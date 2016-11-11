@@ -5,4 +5,6 @@ services:
      expose:
         - "9999"
      command: jupyter-notebook --config=config.py
+     volumes:
+        - ./books:/talk/books
 

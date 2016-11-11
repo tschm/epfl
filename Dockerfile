@@ -4,10 +4,9 @@ FROM continuumio/miniconda3
 # File Author / Maintainer
 MAINTAINER Thomas Schmelzer "thomas.schmelzer@gmail.com"
 
-RUN conda install -q -y pandas ipython-notebook=4.0.4 matplotlib statsmodels
+RUN conda install -q -y pandas ipython-notebook=4.0.4 matplotlib statsmodels seaborn
 
 ADD ./RISE-3.x /talk/RISE-3.x
-ADD ./books /talk/books
 ADD config.py /talk/config.py
 
 WORKDIR /talk
