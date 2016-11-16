@@ -1,23 +1,8 @@
 # Set the base image to Ubuntu
-FROM continuumio/miniconda3
+FROM lobnek/ipy:v0.0.3 
 
 # File Author / Maintainer
 MAINTAINER Thomas Schmelzer "thomas.schmelzer@gmail.com"
 
-RUN conda install -q -y pandas ipython-notebook=4.0.4 matplotlib statsmodels seaborn
-
-ADD ./RISE-3.x /talk/RISE-3.x
-ADD config.py /talk/config.py
-
-WORKDIR /talk
-
-# installing cvxpy
-RUN conda install -y -q -c cvxgrp cvxpy
-
-# create the default profile for ipython
-RUN ipython profile create
-
-# install RISE-3.x
-RUN python /talk/RISE-3.x/setup.py install
-
-RUN rm -rf RISE-3.x
+# install additional packages not provided by the base image...
+RUN conda install -y statsmodels scikit-learn tensorflow && conda install -y -q -c cvxgrp cvxpy

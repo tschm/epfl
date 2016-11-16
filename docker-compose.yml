@@ -2,9 +2,12 @@ version: '2'
 services:
   pytalk:
      build: . 
+     
      expose:
         - "9999"
-     command: jupyter-notebook --config=config.py
+     command: jupyter-notebook --config=/notebooks/config.py
+     
      volumes:
-        - ./books:/talk/books
+           
+        - ./books:/jupyter
 
