@@ -2,16 +2,7 @@ version: '2'
 services:
   pytalk:
      build: . 
-     
-     expose:
-        # the container will be open on port 9999. You need to match a port on the host (see start.sh)
-        - "9999"
 
-     command:
-        # we reuse the config-file from the base image. Of course, you could create your own config file but we do not
-        # recommend that...
-        jupyter-notebook --config=/notebooks/config.py
-     
      volumes:
         # it's important to map a local folder to the /jupyter folder in the container. The jupyter notebook will
         # pick up the notebooks from there
