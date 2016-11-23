@@ -4,6 +4,3 @@ port=$1
 host=":9999"
 
 docker-compose run -d -p $port$host pytalk
-###google-chrome "http://localhost:$port/tree"
-
-
