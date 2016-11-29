@@ -1,3 +1,4 @@
 .idea
 .ipynb_checkpoints
 books/talk/__pycache__
+*.pyc
