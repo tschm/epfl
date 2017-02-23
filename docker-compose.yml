@@ -1,9 +1,0 @@
-version: '2'
-services:
-  pytalk:
-     build: . 
-
-     volumes:
-        # it's important to map a local folder to the /jupyter folder in the container. The jupyter notebook will
-        # pick up the notebooks from there
-        - ./books:/jupyter
