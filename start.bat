@@ -1,0 +1,1 @@
+docker run -d -p 2028:9999 -v %cd%/books:/jupyter tschm/ipy:v0.5
