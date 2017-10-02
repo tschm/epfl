@@ -5,5 +5,4 @@ FROM jupyter/scipy-notebook
 MAINTAINER Thomas Schmelzer "thomas.schmelzer@lobnek.com"
 
 # install cvxpy
-RUN conda install -q -y libgcc && conda install -y -q -c cvxgrp cvxpy
-RUN pip install pandas-datareader
+RUN conda install numpy && conda install -y -q -c cvxgrp cvxpy
