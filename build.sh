@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker build . -t tschm/epfl
+docker-compose build --no-cache web
