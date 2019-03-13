@@ -5,7 +5,6 @@ services:
        context: .
        dockerfile: ./binder/Dockerfile
      volumes:
-       - ./books:/home/jovyan/work
-       - ./jupyter_notebook_config.py:/etc/jupyter/jupyter_notebook_config.py:ro
+       - ./books:/home/${NB_USER}/work
      ports:
-        - "9012:8888"
+        - ${PORT}:8888

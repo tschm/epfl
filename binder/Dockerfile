@@ -1,7 +1,9 @@
 # Set the base image to Ubuntu
-FROM jupyter/minimal-notebook:45b8529a6bfc
+FROM lobnek/jupyter:v2.3
 
-RUN conda config --env --add pinned_packages 'openjdk>8.0.121'
-RUN conda install -y -c conda-forge pandas=0.24.1 beakerx=1.3.0 ipywidgets=7.4.2 cvxpy=1.0.14 matplotlib && conda clean -y --all
+USER root
+RUN conda install -y -c conda-forge matplotlib && conda clean -y --all
+USER $NB_USER
+
 
 COPY ./work ${HOME}/work
