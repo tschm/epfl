@@ -2,8 +2,5 @@
 binder
 .gitignore
 docker-compose.yml
-build.sh
-jupyter_notebook_config.yml
 README.md
-start.sh
 slides.py
