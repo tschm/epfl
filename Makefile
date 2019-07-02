@@ -42,5 +42,5 @@ hub: tag
 	docker rmi -f ${IMAGE}:${PROJECT_VERSION}
 
 slides:
-	mkdir -p artifacts
-	cp -r work/* artifacts
+	docker-compose up -d
+	python slides.py
