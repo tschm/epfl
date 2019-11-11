@@ -1,5 +1,5 @@
 # Set the base image to Ubuntu
-FROM tschm/docker:release-0.4
+FROM tschm/docker:release-0.6
 
 RUN pip install --no-cache-dir cvxpy
 
