@@ -1,8 +1,8 @@
 # Set the base image to Ubuntu
-FROM lobnek/jupyter:v2.8
+FROM tschm/docker:release-0.4
 
-RUN pip install --no-cache-dir matplotlib statsmodels
+RUN pip install --no-cache-dir cvxpy
 
-COPY --chown=beakerx:beakerx ./work ${WORK}
+COPY --chown=jovyan:100 ./work /home/jovyan/work
 
-WORKDIR ${WORK}
+
