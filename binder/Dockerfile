@@ -1,6 +1,7 @@
-# Set the base image to Ubuntu
-FROM tschm/docker:release-0.6
+# Set the base image to jupyter
+FROM lobnek/jupyterx:4.9 as jupyter
 
-RUN pip install --no-cache-dir cvxpy
+RUN conda install -y -c conda-forge matplotlib statsmodels && \
+    conda clean -y --all
 
 COPY --chown=jovyan:100 ./work /home/jovyan/work

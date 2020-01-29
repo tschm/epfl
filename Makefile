@@ -8,7 +8,7 @@ IMAGE := tschm/epfl
 include .env
 export
 
-.PHONY: help build jupyter tag hub slides
+.PHONY: help build jupyter tag hub slides clean-notebooks
 
 
 .DEFAULT: help
@@ -48,3 +48,6 @@ hub: tag
 slides:
 	docker-compose up -d
 	python slides.py
+
+clean-notebooks:
+	docker-compose exec jupyter jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace **/*.ipynb
