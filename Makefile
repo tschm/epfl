@@ -26,6 +26,13 @@ help:
 build:
 	docker-compose build jupyter
 
+build-r:
+	docker-compose build r
+
+jupyter-r: build-r
+	echo "http://localhost:8884"
+	docker-compose up r
+
 jupyter: build
 	echo "http://localhost:${PORT}"
 	docker-compose up jupyter
