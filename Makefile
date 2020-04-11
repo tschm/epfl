@@ -1,5 +1,5 @@
 #!make
-PROJECT_VERSION := 0.2
+PROJECT_VERSION := 0.3
 
 SHELL := /bin/bash
 IMAGE := tschm/epfl
@@ -25,13 +25,6 @@ help:
 
 build:
 	docker-compose build jupyter
-
-build-r:
-	docker-compose build r
-
-jupyter-r: build-r
-	echo "http://localhost:8884"
-	docker-compose up r
 
 jupyter: build
 	echo "http://localhost:${PORT}"

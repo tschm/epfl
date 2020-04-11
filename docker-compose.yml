@@ -10,13 +10,3 @@ services:
      ports:
         - ${PORT}:8888
 
-  r:
-    build:
-      context: .
-      dockerfile: ./binder/Dockerfile-R
-      target: r
-    volumes:
-      - ./work:${WORK}
-    ports:
-      - 8884:8888
-
