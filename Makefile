@@ -4,11 +4,7 @@ PROJECT_VERSION := 0.3
 SHELL := /bin/bash
 IMAGE := tschm/epfl
 
-# needed to get the ${PORT} environment variable
-include .env
-export
-
-.PHONY: help build jupyter tag hub slides clean-notebooks
+.PHONY: help build jupyter tag slides clean-notebooks
 
 
 .DEFAULT: help
@@ -31,19 +27,12 @@ jupyter: build
 	docker-compose up jupyter
 
 jupyterlab: build
-	echo "http://localhost:${PORT}/lab"
+	echo "http://localhost:8888/lab"
 	docker-compose up jupyter
 
 tag:
 	git tag -a ${PROJECT_VERSION} -m "new tag"
 	git push --tags
-
-hub: tag
-	docker build -f binder/Dockerfile --tag ${IMAGE}:latest --no-cache .
-	docker push ${IMAGE}:latest
-	docker tag ${IMAGE}:latest ${IMAGE}:${PROJECT_VERSION}
-	docker push ${IMAGE}:${PROJECT_VERSION}
-	docker rmi -f ${IMAGE}:${PROJECT_VERSION}
 
 slides:
 	docker-compose up -d
