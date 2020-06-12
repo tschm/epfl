@@ -36,7 +36,7 @@ tag:
 
 slides:
 	docker-compose up -d slides
-	docker-compose exec -it slides jupyter nbconvert --output-dir='/tmp/slides' /home/jovyan/work/*.ipynb --to html
+	docker-compose exec -T slides jupyter nbconvert --output-dir='/tmp/slides' /home/jovyan/work/*.ipynb --to html
 
 
 clean-notebooks:
