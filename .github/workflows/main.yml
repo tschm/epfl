@@ -32,7 +32,7 @@ jobs:
         with:
       # declare the artifacts...
           name: slides
-          path: /slides # or path/to/artifact
+          path: /tmp/slides # or path/to/artifact
 
       - uses: docker/build-push-action@v1
         with:
