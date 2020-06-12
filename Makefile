@@ -36,8 +36,8 @@ tag:
 
 slides:
 	whoami
-	docker-compose run slides jupyter nbconvert --output-dir='slides' work/*.ipynb --to html
+	docker-compose run --user="jovyan" slides jupyter nbconvert --output-dir='slides' work/*.ipynb --to html
 
 
 clean-notebooks:
-	docker-compose run slides jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace **/*.ipynb
+	docker-compose run --user="jovyan" slides jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace **/*.ipynb
