@@ -35,8 +35,8 @@ tag:
 	git push --tags
 
 slides:
-	docker-compose up -d
-	python slides.py
+	docker-compose run slides
+
 
 clean-notebooks:
 	docker-compose exec jupyter jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace **/*.ipynb
