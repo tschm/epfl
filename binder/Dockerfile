@@ -7,6 +7,6 @@ COPY --chown=jovyan:100 ./work $WORK
 
 WORKDIR /home/$NB_USER
 
-RUN mkdir slides && \
-    chown -R jovyan:100 slides && \
-    chmod 777 slides
+RUN mkdir /home/$NB_USER/slides && \
+    chown -R jovyan:100 /home/$NB_USER/slides && \
+    chmod 777 /home/$NB_USER/slides

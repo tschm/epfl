@@ -16,6 +16,6 @@ services:
       dockerfile: ./binder/Dockerfile
       target: jupyter
     volumes:
-      - ./work:/home/jovyan/work:ro
+      - ./work:/home/jovyan/work
       - ./slides:/home/jovyan/slides
 
