@@ -26,6 +26,8 @@ jobs:
         uses: actions/checkout@v2
         #name: Checkout
         # Runs a single command using the runners shell
+
+      - name: Slides
         run: |
           make build
           make slides
