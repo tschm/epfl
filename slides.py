@@ -10,24 +10,7 @@ def mkdir(directory):
             os.makedirs(directory)
 
 
-# def parse_config(file=".env"):
-#     """
-#     Parse a config file (like .env where key=value) into dictionary {key: value}
-#     :param file:
-#     :return:
-#     """
-#     d = dict()
-#
-#     with open(file) as file:
-#         for row in file:
-#             a = row.rstrip("\n").split("=")
-#             d[a[0]] = a[1]
-#
-#     return d
-
-
 mkdir(directory="pdf")
-#d = parse_config()
 
 for f in glob.glob(os.path.join("work", "*.ipynb")):
     file = f.lstrip("work")

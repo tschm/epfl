@@ -23,7 +23,7 @@ build:
 	docker-compose build jupyter
 
 jupyter: build
-	echo "http://localhost:${PORT}"
+	echo "http://localhost:8888"
 	docker-compose up jupyter
 
 jupyterlab: build
