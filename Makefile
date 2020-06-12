@@ -2,10 +2,8 @@
 PROJECT_VERSION := 0.3
 
 SHELL := /bin/bash
-IMAGE := tschm/epfl
 
 .PHONY: help build jupyter tag slides clean-notebooks
-
 
 .DEFAULT: help
 
@@ -37,6 +35,5 @@ tag:
 slides:
 	docker-compose run --user=jovyan slides jupyter nbconvert --output-dir=/home/jovyan/slides work/*.ipynb --to html
 
-
 clean-notebooks:
-	docker-compose run --user jovyan slides jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace **/*.ipynb
+	docker-compose run --user=jovyan slides jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace **/*.ipynb
