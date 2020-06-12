@@ -22,18 +22,19 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: slides
       - uses: actions/checkout@v2
       # Runs a single command using the runners shell
-      #- name: test
-      - run: make slides
+        - run: make slides
 
-      #- name: artifacts
+      - name: artifacts
       - uses: actions/upload-artifact@v2
         with:
       # declare the artifacts...
           name: slides
           path: /home/jovyan/slides # or path/to/artifact
 
+      - name: dockerhub
       - uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}

@@ -35,7 +35,7 @@ tag:
 	git push --tags
 
 slides:
-	whoami
+	mkdir slides
 	docker-compose run --user=jovyan slides jupyter nbconvert --output-dir=/home/jovyan/slides work/*.ipynb --to html
 
 
