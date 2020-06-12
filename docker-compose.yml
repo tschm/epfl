@@ -18,5 +18,5 @@ services:
     volumes:
       - ./work:/home/jovyan/work
       - ./slides:/slides
-    command:
-      jupyter nbconvert --output-dir='/slides' /home/jovyan/work/*.ipynb --to html
+    #command:
+    #  jupyter nbconvert --output-dir='/slides' /home/jovyan/work/*.ipynb --to html
