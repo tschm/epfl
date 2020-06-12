@@ -17,5 +17,5 @@ services:
       target: jupyter
     volumes:
       - ./work:/home/jovyan/work
-      - ./slides:/tmp/slides
+      - ./slides:/home/jovyan/slides
 
