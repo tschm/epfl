@@ -35,10 +35,9 @@ tag:
 	git push --tags
 
 slides:
-	docker-compose up -d slides
-	docker-compose exec -T slides jupyter nbconvert --output-dir='/home/jovyan/slides' /home/jovyan/work/*.ipynb --to html
+	whoami
+	docker-compose run slides jupyter nbconvert --output-dir='slides' work/*.ipynb --to html
 
 
 clean-notebooks:
-	docker-compose up -d slides
-	docker-compose exec slides jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace **/*.ipynb
+	docker-compose run slides jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace **/*.ipynb

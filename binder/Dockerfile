@@ -5,6 +5,8 @@ RUN conda install -y -c conda-forge statsmodels && conda clean -y --all
 
 COPY --chown=jovyan:100 ./work $WORK
 
-RUN mkdir /home/$NB_USER/slides && \
-    chown -R jovyan:100 /home/$NB_USER/slides && \
-    chmod 775 /home/$NB_USER/slides
+WORKDIR /home/$NB_USER
+
+RUN mkdir slides && \
+    chown -R jovyan:100 slides && \
+    chmod 777 slides
