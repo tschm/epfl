@@ -7,14 +7,3 @@ COPY --chown=jovyan:100 ./work $WORK
 
 WORKDIR /home/$NB_USER
 
-#### Here the test-configuration
-FROM jupyter as slides
-
-COPY --chown=jovyan:100 ./work $WORK
-
-RUN mkdir /home/$NB_USER/slides && \
-    chown -R jovyan:100 /home/$NB_USER/slides
-
-CMD jupyter nbconvert --output-dir=/home/$NB_USER/slides /home/$NB_USER/work/*.ipynb --to html
-
-
