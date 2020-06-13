@@ -32,8 +32,5 @@ tag:
 	git tag -a ${PROJECT_VERSION} -m "new tag"
 	git push --tags
 
-slides:
-	docker-compose run --user=jovyan slides
-
 clean-notebooks:
 	docker-compose run --user=jovyan slides jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace **/*.ipynb

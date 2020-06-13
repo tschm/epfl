@@ -25,3 +25,10 @@ jobs:
       - name: Convert Notebooks
         run: |
           jupyter nbconvert --output-dir=./slides ./work/*.ipynb --to html
+
+      - name: Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          # declare the artifacts...
+          name: slides ${{ matrix.python-version }}
+          path: slides

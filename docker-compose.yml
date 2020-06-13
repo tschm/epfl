@@ -10,13 +10,3 @@ services:
      ports:
         - 8888:8888
 
-  slides:
-    build:
-      context: .
-      dockerfile: ./binder/Dockerfile
-      target: slides
-    volumes:
-      - ./work:/home/jovyan/work
-      - ./slides:/home/jovyan/slides
-
-    user: root
