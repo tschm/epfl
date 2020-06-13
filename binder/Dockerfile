@@ -12,3 +12,4 @@ FROM jupyter as slides
 
 CMD jupyter nbconvert --output-dir=work/slides work/*.ipynb --to html
 
+
