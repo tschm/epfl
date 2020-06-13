@@ -10,8 +10,5 @@ WORKDIR /home/$NB_USER
 #### Here the test-configuration
 FROM jupyter as slides
 
-RUN mkdir /home/$NB_USER/slides && \
-    chown -R jovyan:100 /home/$NB_USER/slides
-
-CMD jupyter nbconvert --output-dir=/home/$NB_USER/slides /home/$NB_USER/work/*.ipynb --to html
+CMD jupyter nbconvert --output-dir=work/slides work/*.ipynb --to html
 

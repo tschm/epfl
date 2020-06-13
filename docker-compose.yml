@@ -17,4 +17,3 @@ services:
       target: slides
     volumes:
       - ./work:/home/jovyan/work
-      - ./slides:/home/jovyan/slides
