@@ -14,7 +14,7 @@ services:
     build:
       context: .
       dockerfile: ./binder/Dockerfile
-      target: jupyter
+      target: slides
     volumes:
       - ./work:/home/jovyan/work
       - ./slides:/home/jovyan/slides
