@@ -19,4 +19,4 @@ services:
       - ./work:/home/jovyan/work
       - ./slides:/home/jovyan/slides
 
-    user: jovyan
+    user: root
