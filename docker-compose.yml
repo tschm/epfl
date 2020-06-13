@@ -17,4 +17,6 @@ services:
       target: slides
     volumes:
       - ./work:/home/jovyan/work
+      - ./slides:/slides
+
     user: root

@@ -10,6 +10,6 @@ WORKDIR /home/$NB_USER
 #### Here the test-configuration
 FROM jupyter as slides
 
-CMD jupyter nbconvert --output-dir=work/slides work/*.ipynb --to html
+CMD jupyter nbconvert --output-dir=/slides work/*.ipynb --to html
 
 
