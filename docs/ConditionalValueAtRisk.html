@@ -199,37 +199,6 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://mybinder.org/v2/gh/tschm/epfl/main?urlpath=tree/book/docs/ConditionalValueAtRisk.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch onBinder"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="btn__text-container">Binder</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
-
-
-
-
-
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -451,10 +420,12 @@ f^{'}(\gamma) = 1 - \frac{\#\left\{r_i \geq \gamma\right\}}{n\,(1-\alpha)}
 </div>
 </div>
 <p>Before (using conic reformulation of the <span class="math notranslate nohighlight">\(x^+\)</span> function):</p>
-<p>\begin{align}\mathtt{CVaR}(\mathbf{r})=\min_{\gamma \in \mathbb{R}, \mathbf{t} \in \mathbb{R}^n} ,&amp;, \gamma + \frac{1}{n,(1-\alpha)}\sum t_i\
+<ul class="simple">
+<li><p>\begin{align}\mathtt{CVaR}(\mathbf{r})=\min_{\gamma \in \mathbb{R}, \mathbf{t} \in \mathbb{R}^n} ,&amp;, \gamma + \frac{1}{n,(1-\alpha)}\sum t_i\
 \text{s.t. }&amp;t_i \geq r_i - \gamma \
 &amp;\mathbf{t}\geq 0
-\end{align}</p>
+\end{align}</p></li>
+</ul>
 <p>Now</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://www.cvxpy.org/en/latest/tutorial/functions/">http://www.cvxpy.org/en/latest/tutorial/functions/</a>, in particular the <span class="math notranslate nohighlight">\(x^{+} = \max\{0,x\}\)</span></p></li>
