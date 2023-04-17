@@ -444,6 +444,7 @@ f^{'}(\gamma) = 1 - \frac{\#\left\{r_i \geq \gamma\right\}}{n\,(1-\alpha)}
 <span class="n">gamma</span> <span class="o">=</span> <span class="n">cvx</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
 <span class="n">cvar</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="o">=</span><span class="n">gamma</span> <span class="o">+</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))</span> <span class="o">*</span> <span class="n">cvx</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cvx</span><span class="o">.</span><span class="n">pos</span><span class="p">(</span><span class="n">R</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)))</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">)))</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A minimizer of f (&lt;= VaR):  </span><span class="si">{</span><span class="n">gamma</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Minimum of f (== CVaR):     </span><span class="si">{</span><span class="n">cvar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -453,7 +454,8 @@ f^{'}(\gamma) = 1 - \frac{\#\left\{r_i \geq \gamma\right\}}{n\,(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A minimizer of f (&lt;= VaR):  [2.51235075]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5000000000000001
+A minimizer of f (&lt;= VaR):  [2.51235075]
 Minimum of f (== CVaR):     3.5
 4.0
 </pre></div>
