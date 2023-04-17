@@ -1,5 +1,7 @@
 .idea
 .ipynb_checkpoints
-books/talk/__pycache__
+*/.ipynb_checkpoints/*
+
+__pycache__
 *.pyc
-work/slides/*.html
+.venv
