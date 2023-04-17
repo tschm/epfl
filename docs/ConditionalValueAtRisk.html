@@ -479,7 +479,8 @@ Minimum of f (== CVaR):     4.0
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CVaR: </span><span class="si">{</span><span class="n">cvar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="n">cvar2</span> <span class="o">=</span>  <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="o">=</span><span class="n">cvx</span><span class="o">.</span><span class="n">sum_largest</span><span class="p">(</span><span class="n">R</span> <span class="o">@</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))))</span>
+<span class="n">cvar2</span> <span class="o">=</span>  <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="o">=</span><span class="n">cvx</span><span class="o">.</span><span class="n">sum_largest</span><span class="p">(</span><span class="n">R</span> <span class="o">@</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">alpha</span><span class="p">))),</span> <span class="n">constraints</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">w</span><span class="p">,</span> <span class="n">cvx</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">w</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">])</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CVaR 2: </span><span class="si">{</span><span class="n">cvar2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1">#plt.hist(R @ weights, bins=100)</span>
@@ -490,10 +491,10 @@ Minimum of f (== CVaR):     4.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CVaR: 0.18678859256824412
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CVaR: 0.19016250969538986
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CVaR 2: 2.636246624983944e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CVaR 2: 23.770313711935014
 </pre></div>
 </div>
 </div>
