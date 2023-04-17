@@ -4,4 +4,4 @@ format: jb-book
 root: docs/index
 chapters:
     - file: docs/ConditionalValueAtRisk
-    - file: docs/LeveragedPortfolios
+    #- file: docs/LeveragedPortfolios
