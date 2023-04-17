@@ -3,3 +3,4 @@
 books/talk/__pycache__
 *.pyc
 work/slides/*.html
+.venv
