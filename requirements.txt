@@ -4,3 +4,4 @@ numpy
 cvxpy
 scipy
 matplotlib
+statsmodels
