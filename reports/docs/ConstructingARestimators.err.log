@@ -15,31 +15,24 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-r = pd.Series([1.0, -2.0, 1.0, 1.0, 1.5, 0.0, 2.0])
-weights = [2.0, 1.0]
-# trendfollowing == positive weights
-x=pd.DataFrame()
-x["r"] = r
-x["pred"] = convolution(r, weights)
-x["before"] = x["pred"].shift(1)
-print(x)
-print(x.corr())
+import statsmodels.tsa.stattools as sts
+# generate random returns
+r = pd.read_csv("data/SPX_Index.csv", squeeze=True, index_col=0, parse_dates=True).pct_change().dropna()
+# let's compute the optimal convolution!
+weights = sts.pacf(r, nlags=200)
+pd.Series(data=weights[1:]).plot(kind="bar")
+plt.show()
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[3], line 6[0m
-[1;32m      4[0m x[38;5;241m=[39mpd[38;5;241m.[39mDataFrame()
-[1;32m      5[0m x[[38;5;124m"[39m[38;5;124mr[39m[38;5;124m"[39m] [38;5;241m=[39m r
-[0;32m----> 6[0m x[[38;5;124m"[39m[38;5;124mpred[39m[38;5;124m"[39m] [38;5;241m=[39m [43mconvolution[49m[43m([49m[43mr[49m[43m,[49m[43m [49m[43mweights[49m[43m)[49m
-[1;32m      7[0m x[[38;5;124m"[39m[38;5;124mbefore[39m[38;5;124m"[39m] [38;5;241m=[39m x[[38;5;124m"[39m[38;5;124mpred[39m[38;5;124m"[39m][38;5;241m.[39mshift([38;5;241m1[39m)
-[1;32m      8[0m [38;5;28mprint[39m(x)
+[0;31mTypeError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[5], line 3[0m
+[1;32m      1[0m [38;5;28;01mimport[39;00m [38;5;21;01mstatsmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtsa[39;00m[38;5;21;01m.[39;00m[38;5;21;01mstattools[39;00m [38;5;28;01mas[39;00m [38;5;21;01msts[39;00m
+[1;32m      2[0m [38;5;66;03m# generate random returns[39;00m
+[0;32m----> 3[0m r [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_csv[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mdata/SPX_Index.csv[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43msqueeze[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m[43m [49m[43mindex_col[49m[38;5;241;43m=[39;49m[38;5;241;43m0[39;49m[43m,[49m[43m [49m[43mparse_dates[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m)[49m[38;5;241m.[39mpct_change()[38;5;241m.[39mdropna()
+[1;32m      4[0m [38;5;66;03m# let's compute the optimal convolution![39;00m
+[1;32m      5[0m weights [38;5;241m=[39m sts[38;5;241m.[39mpacf(r, nlags[38;5;241m=[39m[38;5;241m200[39m)
 
-Cell [0;32mIn[2], line 2[0m, in [0;36mconvolution[0;34m(ts, weights)[0m
-[1;32m      1[0m [38;5;28;01mdef[39;00m [38;5;21mconvolution[39m(ts, weights):
-[0;32m----> 2[0m     [38;5;28;01mfrom[39;00m [38;5;21;01mstatsmodels[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtsa[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfilters[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfiltertools[39;00m [38;5;28;01mimport[39;00m convolution_filter
-[1;32m      3[0m     [38;5;28;01mreturn[39;00m convolution_filter(ts, weights, nsides[38;5;241m=[39m[38;5;241m1[39m)
-
-[0;31mModuleNotFoundError[0m: No module named 'statsmodels'
+[0;31mTypeError[0m: read_csv() got an unexpected keyword argument 'squeeze'
 

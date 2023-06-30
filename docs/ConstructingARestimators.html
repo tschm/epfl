@@ -390,7 +390,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1821/2951110500.py:5: DeprecationWarning: Importing display from IPython.core.display is deprecated since IPython 7.14, please import from IPython display
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1885/2951110500.py:5: DeprecationWarning: Importing display from IPython.core.display is deprecated since IPython 7.14, please import from IPython display
   from IPython.core.display import display, HTML
 </pre></div>
 </div>
@@ -430,21 +430,18 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">x</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;pred&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">convolution</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;before&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;pred&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="nn">Cell In[2], line 2,</span> in <span class="ni">convolution</span><span class="nt">(ts, weights)</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="k">def</span> <span class="nf">convolution</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
-<span class="ne">----&gt; </span><span class="mi">2</span>     <span class="kn">from</span> <span class="nn">statsmodels.tsa.filters.filtertools</span> <span class="kn">import</span> <span class="n">convolution_filter</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="k">return</span> <span class="n">convolution_filter</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">nsides</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;statsmodels&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     r  pred  before
+0  1.0   NaN     NaN
+1 -2.0  -3.0     NaN
+2  1.0   0.0    -3.0
+3  1.0   3.0     0.0
+4  1.5   4.0     3.0
+5  0.0   1.5     4.0
+6  2.0   4.0     1.5
+               r      pred    before
+r       1.000000  0.895788 -0.190159
+pred    0.895788  1.000000  0.538431
+before -0.190159  0.538431  1.000000
 </pre></div>
 </div>
 </div>
@@ -463,6 +460,22 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     r  pred  before
+0  1.0   NaN     NaN
+1 -2.0   3.0     NaN
+2  1.0   0.0     3.0
+3  1.0  -3.0     0.0
+4  1.5  -4.0    -3.0
+5  0.0  -1.5    -4.0
+6  2.0  -4.0    -1.5
+               r      pred    before
+r       1.000000 -0.895788  0.190159
+pred   -0.895788  1.000000  0.538431
+before  0.190159  0.538431  1.000000
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -478,6 +491,20 @@ document.write(`
 <span class="n">weights</span> <span class="o">=</span> <span class="n">sts</span><span class="o">.</span><span class="n">pacf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">weights</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">statsmodels.tsa.stattools</span> <span class="k">as</span> <span class="nn">sts</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="c1"># generate random returns</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">r</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/SPX_Index.csv&quot;</span><span class="p">,</span> <span class="n">squeeze</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># let&#39;s compute the optimal convolution!</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">sts</span><span class="o">.</span><span class="n">pacf</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">nlags</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: read_csv() got an unexpected keyword argument &#39;squeeze&#39;
 </pre></div>
 </div>
 </div>
