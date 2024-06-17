@@ -29,7 +29,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -46,7 +46,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -208,9 +208,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</label></div>
+</button></div>
       
     </div>
   
@@ -351,9 +351,9 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</label>
+</button>
 </div></div>
       
     </div>
@@ -406,7 +406,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1909/1686460620.py:3: DeprecationWarning: Importing display from IPython.core.display is deprecated since IPython 7.14, please import from IPython display
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1940/1686460620.py:3: DeprecationWarning: Importing display from IPython.core.display is deprecated since IPython 7.14, please import from IPython display
   from IPython.core.display import display, HTML
 </pre></div>
 </div>
@@ -454,9 +454,430 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sum of positive weights: 1.2999999926254482
-Sum of negative weights: -0.29999999262544824
-Sum of all weights:      1.0000000000000002
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.0 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with &#39;pybind11&gt;=2.12&#39;.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to &#39;numpy&lt;2&#39; or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 87, in _run_code
+    exec(code, run_globals)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel_launcher.py&quot;, line 18, in &lt;module&gt;
+    app.launch_new_instance()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/traitlets/config/application.py&quot;, line 1075, in launch_instance
+    app.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelapp.py&quot;, line 739, in start
+    self.io_loop.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/tornado/platform/asyncio.py&quot;, line 205, in start
+    self.asyncio_loop.run_forever()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 601, in run_forever
+    self._run_once()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 1905, in _run_once
+    handle._run()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/events.py&quot;, line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 545, in dispatch_queue
+    await self.process_one()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 534, in process_one
+    await dispatch(*args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 437, in dispatch_shell
+    await result
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 362, in execute_request
+    await super().execute_request(stream, ident, parent)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 778, in execute_request
+    reply_content = await reply_content
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 449, in do_execute
+    res = shell.run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/zmqshell.py&quot;, line 549, in run_cell
+    return super().run_cell(*args, **kwargs)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3048, in run_cell
+    result = self._run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3103, in _run_cell
+    result = runner(coro)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/async_helpers.py&quot;, line 129, in _pseudo_sync_runner
+    coro.send(None)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3308, in run_cell_async
+    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3490, in run_ast_nodes
+    if await self.run_code(code, result, async_=asy):
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3550, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File &quot;/tmp/ipykernel_1940/182719127.py&quot;, line 1, in &lt;module&gt;
+    from cvx.util import cvx, maximize
+  File &quot;/home/runner/work/epfl/epfl/book/docs/cvx/util.py&quot;, line 2, in &lt;module&gt;
+    import cvxpy as cvx
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/__init__.py&quot;, line 19, in &lt;module&gt;
+    from cvxpy.atoms import *
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/atoms/__init__.py&quot;, line 17, in &lt;module&gt;
+    from cvxpy.atoms.affine.binary_operators import (matmul, multiply,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/atoms/affine/binary_operators.py&quot;, line 30, in &lt;module&gt;
+    from cvxpy.atoms.affine.add_expr import AddExpression
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/atoms/affine/add_expr.py&quot;, line 23, in &lt;module&gt;
+    from cvxpy.atoms.affine.affine_atom import AffAtom
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/atoms/affine/affine_atom.py&quot;, line 25, in &lt;module&gt;
+    from cvxpy.cvxcore.python import canonInterface
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/cvxcore/python/__init__.py&quot;, line 11, in &lt;module&gt;
+    import _cvxcore
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="ne">AttributeError</span>: _ARRAY_API not found
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.0 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with &#39;pybind11&gt;=2.12&#39;.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to &#39;numpy&lt;2&#39; or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 87, in _run_code
+    exec(code, run_globals)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel_launcher.py&quot;, line 18, in &lt;module&gt;
+    app.launch_new_instance()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/traitlets/config/application.py&quot;, line 1075, in launch_instance
+    app.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelapp.py&quot;, line 739, in start
+    self.io_loop.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/tornado/platform/asyncio.py&quot;, line 205, in start
+    self.asyncio_loop.run_forever()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 601, in run_forever
+    self._run_once()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 1905, in _run_once
+    handle._run()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/events.py&quot;, line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 545, in dispatch_queue
+    await self.process_one()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 534, in process_one
+    await dispatch(*args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 437, in dispatch_shell
+    await result
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 362, in execute_request
+    await super().execute_request(stream, ident, parent)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 778, in execute_request
+    reply_content = await reply_content
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 449, in do_execute
+    res = shell.run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/zmqshell.py&quot;, line 549, in run_cell
+    return super().run_cell(*args, **kwargs)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3048, in run_cell
+    result = self._run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3103, in _run_cell
+    result = runner(coro)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/async_helpers.py&quot;, line 129, in _pseudo_sync_runner
+    coro.send(None)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3308, in run_cell_async
+    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3490, in run_ast_nodes
+    if await self.run_code(code, result, async_=asy):
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3550, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File &quot;/tmp/ipykernel_1940/182719127.py&quot;, line 1, in &lt;module&gt;
+    from cvx.util import cvx, maximize
+  File &quot;/home/runner/work/epfl/epfl/book/docs/cvx/util.py&quot;, line 2, in &lt;module&gt;
+    import cvxpy as cvx
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/__init__.py&quot;, line 56, in &lt;module&gt;
+    from cvxpy.problems.problem import Problem as Problem
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/problems/problem.py&quot;, line 38, in &lt;module&gt;
+    from cvxpy.reductions import InverseData
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/__init__.py&quot;, line 31, in &lt;module&gt;
+    from cvxpy.reductions.solvers.solving_chain import SolvingChain
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solving_chain.py&quot;, line 43, in &lt;module&gt;
+    from cvxpy.reductions.solvers import defines as slv_def
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 117, in &lt;module&gt;
+    INSTALLED_SOLVERS = installed_solvers()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 106, in installed_solvers
+    if solver.is_installed():
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solver.py&quot;, line 61, in is_installed
+    self.import_solver()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/conic_solvers/ecos_conif.py&quot;, line 76, in import_solver
+    import ecos  # noqa F401
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ecos/__init__.py&quot;, line 1, in &lt;module&gt;
+    from .ecos import solve, __solver_version__
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ecos/ecos.py&quot;, line 1, in &lt;module&gt;
+    import _ecos
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="ne">AttributeError</span>: _ARRAY_API not found
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 17 11:11:03 PM: Encountered unexpected exception importing solver ECOS:
+ImportError(&#39;numpy.core.multiarray failed to import&#39;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.0 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with &#39;pybind11&gt;=2.12&#39;.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to &#39;numpy&lt;2&#39; or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 87, in _run_code
+    exec(code, run_globals)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel_launcher.py&quot;, line 18, in &lt;module&gt;
+    app.launch_new_instance()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/traitlets/config/application.py&quot;, line 1075, in launch_instance
+    app.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelapp.py&quot;, line 739, in start
+    self.io_loop.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/tornado/platform/asyncio.py&quot;, line 205, in start
+    self.asyncio_loop.run_forever()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 601, in run_forever
+    self._run_once()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 1905, in _run_once
+    handle._run()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/events.py&quot;, line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 545, in dispatch_queue
+    await self.process_one()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 534, in process_one
+    await dispatch(*args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 437, in dispatch_shell
+    await result
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 362, in execute_request
+    await super().execute_request(stream, ident, parent)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 778, in execute_request
+    reply_content = await reply_content
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 449, in do_execute
+    res = shell.run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/zmqshell.py&quot;, line 549, in run_cell
+    return super().run_cell(*args, **kwargs)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3048, in run_cell
+    result = self._run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3103, in _run_cell
+    result = runner(coro)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/async_helpers.py&quot;, line 129, in _pseudo_sync_runner
+    coro.send(None)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3308, in run_cell_async
+    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3490, in run_ast_nodes
+    if await self.run_code(code, result, async_=asy):
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3550, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File &quot;/tmp/ipykernel_1940/182719127.py&quot;, line 1, in &lt;module&gt;
+    from cvx.util import cvx, maximize
+  File &quot;/home/runner/work/epfl/epfl/book/docs/cvx/util.py&quot;, line 2, in &lt;module&gt;
+    import cvxpy as cvx
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/__init__.py&quot;, line 56, in &lt;module&gt;
+    from cvxpy.problems.problem import Problem as Problem
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/problems/problem.py&quot;, line 38, in &lt;module&gt;
+    from cvxpy.reductions import InverseData
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/__init__.py&quot;, line 31, in &lt;module&gt;
+    from cvxpy.reductions.solvers.solving_chain import SolvingChain
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solving_chain.py&quot;, line 43, in &lt;module&gt;
+    from cvxpy.reductions.solvers import defines as slv_def
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 117, in &lt;module&gt;
+    INSTALLED_SOLVERS = installed_solvers()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 106, in installed_solvers
+    if solver.is_installed():
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solver.py&quot;, line 61, in is_installed
+    self.import_solver()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/conic_solvers/scs_conif.py&quot;, line 161, in import_solver
+    import scs  # noqa F401
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/scs/__init__.py&quot;, line 4, in &lt;module&gt;
+    import _scs_direct
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="ne">AttributeError</span>: _ARRAY_API not found
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 17 11:11:03 PM: Encountered unexpected exception importing solver SCS:
+ImportError(&#39;numpy.core.multiarray failed to import&#39;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.0 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with &#39;pybind11&gt;=2.12&#39;.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to &#39;numpy&lt;2&#39; or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 87, in _run_code
+    exec(code, run_globals)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel_launcher.py&quot;, line 18, in &lt;module&gt;
+    app.launch_new_instance()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/traitlets/config/application.py&quot;, line 1075, in launch_instance
+    app.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelapp.py&quot;, line 739, in start
+    self.io_loop.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/tornado/platform/asyncio.py&quot;, line 205, in start
+    self.asyncio_loop.run_forever()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 601, in run_forever
+    self._run_once()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 1905, in _run_once
+    handle._run()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/events.py&quot;, line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 545, in dispatch_queue
+    await self.process_one()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 534, in process_one
+    await dispatch(*args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 437, in dispatch_shell
+    await result
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 362, in execute_request
+    await super().execute_request(stream, ident, parent)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 778, in execute_request
+    reply_content = await reply_content
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 449, in do_execute
+    res = shell.run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/zmqshell.py&quot;, line 549, in run_cell
+    return super().run_cell(*args, **kwargs)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3048, in run_cell
+    result = self._run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3103, in _run_cell
+    result = runner(coro)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/async_helpers.py&quot;, line 129, in _pseudo_sync_runner
+    coro.send(None)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3308, in run_cell_async
+    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3490, in run_ast_nodes
+    if await self.run_code(code, result, async_=asy):
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3550, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File &quot;/tmp/ipykernel_1940/182719127.py&quot;, line 1, in &lt;module&gt;
+    from cvx.util import cvx, maximize
+  File &quot;/home/runner/work/epfl/epfl/book/docs/cvx/util.py&quot;, line 2, in &lt;module&gt;
+    import cvxpy as cvx
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/__init__.py&quot;, line 56, in &lt;module&gt;
+    from cvxpy.problems.problem import Problem as Problem
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/problems/problem.py&quot;, line 38, in &lt;module&gt;
+    from cvxpy.reductions import InverseData
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/__init__.py&quot;, line 31, in &lt;module&gt;
+    from cvxpy.reductions.solvers.solving_chain import SolvingChain
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solving_chain.py&quot;, line 43, in &lt;module&gt;
+    from cvxpy.reductions.solvers import defines as slv_def
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 117, in &lt;module&gt;
+    INSTALLED_SOLVERS = installed_solvers()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 106, in installed_solvers
+    if solver.is_installed():
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solver.py&quot;, line 61, in is_installed
+    self.import_solver()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/conic_solvers/ecos_conif.py&quot;, line 76, in import_solver
+    import ecos  # noqa F401
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ecos/__init__.py&quot;, line 1, in &lt;module&gt;
+    from .ecos import solve, __solver_version__
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ecos/ecos.py&quot;, line 1, in &lt;module&gt;
+    import _ecos
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="ne">AttributeError</span>: _ARRAY_API not found
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 17 11:11:03 PM: Encountered unexpected exception importing solver ECOS_BB:
+ImportError(&#39;numpy.core.multiarray failed to import&#39;)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A module that was compiled using NumPy 1.x cannot be run in
+NumPy 2.0.0 as it may crash. To support both 1.x and 2.x
+versions of NumPy, modules must be compiled with NumPy 2.0.
+Some module may need to rebuild instead e.g. with &#39;pybind11&gt;=2.12&#39;.
+
+If you are a user of the module, the easiest solution will be to
+downgrade to &#39;numpy&lt;2&#39; or try to upgrade the affected module.
+We expect that some modules will need time to support NumPy 2.
+
+Traceback (most recent call last):  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 197, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 87, in _run_code
+    exec(code, run_globals)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel_launcher.py&quot;, line 18, in &lt;module&gt;
+    app.launch_new_instance()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/traitlets/config/application.py&quot;, line 1075, in launch_instance
+    app.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelapp.py&quot;, line 739, in start
+    self.io_loop.start()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/tornado/platform/asyncio.py&quot;, line 205, in start
+    self.asyncio_loop.run_forever()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 601, in run_forever
+    self._run_once()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 1905, in _run_once
+    handle._run()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/events.py&quot;, line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 545, in dispatch_queue
+    await self.process_one()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 534, in process_one
+    await dispatch(*args)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 437, in dispatch_shell
+    await result
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 362, in execute_request
+    await super().execute_request(stream, ident, parent)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 778, in execute_request
+    reply_content = await reply_content
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 449, in do_execute
+    res = shell.run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/zmqshell.py&quot;, line 549, in run_cell
+    return super().run_cell(*args, **kwargs)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3048, in run_cell
+    result = self._run_cell(
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3103, in _run_cell
+    result = runner(coro)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/async_helpers.py&quot;, line 129, in _pseudo_sync_runner
+    coro.send(None)
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3308, in run_cell_async
+    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3490, in run_ast_nodes
+    if await self.run_code(code, result, async_=asy):
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3550, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File &quot;/tmp/ipykernel_1940/182719127.py&quot;, line 1, in &lt;module&gt;
+    from cvx.util import cvx, maximize
+  File &quot;/home/runner/work/epfl/epfl/book/docs/cvx/util.py&quot;, line 2, in &lt;module&gt;
+    import cvxpy as cvx
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/__init__.py&quot;, line 56, in &lt;module&gt;
+    from cvxpy.problems.problem import Problem as Problem
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/problems/problem.py&quot;, line 38, in &lt;module&gt;
+    from cvxpy.reductions import InverseData
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/__init__.py&quot;, line 31, in &lt;module&gt;
+    from cvxpy.reductions.solvers.solving_chain import SolvingChain
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solving_chain.py&quot;, line 43, in &lt;module&gt;
+    from cvxpy.reductions.solvers import defines as slv_def
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 117, in &lt;module&gt;
+    INSTALLED_SOLVERS = installed_solvers()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 110, in installed_solvers
+    if solver.is_installed():
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solver.py&quot;, line 61, in is_installed
+    self.import_solver()
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/qp_solvers/osqp_qpif.py&quot;, line 30, in import_solver
+    import osqp
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/osqp/__init__.py&quot;, line 5, in &lt;module&gt;
+    from osqp.interface import OSQP
+  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/osqp/interface.py&quot;, line 6, in &lt;module&gt;
+    import osqp._osqp as _osqp  # Internal low level module
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="ne">AttributeError</span>: _ARRAY_API not found
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 17 11:11:03 PM: Encountered unexpected exception importing solver OSQP:
+ImportError(&#39;numpy.core.multiarray failed to import&#39;)
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/expressions/expression.py:650: UserWarning: 
@@ -468,6 +889,107 @@ Using ``*`` for matrix multiplication has been deprecated since CVXPY 1.1.
 This code path has been hit 1 times so far.
 
   warnings.warn(msg, UserWarning)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">14</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="n">x</span> <span class="o">=</span> <span class="n">cvx</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="n">constraints</span> <span class="o">=</span> <span class="p">[</span><span class="n">cvx</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="n">cvx</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;=</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">excess</span><span class="p">,</span> <span class="n">cvx</span><span class="o">.</span><span class="n">quad_form</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">C</span><span class="p">)</span><span class="o">&lt;=</span><span class="n">sigma_max</span><span class="o">*</span><span class="n">sigma_max</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">14</span> <span class="n">maximize</span><span class="p">(</span><span class="n">objective</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="o">*</span><span class="n">mu</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="n">constraints</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">value</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum of positive weights: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">f</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">])))</span>
+
+<span class="nn">File ~/work/epfl/epfl/book/docs/cvx/util.py:10,</span> in <span class="ni">maximize</span><span class="nt">(objective, constraints)</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">def</span> <span class="nf">maximize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="ne">---&gt; </span><span class="mi">10</span>     <span class="k">return</span> <span class="n">cvx</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">cvx</span><span class="o">.</span><span class="n">Maximize</span><span class="p">(</span><span class="n">objective</span><span class="p">),</span> <span class="n">constraints</span><span class="p">)</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/problems/problem.py:503,</span> in <span class="ni">Problem.solve</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">502</span>     <span class="n">solve_func</span> <span class="o">=</span> <span class="n">Problem</span><span class="o">.</span><span class="n">_solve</span>
+<span class="ne">--&gt; </span><span class="mi">503</span> <span class="k">return</span> <span class="n">solve_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/problems/problem.py:1073,</span> in <span class="ni">Problem._solve</span><span class="nt">(self, solver, warm_start, verbose, gp, qcp, requires_grad, enforce_dpp, ignore_dpp, canon_backend, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1070</span>         <span class="bp">self</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">retrieve</span><span class="p">(</span><span class="n">soln</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1071</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+<span class="ne">-&gt; </span><span class="mi">1073</span> <span class="n">data</span><span class="p">,</span> <span class="n">solving_chain</span><span class="p">,</span> <span class="n">inverse_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_problem_data</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1074</span>     <span class="n">solver</span><span class="p">,</span> <span class="n">gp</span><span class="p">,</span> <span class="n">enforce_dpp</span><span class="p">,</span> <span class="n">ignore_dpp</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">canon_backend</span><span class="p">,</span> <span class="n">kwargs</span>
+<span class="g g-Whitespace">   </span><span class="mi">1075</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1077</span> <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1078</span>     <span class="nb">print</span><span class="p">(</span><span class="n">_NUM_SOLVER_STR</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/problems/problem.py:696,</span> in <span class="ni">Problem.get_problem_data</span><span class="nt">(self, solver, gp, enforce_dpp, ignore_dpp, verbose, canon_backend, solver_opts)</span>
+<span class="g g-Whitespace">    </span><span class="mi">693</span>     <span class="n">s</span><span class="o">.</span><span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">694</span>              <span class="s1">&#39;Compiling problem (target solver=</span><span class="si">%s</span><span class="s1">).&#39;</span><span class="p">,</span> <span class="n">solver_name</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">695</span>     <span class="n">s</span><span class="o">.</span><span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Reduction chain: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">reduction_chain_str</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">696</span> <span class="n">data</span><span class="p">,</span> <span class="n">inverse_data</span> <span class="o">=</span> <span class="n">solving_chain</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">697</span> <span class="n">safe_to_cache</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">698</span>     <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">699</span>     <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">PARAM_PROB</span> <span class="ow">in</span> <span class="n">data</span>
+<span class="g g-Whitespace">    </span><span class="mi">700</span>     <span class="ow">and</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">reduction</span><span class="p">,</span> <span class="n">EvalParams</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">701</span>                 <span class="k">for</span> <span class="n">reduction</span> <span class="ow">in</span> <span class="n">solving_chain</span><span class="o">.</span><span class="n">reductions</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">702</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">703</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compilation_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/chain.py:76,</span> in <span class="ni">Chain.apply</span><span class="nt">(self, problem, verbose)</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>         <span class="n">s</span><span class="o">.</span><span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Applying reduction </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">76</span>     <span class="n">problem</span><span class="p">,</span> <span class="n">inv</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">problem</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span>     <span class="n">inverse_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">inv</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span> <span class="k">return</span> <span class="n">problem</span><span class="p">,</span> <span class="n">inverse_data</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/dcp2cone/cone_matrix_stuffing.py:346,</span> in <span class="ni">ConeMatrixStuffing.apply</span><span class="nt">(self, problem)</span>
+<span class="g g-Whitespace">    </span><span class="mi">344</span> <span class="c1"># Form the constraints</span>
+<span class="g g-Whitespace">    </span><span class="mi">345</span> <span class="n">extractor</span> <span class="o">=</span> <span class="n">CoeffExtractor</span><span class="p">(</span><span class="n">inverse_data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">canon_backend</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">346</span> <span class="n">params_to_P</span><span class="p">,</span> <span class="n">params_to_c</span><span class="p">,</span> <span class="n">flattened_variable</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stuffed_objective</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">347</span>     <span class="n">problem</span><span class="p">,</span> <span class="n">extractor</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">348</span> <span class="c1"># Lower equality and inequality to Zero and NonNeg.</span>
+<span class="g g-Whitespace">    </span><span class="mi">349</span> <span class="n">cons</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/dcp2cone/cone_matrix_stuffing.py:338,</span> in <span class="ni">ConeMatrixStuffing.stuffed_objective</span><span class="nt">(self, problem, extractor)</span>
+<span class="g g-Whitespace">    </span><span class="mi">335</span>     <span class="n">params_to_P</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">params_to_P</span>
+<span class="g g-Whitespace">    </span><span class="mi">336</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">337</span>     <span class="c1"># Extract to c.T * x + r; c is represented by a ma</span>
+<span class="ne">--&gt; </span><span class="mi">338</span>     <span class="n">params_to_c</span> <span class="o">=</span> <span class="n">extractor</span><span class="o">.</span><span class="n">affine</span><span class="p">(</span><span class="n">problem</span><span class="o">.</span><span class="n">objective</span><span class="o">.</span><span class="n">expr</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">339</span>     <span class="n">params_to_P</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span> <span class="k">return</span> <span class="n">params_to_P</span><span class="p">,</span> <span class="n">params_to_c</span><span class="p">,</span> <span class="n">x</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/utilities/coeff_extractor.py:72,</span> in <span class="ni">CoeffExtractor.affine</span><span class="nt">(self, expr)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="n">num_rows</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">size</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">expr_list</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="n">op_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span><span class="o">.</span><span class="n">canonical_form</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">expr_list</span><span class="p">]</span>
+<span class="ne">---&gt; </span><span class="mi">72</span> <span class="k">return</span> <span class="n">canonInterface</span><span class="o">.</span><span class="n">get_problem_matrix</span><span class="p">(</span><span class="n">op_list</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">73</span>                                          <span class="bp">self</span><span class="o">.</span><span class="n">x_length</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">74</span>                                          <span class="bp">self</span><span class="o">.</span><span class="n">id_map</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">75</span>                                          <span class="bp">self</span><span class="o">.</span><span class="n">param_to_size</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">76</span>                                          <span class="bp">self</span><span class="o">.</span><span class="n">param_id_map</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">77</span>                                          <span class="n">num_rows</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">78</span>                                          <span class="bp">self</span><span class="o">.</span><span class="n">canon_backend</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/cvxcore/python/canonInterface.py:296,</span> in <span class="ni">get_problem_matrix</span><span class="nt">(linOps, var_length, id_to_col, param_to_size, param_to_col, constr_length, canon_backend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">293</span> <span class="n">canon_backend</span> <span class="o">=</span> <span class="n">default_canon_backend</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">canon_backend</span> <span class="k">else</span> <span class="n">canon_backend</span>
+<span class="g g-Whitespace">    </span><span class="mi">295</span> <span class="k">if</span> <span class="n">canon_backend</span> <span class="o">==</span> <span class="n">s</span><span class="o">.</span><span class="n">CPP_CANON_BACKEND</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">296</span>     <span class="kn">from</span> <span class="nn">cvxpy.cvxcore.python.cppbackend</span> <span class="kn">import</span> <span class="n">build_matrix</span>
+<span class="g g-Whitespace">    </span><span class="mi">297</span>     <span class="k">return</span> <span class="n">build_matrix</span><span class="p">(</span><span class="n">id_to_col</span><span class="p">,</span> <span class="n">param_to_size</span><span class="p">,</span> <span class="n">param_to_col</span><span class="p">,</span> <span class="n">var_length</span><span class="p">,</span> <span class="n">constr_length</span><span class="p">,</span> <span class="n">linOps</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">299</span> <span class="k">elif</span> <span class="n">canon_backend</span> <span class="ow">in</span> <span class="p">{</span><span class="n">s</span><span class="o">.</span><span class="n">SCIPY_CANON_BACKEND</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">RUST_CANON_BACKEND</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">300</span>                        <span class="n">s</span><span class="o">.</span><span class="n">NUMPY_CANON_BACKEND</span><span class="p">}:</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.9.19</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">cvxpy</span><span class="o">/</span><span class="n">cvxcore</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">cppbackend</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">27</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="kn">import</span> <span class="nn">cvxpy.settings</span> <span class="k">as</span> <span class="nn">s</span>
+<span class="g g-Whitespace">     </span><span class="mi">26</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">27</span>     <span class="kn">import</span> <span class="nn">cvxpy.cvxcore.python.cvxcore</span> <span class="k">as</span> <span class="nn">cvxcore</span>
+<span class="g g-Whitespace">     </span><span class="mi">28</span> <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">29</span>     <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">30</span>         <span class="s2">&quot;Tried using the C++ backend, but the cvxcore module was not installed.&quot;</span>
+<span class="g g-Whitespace">     </span><span class="mi">31</span>     <span class="p">)</span>
+
+<span class="n">File</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">hostedtoolcache</span><span class="o">/</span><span class="n">Python</span><span class="o">/</span><span class="mf">3.9.19</span><span class="o">/</span><span class="n">x64</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.9</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">cvxpy</span><span class="o">/</span><span class="n">cvxcore</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">cvxcore</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Import the low-level C/C++ module</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">if</span> <span class="n">__package__</span> <span class="ow">or</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="vm">__name__</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">10</span>     <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_cvxcore</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>     <span class="kn">import</span> <span class="nn">_cvxcore</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;_cvxcore&#39; from &#39;cvxpy.cvxcore.python&#39; (/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/cvxcore/python/__init__.py)
 </pre></div>
 </div>
 </div>
