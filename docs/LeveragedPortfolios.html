@@ -406,7 +406,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1961/1686460620.py:3: DeprecationWarning: Importing display from IPython.core.display is deprecated since IPython 7.14, please import from IPython display
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_1970/1686460620.py:3: DeprecationWarning: Importing display from IPython.core.display is deprecated since IPython 7.14, please import from IPython display
   from IPython.core.display import display, HTML
 </pre></div>
 </div>
@@ -507,93 +507,7 @@ Traceback (most recent call last):  File &quot;/opt/hostedtoolcache/Python/3.9.1
     if await self.run_code(code, result, async_=asy):
   File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3550, in run_code
     exec(code_obj, self.user_global_ns, self.user_ns)
-  File &quot;/tmp/ipykernel_1961/182719127.py&quot;, line 1, in &lt;module&gt;
-    from cvx.util import cvx, maximize
-  File &quot;/home/runner/work/epfl/epfl/book/docs/cvx/util.py&quot;, line 2, in &lt;module&gt;
-    import cvxpy as cvx
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/__init__.py&quot;, line 56, in &lt;module&gt;
-    from cvxpy.problems.problem import Problem as Problem
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/problems/problem.py&quot;, line 38, in &lt;module&gt;
-    from cvxpy.reductions import InverseData
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/__init__.py&quot;, line 31, in &lt;module&gt;
-    from cvxpy.reductions.solvers.solving_chain import SolvingChain
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solving_chain.py&quot;, line 43, in &lt;module&gt;
-    from cvxpy.reductions.solvers import defines as slv_def
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 117, in &lt;module&gt;
-    INSTALLED_SOLVERS = installed_solvers()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 106, in installed_solvers
-    if solver.is_installed():
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solver.py&quot;, line 61, in is_installed
-    self.import_solver()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/conic_solvers/scs_conif.py&quot;, line 161, in import_solver
-    import scs  # noqa F401
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/scs/__init__.py&quot;, line 4, in &lt;module&gt;
-    import _scs_direct
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="ne">AttributeError</span>: _ARRAY_API not found
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 18 07:21:17 AM: Encountered unexpected exception importing solver SCS:
-ImportError(&#39;numpy.core.multiarray failed to import&#39;)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A module that was compiled using NumPy 1.x cannot be run in
-NumPy 2.0.0 as it may crash. To support both 1.x and 2.x
-versions of NumPy, modules must be compiled with NumPy 2.0.
-Some module may need to rebuild instead e.g. with &#39;pybind11&gt;=2.12&#39;.
-
-If you are a user of the module, the easiest solution will be to
-downgrade to &#39;numpy&lt;2&#39; or try to upgrade the affected module.
-We expect that some modules will need time to support NumPy 2.
-
-Traceback (most recent call last):  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 197, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 87, in _run_code
-    exec(code, run_globals)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel_launcher.py&quot;, line 18, in &lt;module&gt;
-    app.launch_new_instance()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/traitlets/config/application.py&quot;, line 1075, in launch_instance
-    app.start()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelapp.py&quot;, line 739, in start
-    self.io_loop.start()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/tornado/platform/asyncio.py&quot;, line 205, in start
-    self.asyncio_loop.run_forever()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 601, in run_forever
-    self._run_once()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 1905, in _run_once
-    handle._run()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/events.py&quot;, line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 545, in dispatch_queue
-    await self.process_one()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 534, in process_one
-    await dispatch(*args)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 437, in dispatch_shell
-    await result
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 362, in execute_request
-    await super().execute_request(stream, ident, parent)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 778, in execute_request
-    reply_content = await reply_content
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 449, in do_execute
-    res = shell.run_cell(
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/zmqshell.py&quot;, line 549, in run_cell
-    return super().run_cell(*args, **kwargs)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3048, in run_cell
-    result = self._run_cell(
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3103, in _run_cell
-    result = runner(coro)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/async_helpers.py&quot;, line 129, in _pseudo_sync_runner
-    coro.send(None)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3308, in run_cell_async
-    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3490, in run_ast_nodes
-    if await self.run_code(code, result, async_=asy):
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3550, in run_code
-    exec(code_obj, self.user_global_ns, self.user_ns)
-  File &quot;/tmp/ipykernel_1961/182719127.py&quot;, line 1, in &lt;module&gt;
+  File &quot;/tmp/ipykernel_1970/182719127.py&quot;, line 1, in &lt;module&gt;
     from cvx.util import cvx, maximize
   File &quot;/home/runner/work/epfl/epfl/book/docs/cvx/util.py&quot;, line 2, in &lt;module&gt;
     import cvxpy as cvx
@@ -624,7 +538,7 @@ Traceback (most recent call last):  File &quot;/opt/hostedtoolcache/Python/3.9.1
 <span class="ne">AttributeError</span>: _ARRAY_API not found
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 18 07:21:17 AM: Encountered unexpected exception importing solver OSQP:
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 24 10:56:15 PM: Encountered unexpected exception importing solver OSQP:
 ImportError(&#39;numpy.core.multiarray failed to import&#39;)
 </pre></div>
 </div>
