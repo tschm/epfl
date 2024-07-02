@@ -18,12 +18,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
@@ -37,9 +37,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -141,6 +141,8 @@
         <div class="sidebar-primary-item">
 
   
+    
+  
 
 <a class="navbar-brand logo" href="index.html">
   
@@ -156,7 +158,7 @@
 
  <script>
  document.write(`
-   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
     <span class="search-button__default-text">Search</span>
     <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
@@ -336,10 +338,10 @@
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
-    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
 `);
 </script>
@@ -347,7 +349,7 @@ document.write(`
 
 <script>
 document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
 `);
@@ -483,94 +485,6 @@ f^{'}(\gamma) = 1 - \frac{\#\left\{r_i \geq \gamma\right\}}{n\,(1-\alpha)}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A module that was compiled using NumPy 1.x cannot be run in
-NumPy 2.0.0 as it may crash. To support both 1.x and 2.x
-versions of NumPy, modules must be compiled with NumPy 2.0.
-Some module may need to rebuild instead e.g. with &#39;pybind11&gt;=2.12&#39;.
-
-If you are a user of the module, the easiest solution will be to
-downgrade to &#39;numpy&lt;2&#39; or try to upgrade the affected module.
-We expect that some modules will need time to support NumPy 2.
-
-Traceback (most recent call last):  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 197, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/runpy.py&quot;, line 87, in _run_code
-    exec(code, run_globals)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel_launcher.py&quot;, line 18, in &lt;module&gt;
-    app.launch_new_instance()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/traitlets/config/application.py&quot;, line 1075, in launch_instance
-    app.start()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelapp.py&quot;, line 739, in start
-    self.io_loop.start()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/tornado/platform/asyncio.py&quot;, line 205, in start
-    self.asyncio_loop.run_forever()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 601, in run_forever
-    self._run_once()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/base_events.py&quot;, line 1905, in _run_once
-    handle._run()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/asyncio/events.py&quot;, line 80, in _run
-    self._context.run(self._callback, *self._args)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 545, in dispatch_queue
-    await self.process_one()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 534, in process_one
-    await dispatch(*args)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 437, in dispatch_shell
-    await result
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 362, in execute_request
-    await super().execute_request(stream, ident, parent)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/kernelbase.py&quot;, line 778, in execute_request
-    reply_content = await reply_content
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/ipkernel.py&quot;, line 449, in do_execute
-    res = shell.run_cell(
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/ipykernel/zmqshell.py&quot;, line 549, in run_cell
-    return super().run_cell(*args, **kwargs)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3048, in run_cell
-    result = self._run_cell(
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3103, in _run_cell
-    result = runner(coro)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/async_helpers.py&quot;, line 129, in _pseudo_sync_runner
-    coro.send(None)
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3308, in run_cell_async
-    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3490, in run_ast_nodes
-    if await self.run_code(code, result, async_=asy):
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/IPython/core/interactiveshell.py&quot;, line 3550, in run_code
-    exec(code_obj, self.user_global_ns, self.user_ns)
-  File &quot;/tmp/ipykernel_1905/295155948.py&quot;, line 1, in &lt;module&gt;
-    from cvx.util import minimize, cvx
-  File &quot;/home/runner/work/epfl/epfl/book/docs/cvx/util.py&quot;, line 2, in &lt;module&gt;
-    import cvxpy as cvx
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/__init__.py&quot;, line 56, in &lt;module&gt;
-    from cvxpy.problems.problem import Problem as Problem
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/problems/problem.py&quot;, line 38, in &lt;module&gt;
-    from cvxpy.reductions import InverseData
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/__init__.py&quot;, line 31, in &lt;module&gt;
-    from cvxpy.reductions.solvers.solving_chain import SolvingChain
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solving_chain.py&quot;, line 43, in &lt;module&gt;
-    from cvxpy.reductions.solvers import defines as slv_def
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 117, in &lt;module&gt;
-    INSTALLED_SOLVERS = installed_solvers()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/defines.py&quot;, line 110, in installed_solvers
-    if solver.is_installed():
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/solver.py&quot;, line 61, in is_installed
-    self.import_solver()
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/cvxpy/reductions/solvers/qp_solvers/osqp_qpif.py&quot;, line 30, in import_solver
-    import osqp
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/osqp/__init__.py&quot;, line 5, in &lt;module&gt;
-    from osqp.interface import OSQP
-  File &quot;/opt/hostedtoolcache/Python/3.9.19/x64/lib/python3.9/site-packages/osqp/interface.py&quot;, line 6, in &lt;module&gt;
-    import osqp._osqp as _osqp  # Internal low level module
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="ne">AttributeError</span>: _ARRAY_API not found
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(CVXPY) Jun 25 07:52:06 AM: Encountered unexpected exception importing solver OSQP:
-ImportError(&#39;numpy.core.multiarray failed to import&#39;)
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5000000000000001
 A minimizer of f (&lt;= VaR):  [3.13160734]
 Minimum of f (== CVaR):     4.0
@@ -609,10 +523,10 @@ Minimum of f (== CVaR):     4.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CVaR: 0.1894695894118497
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CVaR: 0.18978059446766793
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CVaR 2: 0.1894695894108027
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CVaR 2: 0.1897805944676654
 </pre></div>
 </div>
 </div>
@@ -742,8 +656,8 @@ By Thomas Schmelzer
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>
