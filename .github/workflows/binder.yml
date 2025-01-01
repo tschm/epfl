@@ -1,6 +1,9 @@
 name: binder
 
-on: [push]
+on:
+  push:
+      branches:
+        - main
 
 # This job builds and caches the Docker container for Binder
 jobs:
