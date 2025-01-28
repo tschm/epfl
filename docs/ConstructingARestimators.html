@@ -167,9 +167,6 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ConditionalValueAtRisk.html">The Conditional Value at Risk</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Constructing estimators</a></li>
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="LeveragedPortfolios.html">Leveraged Portfolios</a></li>
 </ul>
 
@@ -363,19 +360,12 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Constructing estimators</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thomas-schmelzer">Thomas Schmelzer</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-only-at-the-last-two-returns-might-be-a-bit">Looking only at the last two returns might be a bit …</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-regression">(Naive) regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-only-at-the-last-two-returns-might-be-a-bit">Looking only at the last two returns might be a bit …</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-regression">(Naive) regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-variation">Mean variation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -404,11 +394,11 @@
 <div class="cell_output docutils container">
 <div class="output text_html"><style>.container { width:100% !important; }</style></div></div>
 </div>
-<section id="constructing-estimators">
+<section class="tex2jax_ignore mathjax_ignore" id="constructing-estimators">
 <h1>Constructing estimators<a class="headerlink" href="#constructing-estimators" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Autoregressive_model">https://en.wikipedia.org/wiki/Autoregressive_model</a></p>
-<section id="thomas-schmelzer">
-<h2>Thomas Schmelzer<a class="headerlink" href="#thomas-schmelzer" title="Link to this heading">#</a></h2>
+<p>Thomas Schmelzer</p>
 <p>A very common estimator is based on AR models (autoregressive)</p>
 <div class="math notranslate nohighlight">
 \[R_T = \sum_{i=1}^n w_i r_{T-i}\]</div>
@@ -486,10 +476,8 @@ before  0.190159  0.538431  1.000000
 </div>
 </div>
 </div>
-</section>
-</section>
 <section id="looking-only-at-the-last-two-returns-might-be-a-bit">
-<h1>Looking only at the last two returns might be a bit …<a class="headerlink" href="#looking-only-at-the-last-two-returns-might-be-a-bit" title="Link to this heading">#</a></h1>
+<h2>Looking only at the last two returns might be a bit …<a class="headerlink" href="#looking-only-at-the-last-two-returns-might-be-a-bit" title="Link to this heading">#</a></h2>
 <p>Is it a good idea to have <span class="math notranslate nohighlight">\(n=200\)</span> free parameters?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -546,7 +534,8 @@ Name: 1, Length: 3989, dtype: float64
 </div>
 </section>
 <section id="bias">
-<h1>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h1>
+<h2>Bias<a class="headerlink" href="#bias" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
 <p>We assume the weights are exponentially decaying, e.g.</p>
 <div class="math notranslate nohighlight">
 \[w_i = \frac{1}{S}\lambda^i\]</div>
@@ -602,7 +591,8 @@ Name: 1, Length: 3989, dtype: float64
 </div>
 </section>
 <section id="naive-regression">
-<h1>(Naive) regression<a class="headerlink" href="#naive-regression" title="Link to this heading">#</a></h1>
+<h2>(Naive) regression<a class="headerlink" href="#naive-regression" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
 <p>\begin{align}
 \mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}&amp; \rVert{\mathbf{A}\mathbf{w} - \mathbf{r}}\lVert_2
 \end{align}</p>
@@ -638,6 +628,7 @@ dtype: float64
 <img alt="../_images/e97729cf84063885bd1bc146e8be71ac980942e18e77f544a0c484dcc0c46bba.png" src="../_images/e97729cf84063885bd1bc146e8be71ac980942e18e77f544a0c484dcc0c46bba.png" />
 </div>
 </div>
+</section>
 <section id="mean-variation">
 <h2>Mean variation<a class="headerlink" href="#mean-variation" title="Link to this heading">#</a></h2>
 <p>We provide a few indicators. Avoid fast indicators. Prefer slower indicators as they induce less trading costs.
@@ -777,19 +768,12 @@ Use the mean variation of the signal (convoluted returns here)</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Constructing estimators</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thomas-schmelzer">Thomas Schmelzer</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-only-at-the-last-two-returns-might-be-a-bit">Looking only at the last two returns might be a bit …</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-regression">(Naive) regression</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#looking-only-at-the-last-two-returns-might-be-a-bit">Looking only at the last two returns might be a bit …</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bias">Bias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-regression">(Naive) regression</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-variation">Mean variation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
