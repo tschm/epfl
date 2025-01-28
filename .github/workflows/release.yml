@@ -57,7 +57,7 @@ jobs:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           generate_release_notes: true
           files: |
-            book/**/*
+            book/_build/html
 
 
 #      # Step 4: Deploy to GitHub Pages
