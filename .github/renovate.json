@@ -13,7 +13,7 @@
   "pre-commit": {
     "enabled": true,
     "schedule": [
-      "on the third day of the month before 6am"
+      "on the second day of the month before 6am"
     ],
     "packageRules": [
       {
