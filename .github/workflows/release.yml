@@ -1,58 +1,22 @@
-name: Build and Release Book
+name: Bump version and publish
 
 on:
-  # Trigger on manual dispatch
   workflow_dispatch:
-  # Trigger on push to the main branch
-  push:
-    branches:
-      - main
-
-permissions:
-  contents: write
 
 
 jobs:
-  build-and-release:
+  tag:
+    permissions:
+      contents: write
+
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
-      - name: Checkout repository
+      - name: Checkout [${{ github.repository }}]
         uses: actions/checkout@v4
 
-      # Install dependencies
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-
-      - name: Install jupyterbook
-        run: |
-          pip install -r requirements.txt
-          pip install jupyter-book
-
-      # Build the book
-      - name: Build the book
-        run: |
-          jupyter-book clean book
-          jupyter-book build book
-
-      # Push the book's HTML to github-pages
-      - name: GitHub Pages action
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Generate Tag
+        uses: cvxgrp/.github/actions/uv/tag@v2.0.12
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: book/_build/html
-
-      - name: Bump version and tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@v6.2
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create GitHub release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ steps.tag_version.outputs.new_tag }}
-          generate_release_notes: true
+          build_package: 'false'
