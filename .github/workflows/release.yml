@@ -12,8 +12,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: cvxgrp/.github/actions/uv/environment@v2.1.0
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python environment
+      #- name: Set up Python
+      #  uses: actions/setup-python@v4
+      #  with:
+      #    python-version: '3.12'  # Specify the desired Python version
 
       - name: Generate Tag
         uses: cvxgrp/.github/actions/tag@v2.1.0
