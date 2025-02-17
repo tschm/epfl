@@ -2,7 +2,7 @@ plotly==6.0.0
 pandas==2.2.3
 numpy==2.2.3
 cvxpy==1.6.0
-scipy==1.15.1
+scipy==1.15.2
 matplotlib==3.10.0
 statsmodels==0.14.4
 pre-commit==4.1.0
