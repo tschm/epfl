@@ -1,4 +1,4 @@
-plotly==6.0.0
+plotly==6.0.1
 pandas==2.2.3
 numpy==2.2.4
 cvxpy==1.6.4
