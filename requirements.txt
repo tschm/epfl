@@ -5,4 +5,4 @@ cvxpy==1.6.4
 scipy==1.15.2
 matplotlib==3.10.1
 statsmodels==0.14.4
-pre-commit==4.1.0
+pre-commit==4.2.0
