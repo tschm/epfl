@@ -3,6 +3,6 @@ pandas==2.2.3
 numpy==2.2.5
 cvxpy==1.6.5
 scipy==1.15.2
-matplotlib==3.10.1
+matplotlib==3.10.3
 statsmodels==0.14.4
 pre-commit==4.2.0
