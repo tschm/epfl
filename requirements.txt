@@ -1,8 +1,25 @@
-plotly==6.1.1
+# Python package dependencies for the EPFL project
+
+# Interactive graphing library for creating interactive, publication-quality graphs
+plotly==6.0.0
+
+# Data manipulation and analysis library
 pandas==2.2.3
-numpy==2.2.6
-cvxpy==1.6.5
-scipy==1.15.3
-matplotlib==3.10.3
+
+# Numerical computing library for array operations
+numpy==2.2.2
+
+# Modeling and solving convex optimization problems
+cvxpy==1.6.0
+
+# Scientific computing library for mathematics, science, and engineering
+scipy==1.15.1
+
+# Data visualization library for creating plots and charts
+matplotlib==3.10.0
+
+# Statistical models, hypothesis tests, and data exploration
 statsmodels==0.14.4
-pre-commit==4.2.0
+
+# Framework for managing and maintaining pre-commit hooks
+pre-commit==4.1.0
