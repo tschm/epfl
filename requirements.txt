@@ -16,7 +16,7 @@ cvxpy==1.6.0
 scipy==1.15.3
 
 # Data visualization library for creating plots and charts
-matplotlib==3.10.0
+matplotlib==3.10.3
 
 # Statistical models, hypothesis tests, and data exploration
 statsmodels==0.14.4
