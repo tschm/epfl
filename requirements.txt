@@ -13,7 +13,7 @@ numpy==2.2.2
 cvxpy==1.6.0
 
 # Scientific computing library for mathematics, science, and engineering
-scipy==1.15.1
+scipy==1.15.3
 
 # Data visualization library for creating plots and charts
 matplotlib==3.10.0
