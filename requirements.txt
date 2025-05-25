@@ -10,7 +10,7 @@ pandas==2.2.3
 numpy==2.2.6
 
 # Modeling and solving convex optimization problems
-cvxpy==1.6.0
+cvxpy==1.6.5
 
 # Scientific computing library for mathematics, science, and engineering
 scipy==1.15.3
