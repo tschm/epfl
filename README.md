@@ -1,3 +1,4 @@
 # [My talk](https://tschm.github.io/epfl/)
 
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/tschm/epfl/master.svg)](https://results.pre-commit.ci/latest/github/tschm/epfl/master)
+[![CodeFactor](https://www.codefactor.io/repository/github/tschm/epfl/badge)](https://www.codefactor.io/repository/github/tschm/epfl)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://github.com/renovatebot/renovate)
