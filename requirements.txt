@@ -7,7 +7,7 @@ plotly==6.0.0
 pandas==2.2.3
 
 # Numerical computing library for array operations
-numpy==2.2.2
+numpy==2.2.6
 
 # Modeling and solving convex optimization problems
 cvxpy==1.6.0
