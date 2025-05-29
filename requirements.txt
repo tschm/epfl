@@ -1,7 +1,7 @@
 # Python package dependencies for the EPFL project
 
 # Interactive graphing library for creating interactive, publication-quality graphs
-plotly==6.1.1
+plotly==6.1.2
 
 # Data manipulation and analysis library
 pandas==2.2.3
