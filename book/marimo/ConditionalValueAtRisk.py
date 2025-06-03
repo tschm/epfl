@@ -21,8 +21,9 @@ def _(mo):
 @app.cell
 def _():
     import numpy as np
+    import plotly.graph_objects as go
 
-    return (np,)
+    return np, go
 
 
 @app.cell
@@ -107,15 +108,22 @@ def _(np):
         return gamma + 1.0 / (len(returns) * (1 - alpha)) * excess[excess > 0].sum()
 
     # note that cvar = (3+4)/2  and var = ? ... depends on your definition. 2?, 3?, 2.5?
-    r = np.array([-1.0, 2.0, 3.0, 2.0, 4.0, 2.0, 0.0, 1.0, -2.0, -2.0])
+    _r = np.array([-1.0, 2.0, 3.0, 2.0, 4.0, 2.0, 0.0, 1.0, -2.0, -2.0])
     _x = np.linspace(start=-1.0, stop=5.0, num=1000)
-    _v = np.array([f(gamma=g, returns=r, alpha=0.80) for g in _x])
+    _v = np.array([f(gamma=g, returns=_r, alpha=0.80) for g in _x])
 
     # Uncomment to show the plot
-    # plt.plot(_x, _v), plt.grid(True), plt.xlabel('$\gamma$'), plt.ylabel('$f$')
-    # plt.title('Conditional value at risk as global minimum of a function f')
-    # plt.axis([0, 5, 3, 6])
-    # plt.show()
+    # _fig = go.Figure()
+    # _fig.add_trace(go.Scatter(x=_x, y=_v, mode='lines'))
+    # _fig.update_layout(
+    #     title='Conditional value at risk as global minimum of a function f',
+    #     xaxis_title='$\gamma$',
+    #     yaxis_title='$f$',
+    #     xaxis_range=[0, 5],
+    #     yaxis_range=[3, 6],
+    #     grid=dict(rows=1, columns=1, pattern='independent')
+    # )
+    # _fig.show()
     return
 
 
@@ -140,24 +148,24 @@ def _(mo):
 
 @app.cell
 def _(cvx, minimize):
-    R = [-1.0, 2.0, 3.0, 2.0, 4.0, 2.0, 0.0, 1.0, -2.0, -2.0]
+    _R = [-1.0, 2.0, 3.0, 2.0, 4.0, 2.0, 0.0, 1.0, -2.0, -2.0]
 
-    n = len(R)
+    _n = len(_R)
     # We are interested in CVaR for alpha=0.80, e.g. what's the mean of the 20% of the biggest losses
-    alpha = 0.80
+    _alpha = 0.80
 
     # introduce the variable for the var
-    gamma = cvx.Variable(1)
-    cvar = minimize(
-        objective=gamma + 1.0 / int(n * (1 - alpha)) * cvx.sum(cvx.pos(R - gamma))
+    _gamma = cvx.Variable(1)
+    _cvar = minimize(
+        objective=_gamma + 1.0 / int(_n * (1 - _alpha)) * cvx.sum(cvx.pos(_R - _gamma))
     )
 
-    print(1.0 / (n * (1 - alpha)))
-    print(f"A minimizer of f (<= VaR):  {gamma.value}")
-    print(f"Minimum of f (== CVaR):     {cvar}")
+    print(1.0 / (_n * (1 - _alpha)))
+    print(f"A minimizer of f (<= VaR):  {_gamma.value}")
+    print(f"Minimum of f (== CVaR):     {_cvar}")
 
-    x = cvx.sum_largest(R, k=int(n * (1 - alpha)))
-    print(x.value)
+    _x = cvx.sum_largest(_R, k=int(_n * (1 - _alpha)))
+    print(_x.value)
     return
 
 
@@ -174,21 +182,27 @@ def _(np):
     _k = int(_n * (1 - _alpha))
 
     _gamma, _w = (cvx.Variable(1), cvx.Variable(_m))
-    constraints = [0 <= _w, cvx.sum(_w) == 1]
+    _constraints = [0 <= _w, cvx.sum(_w) == 1]
 
-    obj = cvx.Minimize(_gamma + cvx.sum(cvx.pos(_R @ _w - _gamma)) / _k)
-    _cvar = cvx.Problem(objective=obj, constraints=constraints).solve()
+    _obj = cvx.Minimize(_gamma + cvx.sum(cvx.pos(_R @ _w - _gamma)) / _k)
+    _cvar = cvx.Problem(objective=_obj, constraints=_constraints).solve()
     print(f"CVaR: {_cvar}")
 
-    obj = cvx.Minimize(cvx.sum_largest(_R @ _w, k=_k) / _k)
-    cvar2 = cvx.Problem(objective=obj, constraints=constraints).solve()
-    print(f"CVaR 2: {cvar2}")
+    _obj2 = cvx.Minimize(cvx.sum_largest(_R @ _w, k=_k) / _k)
+    _cvar2 = cvx.Problem(objective=_obj2, constraints=_constraints).solve()
+    print(f"CVaR 2: {_cvar2}")
 
     # Uncomment to show the plot
-    # plt.hist(R @ weights, bins=100)
-    # plt.axis([-0.4, 0.4, 0, 150])
-    # plt.title("CVaR {0}".format(cvar))
-    # plt.show()
+    # _fig = go.Figure()
+    # _fig.add_trace(go.Histogram(x=_R @ _w.value, nbinsx=100))
+    # _fig.update_layout(
+    #     title=f"CVaR {_cvar}",
+    #     xaxis_title="Value",
+    #     yaxis_title="Frequency",
+    #     xaxis_range=[-0.4, 0.4],
+    #     yaxis_range=[0, 150]
+    # )
+    # _fig.show()
     return cvx, minimize
 
 

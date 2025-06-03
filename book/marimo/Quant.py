@@ -6,13 +6,11 @@ app = marimo.App()
 
 @app.cell
 def _():
-    import matplotlib
-
     import numpy as np
-    import matplotlib.pyplot as plt
+    import plotly.graph_objects as go
+    from plotly.subplots import make_subplots
 
-    matplotlib.style.use("ggplot")
-    return np, plt
+    return go, make_subplots, np
 
 
 @app.cell
@@ -222,20 +220,21 @@ def _():
 
 
 @app.cell
-def _(min_var, np, plt):
-    def plot(ax, data, width=0.35, title=""):
-        ax.bar(np.arange(5) + 1 - width, data, 2 * width)
-        ax.set_ylabel("Weight"), ax.set_xlabel("index"), ax.set_title(title)
-        ax.set_ylim([0, 1])
-        return ax
+def _(go, min_var, np):
+    def plot_bar(data, width=0.35, title=""):
+        _fig = go.Figure()
+        _fig.add_trace(go.Bar(x=np.arange(5) + 1, y=data, width=2 * width))
+        _fig.update_layout(
+            title=title, xaxis_title="index", yaxis_title="Weight", yaxis_range=[0, 1]
+        )
+        return _fig
 
-    random_data = np.dot(np.random.randn(250, 5), np.diag([1, 2, 3, 4, 5]))
-    data = min_var(random_data)
+    _random_data = np.dot(np.random.randn(250, 5), np.diag([1, 2, 3, 4, 5]))
+    _data = min_var(_random_data)
 
-    fig, ax = plt.subplots()
-    plot(ax, data)
-    plt.show()
-    return plot, random_data
+    _fig = plot_bar(_data)
+    _fig
+    return plot_bar, _random_data
 
 
 @app.cell
@@ -260,29 +259,72 @@ def _(mo):
 
 
 @app.cell
-def _(min_var, plot, plt, random_data):
-    _, _axs = plt.subplots(1, 2, figsize=(25, 10))
-    plot(_axs[0], data=min_var(random_data, lamb=0), title="0")
-    plot(_axs[1], data=min_var(random_data, lamb=10), title="10")
-    plt.show()
+def _(make_subplots, min_var, plot_bar, _random_data):
+    # Create subplot layout with specified width/height via `update_layout` later
+    _fig = make_subplots(
+        rows=1, cols=2, subplot_titles=["0", "10"], horizontal_spacing=0.05
+    )
+
+    # Add first subplot
+    _fig1 = plot_bar(min_var(_random_data, lamb=0))
+    _fig.add_trace(_fig1.data[0], row=1, col=1)
+
+    # Add second subplot
+    _fig2 = plot_bar(min_var(_random_data, lamb=10))
+    _fig.add_trace(_fig2.data[0], row=1, col=2)
+
+    # Update layout (width/height here)
+    _fig.update_layout(
+        width=1000,
+        height=400,
+        showlegend=False,
+        yaxis_range=[0, 1],
+        yaxis2_range=[0, 1],
+    )
+
+    _fig
     return
 
 
 @app.cell
-def _(min_var, plot, plt, random_data):
-    _, _axs = plt.subplots(1, 2, figsize=(25, 10))
-    plot(_axs[0], data=min_var(random_data, lamb=20), title="20")
-    plot(_axs[1], data=min_var(random_data, lamb=50), title="50")
-    plt.show()
+def _(make_subplots, min_var, plot_bar, _random_data):
+    _fig = make_subplots(
+        rows=1, cols=2, subplot_titles=["20", "50"], horizontal_spacing=0.05
+    )
+
+    # Add the first subplot
+    _fig1 = plot_bar(min_var(_random_data, lamb=20))
+    _fig.add_trace(_fig1.data[0], row=1, col=1)
+
+    # Add the second subplot
+    _fig2 = plot_bar(min_var(_random_data, lamb=50))
+    _fig.add_trace(_fig2.data[0], row=1, col=2)
+
+    # Update layout
+    _fig.update_layout(showlegend=False, yaxis_range=[0, 1], yaxis2_range=[0, 1])
+
+    _fig
     return
 
 
 @app.cell
-def _(min_var, plot, plt, random_data):
-    _, _axs = plt.subplots(1, 2, figsize=(25, 10))
-    plot(_axs[0], data=min_var(random_data, lamb=100), title="100")
-    plot(_axs[1], data=min_var(random_data, lamb=200), title="200")
-    plt.show()
+def _(make_subplots, min_var, plot_bar, random_data):
+    fig = make_subplots(
+        rows=1, cols=2, subplot_titles=["100", "200"], horizontal_spacing=0.05
+    )
+
+    # Add the first subplot
+    fig1 = plot_bar(min_var(random_data, lamb=100))
+    fig.add_trace(fig1.data[0], row=1, col=1)
+
+    # Add the second subplot
+    fig2 = plot_bar(min_var(random_data, lamb=200))
+    fig.add_trace(fig2.data[0], row=1, col=2)
+
+    # Update layout
+    fig.update_layout(showlegend=False, yaxis_range=[0, 1], yaxis2_range=[0, 1])
+
+    fig.show()
     return
 
 

@@ -6,14 +6,12 @@ app = marimo.App()
 
 @app.cell
 def _():
-    import matplotlib
-
     import numpy as np
     import pandas as pd
-    import matplotlib.pyplot as plt
+    import plotly.graph_objects as go
+    import plotly.express as px
 
-    matplotlib.style.use("ggplot")
-    return np, pd, plt
+    return np, pd, go, px
 
 
 @app.cell
@@ -94,11 +92,11 @@ def _(mo):
 
 
 @app.cell
-def _(mo, pd, plt):
+def _(go, mo, pd):
     import statsmodels.tsa.stattools as sts
 
     # generate random returns
-    r = (
+    _r = (
         pd.read_csv(
             mo.notebook_location() / "data" / "SPX_Index.csv",
             index_col=0,
@@ -109,23 +107,38 @@ def _(mo, pd, plt):
         .dropna()[1]
     )
     # let's compute the optimal convolution!
-    _weights = sts.pacf(r, nlags=200)
-    pd.Series(data=_weights[1:]).plot(kind="bar")
-    plt.show()
-    print(r)
-    return (r,)
+    _weights = sts.pacf(_r, nlags=200)
+
+    # Create a bar chart with plotly
+    _fig = go.Figure()
+    _fig.add_trace(go.Bar(x=list(range(1, len(_weights))), y=_weights[1:]))
+    _fig.update_layout(
+        title="Partial Autocorrelation", xaxis_title="Lag", yaxis_title="PACF"
+    )
+    _fig.show()
+
+    print(_r)
+    return _r, sts, _weights
 
 
 @app.cell
-def _(plt, r, weights):
+def _(go, _r, _weights):
     # The trading system!
-    _pos = convolution(r, weights[1:])
+    _pos = convolution(_r, _weights[1:])
     _pos = 1e6 * (_pos / _pos.std())
     # profit = return[today] * position[yesterday]
-    (r * _pos.shift(1)).cumsum().plot()
-    plt.xlabel("Time"), plt.ylabel("Profit")
-    plt.show()
-    return
+
+    # Create a line chart with plotly
+    _fig = go.Figure()
+    _fig.add_trace(
+        go.Scatter(x=_r.index, y=(_r * _pos.shift(1)).cumsum(), mode="lines")
+    )
+    _fig.update_layout(
+        title="Cumulative Profit", xaxis_title="Time", yaxis_title="Profit"
+    )
+    _fig.show()
+
+    return _pos
 
 
 @app.cell
@@ -147,38 +160,75 @@ def _(mo):
 
 
 @app.cell
-def _(np, pd, plt):
+def _(go, np, pd):
     def exp_weights(m, n=100):
         x = np.power(1.0 - 1.0 / m, range(1, n + 1))
         S = np.linalg.norm(x)
         return x / S
 
-    pd.Series(exp_weights(m=16, n=40)).plot(kind="bar")
-    plt.show()
-    return (exp_weights,)
+    # Create a bar chart with plotly
+    _weights = exp_weights(m=16, n=40)
+    _fig = go.Figure()
+    _fig.add_trace(go.Bar(x=list(range(1, len(_weights) + 1)), y=_weights))
+    _fig.update_layout(
+        title="Exponential Weights (m=16, n=40)",
+        xaxis_title="Index",
+        yaxis_title="Weight",
+    )
+    _fig.show()
+
+    return exp_weights
 
 
 @app.cell
-def _(exp_weights, pd, plt):
-    periods = [2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 192]
+def _(exp_weights, go, pd):
+    _periods = [2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 192]
     # matrix of weights
-    W = pd.DataFrame({period: exp_weights(m=period, n=200) for period in periods})
-    W.plot()
-    plt.show()
-    return W, periods
+    _W = pd.DataFrame({period: exp_weights(m=period, n=200) for period in _periods})
+
+    # Create a line chart with plotly
+    _fig = go.Figure()
+    for period in _periods:
+        _fig.add_trace(
+            go.Scatter(
+                x=list(range(1, 201)),
+                y=_W[period],
+                mode="lines",
+                name=f"Period {period}",
+            )
+        )
+    _fig.update_layout(
+        title="Exponential Weights for Different Periods",
+        xaxis_title="Index",
+        yaxis_title="Weight",
+    )
+    _fig.show()
+
+    return _W, _periods
 
 
 @app.cell
-def _(W, pd, periods, plt, r):
+def _(_W, convolution, go, pd, _periods, _r):
     # each column of A is a convoluted return time series
-    A = pd.DataFrame({period: convolution(r, W[period]).shift(1) for period in periods})
+    _A = pd.DataFrame(
+        {period: convolution(_r, _W[period]).shift(1) for period in _periods}
+    )
 
-    A = A.dropna(axis=0)
-    r_filtered = r[A.index].dropna()
+    _A = _A.dropna(axis=0)
+    _r_filtered = _r[_A.index].dropna()
 
-    A[[2, 16, 64]].plot()
-    plt.show()
-    return A, r_filtered
+    # Create a line chart with plotly
+    _fig = go.Figure()
+    for period in [2, 16, 64]:
+        _fig.add_trace(
+            go.Scatter(x=_A.index, y=_A[period], mode="lines", name=f"Period {period}")
+        )
+    _fig.update_layout(
+        title="Convoluted Return Time Series", xaxis_title="Date", yaxis_title="Value"
+    )
+    _fig.show()
+
+    return _A, _r_filtered
 
 
 @app.cell
@@ -196,16 +246,40 @@ def _(mo):
 
 
 @app.cell
-def _(A, W, pd, periods, plt, r_filtered):
+def _(_A, _W, go, pd, _periods, _r_filtered):
     from numpy.linalg import lstsq
 
     # sometimes you don't need to use MOSEK :-)
-    weights = pd.Series(index=periods, data=lstsq(A.values, r_filtered.values)[0])
-    print(weights)
-    (W * weights).sum(axis=1).plot(kind="bar")
-    (W * weights).sum(axis=1).plot()
-    plt.show()
-    return (weights,)
+    _weights = pd.Series(index=_periods, data=lstsq(_A.values, _r_filtered.values)[0])
+    print(_weights)
+
+    # Create bar chart
+    _fig1 = go.Figure()
+    _fig1.add_trace(go.Bar(x=_weights.index.astype(str), y=(_W * _weights).sum(axis=1)))
+    _fig1.update_layout(
+        title="Weights Distribution (Bar Chart)",
+        xaxis_title="Period",
+        yaxis_title="Weight",
+    )
+    _fig1.show()
+
+    # Create line chart
+    _fig2 = go.Figure()
+    _fig2.add_trace(
+        go.Scatter(
+            x=list(range(1, len((_W * _weights).sum(axis=1)) + 1)),
+            y=(_W * _weights).sum(axis=1),
+            mode="lines",
+        )
+    )
+    _fig2.update_layout(
+        title="Weights Distribution (Line Chart)",
+        xaxis_title="Index",
+        yaxis_title="Weight",
+    )
+    _fig2.show()
+
+    return lstsq, _weights
 
 
 @app.cell
@@ -245,33 +319,66 @@ def _(np, pd):
 
 
 @app.cell
-def _(A, W, ar, pd, plt, r_filtered):
-    t_weight = pd.DataFrame(
+def _(_A, _W, ar, go, pd, _r_filtered):
+    _t_weight = pd.DataFrame(
         {
-            lamb: (W * ar(A, r_filtered.values, lamb=lamb)).sum(axis=1)
+            lamb: (_W * ar(_A, _r_filtered.values, lamb=lamb)).sum(axis=1)
             for lamb in [0.0, 1.0, 2.0, 3.0, 5.0, 7.0, 9.0, 12.0, 15.0]
         }
     )
-    t_weight[[0.0, 5.0, 15.0]].plot(figsize=(30, 10))
-    plt.show()
-    return (t_weight,)
+
+    # Create a line chart with plotly
+    _fig = go.Figure()
+    for lamb in [0.0, 5.0, 15.0]:
+        _fig.add_trace(
+            go.Scatter(
+                x=list(range(1, len(_t_weight) + 1)),
+                y=_t_weight[lamb],
+                mode="lines",
+                name=f"Lambda {lamb}",
+            )
+        )
+    _fig.update_layout(
+        title="Weight Distribution for Different Lambda Values",
+        xaxis_title="Index",
+        yaxis_title="Weight",
+        width=1200,
+        height=400,
+    )
+    _fig.show()
+
+    return _t_weight
 
 
 @app.cell
-def _(pd, plt, r, t_weight):
-    # for lamb in sorted(t_weight.keys()):
+def _(convolution, go, pd, _r, _t_weight):
+    # for lamb in sorted(_t_weight.keys()):
 
-    pos = pd.DataFrame(
-        {lamb: convolution(r, t_weight[lamb]) for lamb in t_weight.keys()}
+    _pos = pd.DataFrame(
+        {lamb: convolution(_r, _t_weight[lamb]) for lamb in _t_weight.keys()}
     )
-    pos = 1e6 * (pos / pos.std())
+    _pos = 1e6 * (_pos / _pos.std())
 
-    profit = pd.DataFrame(
-        {lamb: (r * pos[lamb].shift(1)).cumsum() for lamb in pos.keys()}
+    _profit = pd.DataFrame(
+        {lamb: (_r * _pos[lamb].shift(1)).cumsum() for lamb in _pos.keys()}
     )
-    profit[[0.0, 5.0, 15.0]].plot()
-    plt.show()
-    return
+
+    # Create a line chart with plotly
+    _fig = go.Figure()
+    for lamb in [0.0, 5.0, 15.0]:
+        _fig.add_trace(
+            go.Scatter(
+                x=_profit.index, y=_profit[lamb], mode="lines", name=f"Lambda {lamb}"
+            )
+        )
+    _fig.update_layout(
+        title="Cumulative Profit for Different Lambda Values",
+        xaxis_title="Date",
+        yaxis_title="Profit",
+    )
+    _fig.show()
+
+    return _pos, _profit
 
 
 @app.cell

@@ -57,26 +57,26 @@ def _(np):
     from cvx.util import cvx, maximize
 
     # make some random data, e.g. cov-matrix and expected returns
-    n = 100
-    c = 0.9
-    C = c * np.ones((n, n)) + (1 - c) * np.eye(n)
-    mu = 0.05 * np.sin(range(0, n))
+    _n = 100
+    _c = 0.9
+    _C = _c * np.ones((_n, _n)) + (1 - _c) * np.eye(_n)
+    _mu = 0.05 * np.sin(range(0, _n))
     # maximal volatility and leverage...
-    sigma_max = 1.0
-    excess = 0.3
+    _sigma_max = 1.0
+    _excess = 0.3
 
-    x = cvx.Variable(n)
-    constraints = [
-        cvx.sum(x) == 1,
-        cvx.norm(x, 1) <= 1 + 2 * excess,
-        cvx.quad_form(x, C) <= sigma_max * sigma_max,
+    _x = cvx.Variable(_n)
+    _constraints = [
+        cvx.sum(_x) == 1,
+        cvx.norm(_x, 1) <= 1 + 2 * _excess,
+        cvx.quad_form(_x, _C) <= _sigma_max * _sigma_max,
     ]
-    maximize(objective=x.T @ mu, constraints=constraints)
-    f = x.value
+    maximize(objective=_x.T @ _mu, constraints=_constraints)
+    _f = _x.value
 
-    print("Sum of positive weights: {}".format(np.sum(f[f > 0])))
-    print("Sum of negative weights: {}".format(np.sum(f[f < 0])))
-    print("Sum of all weights:      {}".format(np.sum(f)))
+    print("Sum of positive weights: {}".format(np.sum(_f[_f > 0])))
+    print("Sum of negative weights: {}".format(np.sum(_f[_f < 0])))
+    print("Sum of all weights:      {}".format(np.sum(_f)))
     return
 
 
