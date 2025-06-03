@@ -25,7 +25,7 @@ jobs:
       # This automatically determines the next version number based on commit messages
       # Note: This uses v0.1.68 which is slightly older than the version used in other workflows
       - name: Generate Tag
-        uses: tschm/cradle/actions/tag@v0.1.69
+        uses: tschm/cradle/actions/tag@v0.1.70
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -35,7 +35,7 @@ jobs:
     steps:
       # Set up the virtual environment with all dependencies
       - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.1.69
+        uses: tschm/cradle/actions/environment@v0.1.70
 
       - name: Convert all Python notebooks to HTML
         run: |
