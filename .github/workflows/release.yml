@@ -28,3 +28,68 @@ jobs:
         uses: tschm/cradle/actions/tag@v0.1.69
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  # Job to set up and build the Marimo interactive notebook environment
+  marimo:
+    runs-on: ubuntu-latest
+    steps:
+      # Set up the virtual environment with all dependencies
+      - name: "Build the virtual environment for ${{ github.repository }}"
+        uses: tschm/cradle/actions/environment@v0.1.69
+
+      - name: Convert all Python notebooks to HTML
+        run: |
+          uv run pip install --no-cache-dir marimo
+          mkdir -p artifacts/marimo
+
+          # Find all Python files in the book/marimo directory and export them to HTML
+          for py_file in book/marimo/*.py; do
+            # Skip __init__.py and other non-notebook files
+            if [[ "$py_file" == *"__init__.py" ]]; then
+              continue
+            fi
+
+            # Extract the filename without extension
+            filename=$(basename "$py_file" .py)
+            echo "Converting $py_file to HTML..."
+
+            # Create output directory for this file
+            mkdir -p artifacts/marimo/$filename
+
+            # Export the Python file to HTML
+            uv run marimo export html "$py_file" -o artifacts/marimo/$filename/index.html
+          done
+
+      - run: |
+          ls -all
+          ls -all artifacts
+
+      # Upload the generated HTML files as a GitHub Actions artifact
+      # This makes the files available for the deployment job
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: artifacts/marimo
+
+  # Job to deploy the built HTML to GitHub Pages
+  # This job takes the artifact from the page job and deploys it to GitHub Pages
+  deploy-book:
+    runs-on: ubuntu-latest
+    # This job depends on the page job completing successfully
+    needs: marimo
+    # Need specific permissions for GitHub Pages deployment
+    permissions:
+      pages: write      # Permission to deploy to Pages
+      id-token: write   # Permission to verify deployment origin
+
+    # Configure the deployment environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}  # URL will be available after deployment
+
+    steps:
+      # Deploy the artifact to GitHub Pages using GitHub's official action
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
