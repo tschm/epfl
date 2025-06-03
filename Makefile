@@ -39,11 +39,11 @@ help:  ## Display this help screen
 	@grep -E '^[a-z.A-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}' | sort
 
 
-# Start Jupyter Lab for interactive notebook development
-.PHONY: jupyter
-jupyter: install ## Run jupyter lab
-	@uv pip install jupyterlab
-	@uv run jupyter lab
+# Install and run Marimo for interactive notebooks
+.PHONY: marimo
+marimo: install ## Run Marimo notebooks
+	@uv pip install marimo
+	@uv run marimo edit book/marimo
 
 # Build the Jupyter Book documentation
 .PHONY: book
