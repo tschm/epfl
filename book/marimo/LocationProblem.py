@@ -28,13 +28,13 @@ def _(mo):
 @app.cell
 def _(go, np):
     # pick a bunch of random points
-    _pos = np.random.randn(1000, 2)
+    pos = np.random.randn(1000, 2)
 
     # Create a scatter plot with plotly
     _fig = go.Figure()
     _fig.add_trace(
         go.Scatter(
-            x=_pos[:, 0], y=_pos[:, 1], mode="markers", marker=dict(symbol="x", size=10)
+            x=pos[:, 0], y=pos[:, 1], mode="markers", marker=dict(symbol="x", size=10)
         )
     )
     _fig.update_layout(
@@ -46,7 +46,7 @@ def _(go, np):
 
     _fig
 
-    return (_pos,)
+    return (pos,)
 
 
 @app.cell
@@ -63,15 +63,15 @@ def _():
 
 
 @app.cell
-def _(location, _pos):
-    print(location(_pos))
+def _(location, pos):
+    print(location(pos))
     return
 
 
 @app.cell
-def _(go, location, math, np, _pos):
+def _(go, location, math, np, pos):
     # Create a scatter plot with a circle overlay using plotly
-    _radius, _midpoint = location(_pos)
+    _radius, _midpoint = location(pos)
 
     # Generate points for the circle
     _theta = np.linspace(0, 2 * math.pi, 1000)
@@ -84,8 +84,8 @@ def _(go, location, math, np, _pos):
     # Add the scatter points
     _fig.add_trace(
         go.Scatter(
-            x=_pos[:, 0],
-            y=_pos[:, 1],
+            x=pos[:, 0],
+            y=pos[:, 1],
             mode="markers",
             marker=dict(symbol="x", size=10),
             name="Points",
@@ -111,7 +111,7 @@ def _(go, location, math, np, _pos):
         yaxis=dict(scaleanchor="x", scaleratio=1),
     )
 
-    _fig.show()
+    _fig
 
     return
 
