@@ -10,8 +10,9 @@ def _():
     import pandas as pd
     import plotly.graph_objects as go
     import plotly.express as px
+    import cvxpy as cvx
 
-    return np, pd, go, px
+    return np, pd, go, px, cvx
 
 
 @app.cell
@@ -246,8 +247,8 @@ def _(mo):
 
 
 @app.cell
-def _(_A, _W, go, pd, _periods, _r_filtered):
-    from numpy.linalg import lstsq
+def _(_A, _W, go, pd, np, _periods, _r_filtered):
+    from np.linalg import lstsq
 
     # sometimes you don't need to use MOSEK :-)
     _weights = pd.Series(index=_periods, data=lstsq(_A.values, _r_filtered.values)[0])
@@ -302,8 +303,9 @@ def _(mo):
 
 
 @app.cell
-def _(np, pd):
-    from cvx.util import cvx, minimize
+def _(np, pd, cvx):
+    def minimize(objective, constraints=None):
+        return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
     def mean_variation(ts):
         return ts.diff().abs().mean()

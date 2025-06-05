@@ -9,8 +9,9 @@ def _():
     import numpy as np
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
+    import cvxpy as cvx
 
-    return go, make_subplots, np
+    return go, make_subplots, np, cvx
 
 
 @app.cell
@@ -201,8 +202,9 @@ def _(mo):
 
 
 @app.cell
-def _():
-    from cvx.util import minimize, cvx
+def _(cvx):
+    def minimize(objective, constraints=None):
+        return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
     def min_var(matrix, lamb=0.0):
         """

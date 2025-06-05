@@ -9,8 +9,9 @@ def _():
     import numpy as np
     import plotly.graph_objects as go
     import math
+    import cvxpy as cvx
 
-    return go, math, np
+    return go, math, np, cvx
 
 
 @app.cell
@@ -50,9 +51,10 @@ def _(go, np):
 
 
 @app.cell
-def _():
+def _(cvx):
     # solution with cvxpy
-    from cvx.util import cvx, minimize
+    def minimize(objective, constraints=None):
+        return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
     def location(pos):
         R, x = cvx.Variable(1), cvx.Variable(2)

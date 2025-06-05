@@ -22,8 +22,9 @@ def _(mo):
 def _():
     import numpy as np
     import plotly.graph_objects as go
+    import cvxpy as cvx
 
-    return np, go
+    return np, cvx, go
 
 
 @app.cell
@@ -170,8 +171,9 @@ def _(cvx, minimize):
 
 
 @app.cell
-def _(np):
-    from cvx.util import minimize, cvx
+def _(np, cvx):
+    def minimize(objective, constraints=None):
+        return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
     # take some random return data
     _R = np.random.randn(2500, 100)

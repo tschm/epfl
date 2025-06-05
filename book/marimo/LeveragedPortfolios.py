@@ -7,8 +7,9 @@ app = marimo.App()
 @app.cell
 def _():
     import numpy as np
+    import cvxpy as cvx
 
-    return (np,)
+    return (np, cvx)
 
 
 @app.cell
