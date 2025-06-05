@@ -68,7 +68,7 @@ jobs:
 
             # test the notebook
             uv run marimo export html-wasm $notebook -o artifacts/marimo_run/$filename --mode run
-            uv run python -m http.server --directory artifacts/marimo_run/$filename
+            uv run http.server --directory artifacts/marimo_run/$filename
 
           done
 
