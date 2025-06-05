@@ -54,8 +54,10 @@ def _(mo):
 
 
 @app.cell
-def _(np):
-    from cvx.util import cvx, maximize
+def _(np, cvx):
+    # solution with cvxpy
+    def maximize(objective, constraints=None):
+        return cvx.Problem(cvx.Maximize(objective), constraints).solve()
 
     # make some random data, e.g. cov-matrix and expected returns
     _n = 100
