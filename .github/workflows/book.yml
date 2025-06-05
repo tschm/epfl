@@ -50,7 +50,7 @@ jobs:
       # The WASM format allows for interactive elements to work in the browser
       - name: Convert notebooks to HTML-WASM
         run: |
-          uv run pip install --no-cache-dir marimo
+          uv run pip install --no-cache-dir marimo http.server
           mkdir -p artifacts/marimo
           mkdir -p artifacts/marimo_run
 
