@@ -7,10 +7,11 @@ plotly==6.1.2
 pandas==2.2.3
 
 # Numerical computing library for array operations
-numpy==2.2.6
+numpy==2.0.2
 
 # Modeling and solving convex optimization problems
-cvxpy==1.6.5
+cvxpy-base==1.5.1
+clarabel==0.11.0
 
 # Scientific computing library for mathematics, science, and engineering
 scipy==1.15.3
@@ -19,4 +20,4 @@ scipy==1.15.3
 statsmodels==0.14.4
 
 # Framework for managing and maintaining pre-commit hooks
-pre-commit==4.2.0
+# pre-commit==4.2.0
