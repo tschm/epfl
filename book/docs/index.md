@@ -1,3 +1,1 @@
-# epfl
-
-Talk I gave once at EPFL
+../../README.md
