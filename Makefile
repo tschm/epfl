@@ -20,7 +20,6 @@ install: venv ## Install a virtual environment
 # Format and lint the code using pre-commit
 .PHONY: fmt
 fmt: venv ## Run autoformatting and linting
-	#@uv pip install pre-commit
 	@uvx pre-commit install
 	@uvx pre-commit run --all-files
 
@@ -42,12 +41,4 @@ help:  ## Display this help screen
 # Install and run Marimo for interactive notebooks
 .PHONY: marimo
 marimo: install ## Run Marimo notebooks
-	#@uv pip install marimo
 	@uvx marimo edit book/marimo
-
-# Build the Jupyter Book documentation
-#.PHONY: book
-#book: install  ## Compile the book
-#	@uv pip install jupyterlab jupyter-book
-#	@uv run jupyter-book clean book
-#	@uv run jupyter-book build book
