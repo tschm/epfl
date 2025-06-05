@@ -52,6 +52,7 @@ jobs:
         run: |
           uv run pip install --no-cache-dir marimo
           mkdir -p artifacts/marimo
+          mkdir -p artifacts/marimo_run
 
           # Find all Python files in the notebooks directory and export them to HTML-WASM
           for notebook in book/marimo/*.py; do
@@ -64,6 +65,10 @@ jobs:
 
             # Export in edit mode to allow users to modify the notebook
             uv run marimo export html-wasm $notebook -o artifacts/marimo/$filename --mode edit
+
+            # test the notebook
+            uv run marimo export html-wasm $notebook -o artifacts/marimo_run/$filename --mode run
+
           done
 
           # List all exported notebooks
