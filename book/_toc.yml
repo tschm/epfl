@@ -14,3 +14,9 @@ chapters:
 
     - url: https://tschm.github.io/epfl/marimo/LocationProblem/index.html
       title: A location problem
+
+    - url: https://tschm.github.io/epfl/marimo/ConditionalValueAtRisk/index.html
+      title: cVar
+
+    - url: https://tschm.github.io/epfl/marimo/ConstructingARestimators/index.html
+      title: Constructing AR estimators
