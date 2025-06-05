@@ -5,3 +5,6 @@ root: docs/index
 chapters:
     - url: https://tschm.github.io/epfl/marimo/Quant/index.html
       title: Being a quant
+
+    - url: https://tschm.github.io/epfl/marimo/LocationProblem/index.html
+      title: A location problem
