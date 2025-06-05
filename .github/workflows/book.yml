@@ -68,8 +68,15 @@ jobs:
 
             # test the notebook
             uv run marimo export html-wasm $notebook -o artifacts/marimo_run/$filename --mode run
-            uv run python -m http.server --directory artifacts/marimo_run/$filename
-            pushd artifacts/marimo_run/$filename/index.html;  python3 -m http.server 9999; popd;
+
+            # 2. Serve the output directory (not the file!)
+            uv run python -m http.server 8000 --directory artifacts/marimo_run/$filename
+
+            # 3. (Optional) Open in browser from CLI
+            uv run python -m webbrowser http://localhost:8000/index.html
+
+            # uv run python -m http.server --directory artifacts/marimo_run/$filename
+            # pushd artifacts/marimo_run/$filename/index.html;  python3 -m http.server 9999; popd;
           done
 
           # List all exported notebooks
