@@ -92,7 +92,7 @@ def _():
 @app.cell
 def _():
     # generate random returns
-    _r = (
+    r = (
         pd.read_csv(
             mo.notebook_location() / "public" / "SPX_Index.csv",
             index_col=0,
@@ -103,38 +103,34 @@ def _():
         .dropna()[1]
     )
     # let's compute the optimal convolution!
-    _weights = sts.pacf(_r, nlags=200)
+    weights = sts.pacf(r, nlags=200)
 
     # Create a bar chart with plotly
     _fig = go.Figure()
-    _fig.add_trace(go.Bar(x=list(range(1, len(_weights))), y=_weights[1:]))
+    _fig.add_trace(go.Bar(x=list(range(1, len(weights))), y=weights[1:]))
     _fig.update_layout(
         title="Partial Autocorrelation", xaxis_title="Lag", yaxis_title="PACF"
     )
-    _fig.show()
-
-    print(_r)
-    return (_r, _weights)
+    _fig
+    return r, weights
 
 
 @app.cell
-def _(_r, _weights):
+def _(r, weights):
     # The trading system!
-    _pos = convolution(_r, _weights[1:])
-    _pos = 1e6 * (_pos / _pos.std())
+    _pos = convolution(r, weights[1:])
+    pos = 1e6 * (_pos / _pos.std())
     # profit = return[today] * position[yesterday]
 
     # Create a line chart with plotly
     _fig = go.Figure()
-    _fig.add_trace(
-        go.Scatter(x=_r.index, y=(_r * _pos.shift(1)).cumsum(), mode="lines")
-    )
+    _fig.add_trace(go.Scatter(x=r.index, y=(r * pos.shift(1)).cumsum(), mode="lines"))
     _fig.update_layout(
         title="Cumulative Profit", xaxis_title="Time", yaxis_title="Profit"
     )
-    _fig.show()
+    _fig
 
-    return _pos
+    return pos
 
 
 @app.cell
