@@ -4,16 +4,14 @@ __generated_with = "0.13.15"
 app = marimo.App()
 
 
+with app.setup:
+    import marimo as mo
+    import cvxpy as cvx
+    import numpy as np
+
+
 @app.cell
 def _():
-    import numpy as np
-    import cvxpy as cvx
-
-    return (np, cvx)
-
-
-@app.cell
-def _(mo):
     mo.md(
         r"""
     # Leveraged Portfolios
@@ -27,7 +25,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     ## A 130/30 Equity Portfolio
@@ -40,7 +38,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     \begin{align}\mathbf{x}^{*}=\arg\max_{\mathbf{x} \in \mathbb{R}^n}& \mu^{T}\mathbf{x}\\
@@ -53,12 +51,13 @@ def _(mo):
     return
 
 
-@app.cell
-def _(np, cvx):
-    # solution with cvxpy
-    def maximize(objective, constraints=None):
-        return cvx.Problem(cvx.Maximize(objective), constraints).solve()
+@app.function
+def maximize(objective, constraints=None):
+    return cvx.Problem(cvx.Maximize(objective), constraints).solve()
 
+
+@app.cell
+def _():
     # make some random data, e.g. cov-matrix and expected returns
     _n = 100
     _c = 0.9
@@ -84,7 +83,7 @@ def _(np, cvx):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     ## Summary
@@ -95,13 +94,6 @@ def _(mo):
     """
     )
     return
-
-
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
 
 
 if __name__ == "__main__":

@@ -34,4 +34,4 @@ jobs:
       # Run the tests using pytest
       - name: Run tests
         run: |
-          uv run pytest -xvs tests/test_wasm.py
+          uv run pytest -xvs tests

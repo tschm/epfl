@@ -3,19 +3,16 @@ import marimo
 __generated_with = "0.13.15"
 app = marimo.App()
 
-
-@app.cell
-def _():
+with app.setup:
+    import marimo as mo
     import numpy as np
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
     import cvxpy as cvx
 
-    return go, make_subplots, np, cvx
-
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Regression
@@ -26,7 +23,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Linear Regression
@@ -46,7 +43,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Examples:
@@ -62,7 +59,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # The normal equations
@@ -86,7 +83,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Constrained regression
@@ -103,7 +100,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # The Sculptor method
@@ -117,7 +114,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     Shall we apply the sculptor method?
@@ -131,7 +128,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     <div>
@@ -144,7 +141,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Conic Programming
@@ -162,7 +159,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     We introduce an auxiliary vector $\mathbf{y} \in \mathbb{R}^n$:
@@ -183,7 +180,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Application: Implementing a minimum variance portfolio
@@ -201,46 +198,47 @@ def _(mo):
     return
 
 
+@app.function
+def minimize(objective, constraints=None):
+    return cvx.Problem(cvx.Minimize(objective), constraints).solve()
+
+
+@app.function
+def min_var(matrix, lamb=0.0):
+    """
+    min 2-norm (matrix*w) + lamb*2-norm(w)
+    s.t. e'w = 1, w >= 0
+    """
+    w = cvx.Variable(matrix.shape[1])
+    minimize(
+        objective=cvx.norm(matrix @ w, 2) + lamb * cvx.norm(w, 2),
+        constraints=[0 <= w, cvx.sum(w) == 1],
+    )
+    return w.value
+
+
+@app.function
+def plot_bar(data, width=0.35, title=""):
+    _fig = go.Figure()
+    _fig.add_trace(go.Bar(x=np.arange(5) + 1, y=data, width=2 * width))
+    _fig.update_layout(
+        title=title, xaxis_title="index", yaxis_title="Weight", yaxis_range=[0, 1]
+    )
+    return _fig
+
+
 @app.cell
-def _(cvx):
-    def minimize(objective, constraints=None):
-        return cvx.Problem(cvx.Minimize(objective), constraints).solve()
-
-    def min_var(matrix, lamb=0.0):
-        """
-        min 2-norm (matrix*w) + lamb*2-norm(w)
-        s.t. e'w = 1, w >= 0
-        """
-        w = cvx.Variable(matrix.shape[1])
-        minimize(
-            objective=cvx.norm(matrix @ w, 2) + lamb * cvx.norm(w, 2),
-            constraints=[0 <= w, cvx.sum(w) == 1],
-        )
-        return w.value
-
-    return (min_var,)
-
-
-@app.cell
-def _(go, min_var, np):
-    def plot_bar(data, width=0.35, title=""):
-        _fig = go.Figure()
-        _fig.add_trace(go.Bar(x=np.arange(5) + 1, y=data, width=2 * width))
-        _fig.update_layout(
-            title=title, xaxis_title="index", yaxis_title="Weight", yaxis_range=[0, 1]
-        )
-        return _fig
-
+def _():
     _random_data = np.dot(np.random.randn(250, 5), np.diag([1, 2, 3, 4, 5]))
     _data = min_var(_random_data)
 
     _fig = plot_bar(_data)
     _fig
-    return plot_bar, _random_data
+    return _random_data
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Balance?
@@ -261,7 +259,7 @@ def _(mo):
 
 
 @app.cell
-def _(make_subplots, min_var, plot_bar, _random_data):
+def _(_random_data):
     # Create subplot layout with specified width/height via `update_layout` later
     _fig = make_subplots(
         rows=1, cols=2, subplot_titles=["0", "10"], horizontal_spacing=0.05
@@ -289,7 +287,7 @@ def _(make_subplots, min_var, plot_bar, _random_data):
 
 
 @app.cell
-def _(make_subplots, min_var, plot_bar, _random_data):
+def _(_random_data):
     _fig = make_subplots(
         rows=1, cols=2, subplot_titles=["20", "50"], horizontal_spacing=0.05
     )
@@ -310,7 +308,7 @@ def _(make_subplots, min_var, plot_bar, _random_data):
 
 
 @app.cell
-def _(make_subplots, min_var, plot_bar, random_data):
+def _(random_data):
     fig = make_subplots(
         rows=1, cols=2, subplot_titles=["100", "200"], horizontal_spacing=0.05
     )
@@ -331,7 +329,7 @@ def _(make_subplots, min_var, plot_bar, random_data):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Summary
@@ -348,13 +346,6 @@ def _(mo):
     """
     )
     return
-
-
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
 
 
 if __name__ == "__main__":
