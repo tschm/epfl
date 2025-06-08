@@ -10,6 +10,7 @@ with app.setup:
     import plotly.graph_objects as go
     import cvxpy as cvx
     import statsmodels.tsa.stattools as sts
+    from numpy.linalg import lstsq
 
 
 @app.cell
@@ -238,16 +239,14 @@ def _():
 
 
 @app.cell
-def _(_periods, _A, _r_filtered, _W):
-    from numpy.linalg import lstsq
-
+def _(periods, A, r_filtered, W):
     # sometimes you don't need to use MOSEK :-)
-    _weights = pd.Series(index=_periods, data=lstsq(_A.values, _r_filtered.values)[0])
+    _weights = pd.Series(index=periods, data=lstsq(A.values, r_filtered.values)[0])
     print(_weights)
 
     # Create bar chart
     _fig1 = go.Figure()
-    _fig1.add_trace(go.Bar(x=_weights.index.astype(str), y=(_W * _weights).sum(axis=1)))
+    _fig1.add_trace(go.Bar(x=_weights.index.astype(str), y=(W * _weights).sum(axis=1)))
     _fig1.update_layout(
         title="Weights Distribution (Bar Chart)",
         xaxis_title="Period",
@@ -259,8 +258,8 @@ def _(_periods, _A, _r_filtered, _W):
     _fig2 = go.Figure()
     _fig2.add_trace(
         go.Scatter(
-            x=list(range(1, len((_W * _weights).sum(axis=1)) + 1)),
-            y=(_W * _weights).sum(axis=1),
+            x=list(range(1, len((W * _weights).sum(axis=1)) + 1)),
+            y=(W * _weights).sum(axis=1),
             mode="lines",
         )
     )
