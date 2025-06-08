@@ -151,13 +151,15 @@ def _():
     return
 
 
+@app.function
+def exp_weights(m, n=100):
+    x = np.power(1.0 - 1.0 / m, range(1, n + 1))
+    S = np.linalg.norm(x)
+    return x / S
+
+
 @app.cell
 def _():
-    def exp_weights(m, n=100):
-        x = np.power(1.0 - 1.0 / m, range(1, n + 1))
-        S = np.linalg.norm(x)
-        return x / S
-
     # Create a bar chart with plotly
     _weights = exp_weights(m=16, n=40)
     _fig = go.Figure()
@@ -169,22 +171,20 @@ def _():
     )
     _fig
 
-    return exp_weights
-
 
 @app.cell
-def _(exp_weights):
-    _periods = [2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 192]
+def _():
+    periods = [2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 192]
     # matrix of weights
-    _W = pd.DataFrame({_period: exp_weights(m=_period, n=200) for _period in _periods})
+    W = pd.DataFrame({_period: exp_weights(m=_period, n=200) for _period in periods})
 
     # Create a line chart with plotly
     _fig = go.Figure()
-    for _period in _periods:
+    for _period in periods:
         _fig.add_trace(
             go.Scatter(
                 x=list(range(1, 201)),
-                y=_W[_period],
+                y=W[_period],
                 mode="lines",
                 name=f"Period {_period}",
             )
@@ -196,33 +196,31 @@ def _(exp_weights):
     )
     _fig
 
-    return _periods, _W
+    return periods, W
 
 
 @app.cell
-def _(_r, _periods, _W):
+def _(r, periods, W):
     # each column of A is a convoluted return time series
-    _A = pd.DataFrame(
-        {_period: convolution(_r, _W[_period]).shift(1) for _period in _periods}
+    A = pd.DataFrame(
+        {_period: convolution(r, W[_period]).shift(1) for _period in periods}
     )
 
-    _A = _A.dropna(axis=0)
-    _r_filtered = _r[_A.index].dropna()
+    A = A.dropna(axis=0)
+    r_filtered = r[A.index].dropna()
 
     # Create a line chart with plotly
     _fig = go.Figure()
     for _period in [2, 16, 64]:
         _fig.add_trace(
-            go.Scatter(
-                x=_A.index, y=_A[_period], mode="lines", name=f"Period {_period}"
-            )
+            go.Scatter(x=A.index, y=A[_period], mode="lines", name=f"Period {_period}")
         )
     _fig.update_layout(
         title="Convoluted Return Time Series", xaxis_title="Date", yaxis_title="Value"
     )
     _fig
 
-    return _A, _r_filtered
+    return A, r_filtered
 
 
 @app.cell
