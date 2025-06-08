@@ -69,11 +69,14 @@ def _():
     $$
     \mathbf{x}^{*}=\left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^{T}\mathbf{x}
     $$
+
     solves
+
     \begin{align}\mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{x}-\mathbf{b}}\lVert_2
     \end{align}
 
     You may see here already
+
      + The matrix $\mathbf{A}^T \mathbf{A}$ is a scaled covariance matrix (if the columns of $\mathbf{A}$ are centered). Run into problems with small eigenvalues here...
 
     **Nerd alarm**: Being a numerical analyst I recommend to use the SVD or QR-decomposition to solve the unconstrained least squares problem.
@@ -118,6 +121,7 @@ def _():
     mo.md(
         r"""
     Shall we apply the sculptor method?
+
     - We could delete the negative entries (really bad if they are all negative)
     - We could scale the surviving entries to enforce the $\Sigma\,x_i=1$.
 
@@ -308,17 +312,17 @@ def _(_random_data):
 
 
 @app.cell
-def _(random_data):
+def _(_random_data):
     fig = make_subplots(
         rows=1, cols=2, subplot_titles=["100", "200"], horizontal_spacing=0.05
     )
 
     # Add the first subplot
-    fig1 = plot_bar(min_var(random_data, lamb=100))
+    fig1 = plot_bar(min_var(_random_data, lamb=100))
     fig.add_trace(fig1.data[0], row=1, col=1)
 
     # Add the second subplot
-    fig2 = plot_bar(min_var(random_data, lamb=200))
+    fig2 = plot_bar(min_var(_random_data, lamb=200))
     fig.add_trace(fig2.data[0], row=1, col=2)
 
     # Update layout
