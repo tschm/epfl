@@ -4,7 +4,7 @@
 plotly==6.1.2
 
 # Data manipulation and analysis library
-pandas==2.2.3
+pandas==2.3.0
 
 # Numerical computing library for array operations
 numpy==2.0.2
