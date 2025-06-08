@@ -312,10 +312,10 @@ def ar(A, r, lamb=0.0):
 
 
 @app.cell
-def _(_W, _A, _r_filtered):
-    _t_weight = pd.DataFrame(
+def _(W, A, r_filtered):
+    t_weight = pd.DataFrame(
         {
-            _lamb: (_W * ar(_A, _r_filtered.values, lamb=_lamb)).sum(axis=1)
+            _lamb: (W * ar(A, r_filtered.values, lamb=_lamb)).sum(axis=1)
             for _lamb in [0.0, 1.0, 2.0, 3.0, 5.0, 7.0, 9.0, 12.0, 15.0]
         }
     )
@@ -325,8 +325,8 @@ def _(_W, _A, _r_filtered):
     for _lamb in [0.0, 5.0, 15.0]:
         _fig.add_trace(
             go.Scatter(
-                x=list(range(1, len(_t_weight) + 1)),
-                y=_t_weight[_lamb],
+                x=list(range(1, len(t_weight) + 1)),
+                y=t_weight[_lamb],
                 mode="lines",
                 name=f"Lambda {_lamb}",
             )
@@ -340,20 +340,20 @@ def _(_W, _A, _r_filtered):
     )
     _fig.show()
 
-    return _t_weight
+    return t_weight
 
 
 @app.cell
-def _(_r, _t_weight):
+def _(r, t_weight):
     # for lamb in sorted(_t_weight.keys()):
 
     _pos = pd.DataFrame(
-        {_lamb: convolution(_r, _t_weight[_lamb]) for _lamb in _t_weight.keys()}
+        {_lamb: convolution(r, t_weight[_lamb]) for _lamb in t_weight.keys()}
     )
     _pos = 1e6 * (_pos / _pos.std())
 
     _profit = pd.DataFrame(
-        {lamb: (_r * _pos[lamb].shift(1)).cumsum() for lamb in _pos.keys()}
+        {lamb: (r * _pos[lamb].shift(1)).cumsum() for lamb in _pos.keys()}
     )
 
     # Create a line chart with plotly
