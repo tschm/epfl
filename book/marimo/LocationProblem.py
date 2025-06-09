@@ -3,15 +3,12 @@ import marimo
 __generated_with = "0.13.15"
 app = marimo.App()
 
-
-@app.cell
-def _():
+with app.setup:
+    import marimo as mo
     import numpy as np
     import plotly.graph_objects as go
     import math
     import cvxpy as cvx
-
-    return go, math, np, cvx
 
 
 @app.cell
@@ -27,7 +24,7 @@ def _(mo):
 
 
 @app.cell
-def _(go, np):
+def _():
     # pick a bunch of random points
     pos = np.random.randn(1000, 2)
 
@@ -50,28 +47,26 @@ def _(go, np):
     return (pos,)
 
 
-@app.cell
-def _(cvx):
-    # solution with cvxpy
-    def minimize(objective, constraints=None):
-        return cvx.Problem(cvx.Minimize(objective), constraints).solve()
+@app.function
+def minimize(objective, constraints=None):
+    return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
-    def location(pos):
-        R, x = cvx.Variable(1), cvx.Variable(2)
-        minimize(objective=R, constraints=[cvx.norm(row - x, 2) <= R for row in pos])
-        return R.value, x.value
 
-    return (location,)
+@app.function
+def location(pos):
+    R, x = cvx.Variable(1), cvx.Variable(2)
+    minimize(objective=R, constraints=[cvx.norm(row - x, 2) <= R for row in pos])
+    return R.value, x.value
 
 
 @app.cell
-def _(location, pos):
+def _(pos):
     print(location(pos))
     return
 
 
 @app.cell
-def _(go, location, math, np, pos):
+def _(pos):
     # Create a scatter plot with a circle overlay using plotly
     _radius, _midpoint = location(pos)
 
@@ -119,7 +114,7 @@ def _(go, location, math, np, pos):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Summary
@@ -132,13 +127,6 @@ def _(mo):
     """
     )
     return
-
-
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
 
 
 if __name__ == "__main__":

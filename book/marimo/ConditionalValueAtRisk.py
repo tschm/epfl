@@ -3,9 +3,14 @@ import marimo
 __generated_with = "0.13.15"
 app = marimo.App()
 
+with app.setup:
+    import marimo as mo
+    import numpy as np
+    import cvxpy as cvx
+
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # The Conditional Value at Risk
@@ -20,15 +25,6 @@ def _(mo):
 
 @app.cell
 def _():
-    import numpy as np
-    import plotly.graph_objects as go
-    import cvxpy as cvx
-
-    return np, cvx, go
-
-
-@app.cell
-def _(mo):
     mo.md(
         r"""
     The $\alpha=0.99$ tail of a loss distribution
@@ -40,7 +36,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     * In this talk we assume losses are positive. Larger losses, more pain... We want negative losses!
@@ -56,7 +52,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     * We compute the mean of the largest $n(1-\alpha)$ entries of a vector (or a optimal linear combination of vectors) without ever sorting the entries of any vector.
@@ -70,14 +66,17 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     Given a vector $\mathbf{r}$ we introduce a free variable $\gamma$ and define the function $f$ as:
-    \begin{eqnarray}
-    f(\gamma) &=& \gamma + \frac{1}{n\,(1-\alpha)}\sum (r_i - \gamma)^{+}
-    \end{eqnarray}
+
+    $$
+    f(\gamma) = \gamma + \frac{1}{n\,(1-\alpha)}\sum (r_i - \gamma)^{+}
+    $$
+
     This is a continuous and convex function (in $\gamma$). The first derivative is:
+
     $$
     f^{'}(\gamma) = 1 - \frac{\#\left\{r_i \geq \gamma\right\}}{n\,(1-\alpha)}
     $$
@@ -87,10 +86,11 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     If $\gamma$ such that $\#\{r_i \geq \gamma\}=n\,(1-\alpha)$:
+
     - $\gamma$ is a minimizer of $f$.
     - $f(\gamma) =\mathtt{CVaR}_\alpha(\mathbf{r})$.
 
@@ -103,7 +103,7 @@ def _(mo):
 
 
 @app.cell
-def _(np):
+def _():
     def f(gamma, returns, alpha=0.99):
         excess = returns - gamma
         return gamma + 1.0 / (len(returns) * (1 - alpha)) * excess[excess > 0].sum()
@@ -113,23 +113,11 @@ def _(np):
     _x = np.linspace(start=-1.0, stop=5.0, num=1000)
     _v = np.array([f(gamma=g, returns=_r, alpha=0.80) for g in _x])
 
-    # Uncomment to show the plot
-    # _fig = go.Figure()
-    # _fig.add_trace(go.Scatter(x=_x, y=_v, mode='lines'))
-    # _fig.update_layout(
-    #     title='Conditional value at risk as global minimum of a function f',
-    #     xaxis_title='$\gamma$',
-    #     yaxis_title='$f$',
-    #     xaxis_range=[0, 5],
-    #     yaxis_range=[3, 6],
-    #     grid=dict(rows=1, columns=1, pattern='independent')
-    # )
-    # _fig.show()
     return
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     Before (using conic reformulation of the $x^+$ function):
@@ -148,7 +136,7 @@ def _(mo):
 
 
 @app.cell
-def _(cvx, minimize):
+def _():
     _R = [-1.0, 2.0, 3.0, 2.0, 4.0, 2.0, 0.0, 1.0, -2.0, -2.0]
 
     _n = len(_R)
@@ -171,10 +159,7 @@ def _(cvx, minimize):
 
 
 @app.cell
-def _(np, cvx):
-    def minimize(objective, constraints=None):
-        return cvx.Problem(cvx.Minimize(objective), constraints).solve()
-
+def _():
     # take some random return data
     _R = np.random.randn(2500, 100)
     _n, _m = _R.shape
@@ -194,22 +179,11 @@ def _(np, cvx):
     _cvar2 = cvx.Problem(objective=_obj2, constraints=_constraints).solve()
     print(f"CVaR 2: {_cvar2}")
 
-    # Uncomment to show the plot
-    # _fig = go.Figure()
-    # _fig.add_trace(go.Histogram(x=_R @ _w.value, nbinsx=100))
-    # _fig.update_layout(
-    #     title=f"CVaR {_cvar}",
-    #     xaxis_title="Value",
-    #     yaxis_title="Frequency",
-    #     xaxis_range=[-0.4, 0.4],
-    #     yaxis_range=[0, 150]
-    # )
-    # _fig.show()
-    return cvx, minimize
+    return
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     Summary
@@ -225,11 +199,9 @@ def _(mo):
     return
 
 
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
+@app.function
+def minimize(objective, constraints=None):
+    return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
 
 if __name__ == "__main__":

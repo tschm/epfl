@@ -3,20 +3,18 @@ import marimo
 __generated_with = "0.13.15"
 app = marimo.App()
 
-
-@app.cell
-def _():
+with app.setup:
+    import marimo as mo
     import numpy as np
     import pandas as pd
     import plotly.graph_objects as go
-    import plotly.express as px
     import cvxpy as cvx
-
-    return np, pd, go, px, cvx
+    import statsmodels.tsa.stattools as sts
+    from numpy.linalg import lstsq
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     # Constructing estimators
@@ -30,7 +28,7 @@ def _(mo):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     A very common estimator is based on AR models (autoregressive)
@@ -53,7 +51,7 @@ def convolution(ts, weights):
 
 
 @app.cell
-def _(pd):
+def _():
     _r = pd.Series([1.0, -2.0, 1.0, 1.0, 1.5, 0.0, 2.0])
     _weights = [2.0, 1.0]
     # trendfollowing == positive weights
@@ -67,7 +65,7 @@ def _(pd):
 
 
 @app.cell
-def _(pd):
+def _():
     # mean-reversion == negative weights
     _r = pd.Series([1.0, -2.0, 1.0, 1.0, 1.5, 0.0, 2.0])
     _weights = [-2.0, -1.0]
@@ -81,7 +79,7 @@ def _(pd):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     ## Looking only at the last two returns might be a bit ...
@@ -93,13 +91,11 @@ def _(mo):
 
 
 @app.cell
-def _(go, mo, pd):
-    import statsmodels.tsa.stattools as sts
-
+def _():
     # generate random returns
-    _r = (
+    r = (
         pd.read_csv(
-            mo.notebook_location() / "data" / "SPX_Index.csv",
+            mo.notebook_location() / "public" / "SPX_Index.csv",
             index_col=0,
             header=None,
             parse_dates=True,
@@ -108,42 +104,38 @@ def _(go, mo, pd):
         .dropna()[1]
     )
     # let's compute the optimal convolution!
-    _weights = sts.pacf(_r, nlags=200)
+    weights = sts.pacf(r, nlags=200)
 
     # Create a bar chart with plotly
     _fig = go.Figure()
-    _fig.add_trace(go.Bar(x=list(range(1, len(_weights))), y=_weights[1:]))
+    _fig.add_trace(go.Bar(x=list(range(1, len(weights))), y=weights[1:]))
     _fig.update_layout(
         title="Partial Autocorrelation", xaxis_title="Lag", yaxis_title="PACF"
     )
-    _fig.show()
-
-    print(_r)
-    return _r, sts, _weights
+    _fig
+    return r, weights
 
 
 @app.cell
-def _(go, _r, _weights):
+def _(r, weights):
     # The trading system!
-    _pos = convolution(_r, _weights[1:])
-    _pos = 1e6 * (_pos / _pos.std())
+    _pos = convolution(r, weights[1:])
+    pos = 1e6 * (_pos / _pos.std())
     # profit = return[today] * position[yesterday]
 
     # Create a line chart with plotly
     _fig = go.Figure()
-    _fig.add_trace(
-        go.Scatter(x=_r.index, y=(_r * _pos.shift(1)).cumsum(), mode="lines")
-    )
+    _fig.add_trace(go.Scatter(x=r.index, y=(r * pos.shift(1)).cumsum(), mode="lines"))
     _fig.update_layout(
         title="Cumulative Profit", xaxis_title="Time", yaxis_title="Profit"
     )
-    _fig.show()
+    _fig
 
-    return _pos
+    return pos
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     ## Bias
@@ -160,13 +152,15 @@ def _(mo):
     return
 
 
-@app.cell
-def _(go, np, pd):
-    def exp_weights(m, n=100):
-        x = np.power(1.0 - 1.0 / m, range(1, n + 1))
-        S = np.linalg.norm(x)
-        return x / S
+@app.function
+def exp_weights(m, n=100):
+    x = np.power(1.0 - 1.0 / m, range(1, n + 1))
+    S = np.linalg.norm(x)
+    return x / S
 
+
+@app.cell
+def _():
     # Create a bar chart with plotly
     _weights = exp_weights(m=16, n=40)
     _fig = go.Figure()
@@ -176,26 +170,24 @@ def _(go, np, pd):
         xaxis_title="Index",
         yaxis_title="Weight",
     )
-    _fig.show()
-
-    return exp_weights
+    _fig
 
 
 @app.cell
-def _(exp_weights, go, pd):
-    _periods = [2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 192]
+def _():
+    periods = [2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 192]
     # matrix of weights
-    _W = pd.DataFrame({period: exp_weights(m=period, n=200) for period in _periods})
+    W = pd.DataFrame({_period: exp_weights(m=_period, n=200) for _period in periods})
 
     # Create a line chart with plotly
     _fig = go.Figure()
-    for period in _periods:
+    for _period in periods:
         _fig.add_trace(
             go.Scatter(
                 x=list(range(1, 201)),
-                y=_W[period],
+                y=W[_period],
                 mode="lines",
-                name=f"Period {period}",
+                name=f"Period {_period}",
             )
         )
     _fig.update_layout(
@@ -203,37 +195,37 @@ def _(exp_weights, go, pd):
         xaxis_title="Index",
         yaxis_title="Weight",
     )
-    _fig.show()
+    _fig
 
-    return _W, _periods
+    return periods, W
 
 
 @app.cell
-def _(_W, convolution, go, pd, _periods, _r):
+def _(r, periods, W):
     # each column of A is a convoluted return time series
-    _A = pd.DataFrame(
-        {period: convolution(_r, _W[period]).shift(1) for period in _periods}
+    A = pd.DataFrame(
+        {_period: convolution(r, W[_period]).shift(1) for _period in periods}
     )
 
-    _A = _A.dropna(axis=0)
-    _r_filtered = _r[_A.index].dropna()
+    A = A.dropna(axis=0)
+    r_filtered = r[A.index].dropna()
 
     # Create a line chart with plotly
     _fig = go.Figure()
-    for period in [2, 16, 64]:
+    for _period in [2, 16, 64]:
         _fig.add_trace(
-            go.Scatter(x=_A.index, y=_A[period], mode="lines", name=f"Period {period}")
+            go.Scatter(x=A.index, y=A[_period], mode="lines", name=f"Period {_period}")
         )
     _fig.update_layout(
         title="Convoluted Return Time Series", xaxis_title="Date", yaxis_title="Value"
     )
-    _fig.show()
+    _fig
 
-    return _A, _r_filtered
+    return A, r_filtered
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     ## (Naive) regression
@@ -247,16 +239,14 @@ def _(mo):
 
 
 @app.cell
-def _(_A, _W, go, pd, np, _periods, _r_filtered):
-    from np.linalg import lstsq
-
+def _(periods, A, r_filtered, W):
     # sometimes you don't need to use MOSEK :-)
-    _weights = pd.Series(index=_periods, data=lstsq(_A.values, _r_filtered.values)[0])
+    _weights = pd.Series(index=periods, data=lstsq(A.values, r_filtered.values)[0])
     print(_weights)
 
     # Create bar chart
     _fig1 = go.Figure()
-    _fig1.add_trace(go.Bar(x=_weights.index.astype(str), y=(_W * _weights).sum(axis=1)))
+    _fig1.add_trace(go.Bar(x=_weights.index.astype(str), y=(W * _weights).sum(axis=1)))
     _fig1.update_layout(
         title="Weights Distribution (Bar Chart)",
         xaxis_title="Period",
@@ -268,8 +258,8 @@ def _(_A, _W, go, pd, np, _periods, _r_filtered):
     _fig2 = go.Figure()
     _fig2.add_trace(
         go.Scatter(
-            x=list(range(1, len((_W * _weights).sum(axis=1)) + 1)),
-            y=(_W * _weights).sum(axis=1),
+            x=list(range(1, len((W * _weights).sum(axis=1)) + 1)),
+            y=(W * _weights).sum(axis=1),
             mode="lines",
         )
     )
@@ -280,11 +270,11 @@ def _(_A, _W, go, pd, np, _periods, _r_filtered):
     )
     _fig2.show()
 
-    return lstsq, _weights
+    return _weights
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     ## Mean variation
@@ -302,42 +292,43 @@ def _(mo):
     return
 
 
+@app.function
+def minimize(objective, constraints=None):
+    return cvx.Problem(cvx.Minimize(objective), constraints).solve()
+
+
+@app.function
+def mean_variation(ts):
+    return ts.diff().abs().mean()
+
+
+@app.function
+def ar(A, r, lamb=0.0):
+    # introduce the variable for the var
+    x = cvx.Variable(A.shape[1])
+    D = np.diag(A.apply(mean_variation))
+    minimize(objective=cvx.norm(A.values @ x - r, 2) + lamb * cvx.norm(D @ x, 1))
+    return pd.Series(index=A.keys(), data=x.value)
+
+
 @app.cell
-def _(np, pd, cvx):
-    def minimize(objective, constraints=None):
-        return cvx.Problem(cvx.Minimize(objective), constraints).solve()
-
-    def mean_variation(ts):
-        return ts.diff().abs().mean()
-
-    def ar(A, r, lamb=0.0):
-        # introduce the variable for the var
-        x = cvx.Variable(A.shape[1])
-        D = np.diag(A.apply(mean_variation))
-        minimize(objective=cvx.norm(A.values @ x - r, 2) + lamb * cvx.norm(D @ x, 1))
-        return pd.Series(index=A.keys(), data=x.value)
-
-    return (ar,)
-
-
-@app.cell
-def _(_A, _W, ar, go, pd, _r_filtered):
-    _t_weight = pd.DataFrame(
+def _(W, A, r_filtered):
+    t_weight = pd.DataFrame(
         {
-            lamb: (_W * ar(_A, _r_filtered.values, lamb=lamb)).sum(axis=1)
-            for lamb in [0.0, 1.0, 2.0, 3.0, 5.0, 7.0, 9.0, 12.0, 15.0]
+            _lamb: (W * ar(A, r_filtered.values, lamb=_lamb)).sum(axis=1)
+            for _lamb in [0.0, 1.0, 2.0, 3.0, 5.0, 7.0, 9.0, 12.0, 15.0]
         }
     )
 
     # Create a line chart with plotly
     _fig = go.Figure()
-    for lamb in [0.0, 5.0, 15.0]:
+    for _lamb in [0.0, 5.0, 15.0]:
         _fig.add_trace(
             go.Scatter(
-                x=list(range(1, len(_t_weight) + 1)),
-                y=_t_weight[lamb],
+                x=list(range(1, len(t_weight) + 1)),
+                y=t_weight[_lamb],
                 mode="lines",
-                name=f"Lambda {lamb}",
+                name=f"Lambda {_lamb}",
             )
         )
     _fig.update_layout(
@@ -349,28 +340,28 @@ def _(_A, _W, ar, go, pd, _r_filtered):
     )
     _fig.show()
 
-    return _t_weight
+    return t_weight
 
 
 @app.cell
-def _(convolution, go, pd, _r, _t_weight):
+def _(r, t_weight):
     # for lamb in sorted(_t_weight.keys()):
 
     _pos = pd.DataFrame(
-        {lamb: convolution(_r, _t_weight[lamb]) for lamb in _t_weight.keys()}
+        {_lamb: convolution(r, t_weight[_lamb]) for _lamb in t_weight.keys()}
     )
     _pos = 1e6 * (_pos / _pos.std())
 
     _profit = pd.DataFrame(
-        {lamb: (_r * _pos[lamb].shift(1)).cumsum() for lamb in _pos.keys()}
+        {lamb: (r * _pos[lamb].shift(1)).cumsum() for lamb in _pos.keys()}
     )
 
     # Create a line chart with plotly
     _fig = go.Figure()
-    for lamb in [0.0, 5.0, 15.0]:
+    for _lamb in [0.0, 5.0, 15.0]:
         _fig.add_trace(
             go.Scatter(
-                x=_profit.index, y=_profit[lamb], mode="lines", name=f"Lambda {lamb}"
+                x=_profit.index, y=_profit[_lamb], mode="lines", name=f"Lambda {_lamb}"
             )
         )
     _fig.update_layout(
@@ -384,7 +375,7 @@ def _(convolution, go, pd, _r, _t_weight):
 
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     ## Summary
@@ -402,13 +393,6 @@ def _(mo):
     """
     )
     return
-
-
-@app.cell
-def _():
-    import marimo as mo
-
-    return (mo,)
 
 
 if __name__ == "__main__":
