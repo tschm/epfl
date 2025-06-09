@@ -1,3 +1,5 @@
+"""Intro."""
+
 import marimo
 
 __generated_with = "0.13.15"

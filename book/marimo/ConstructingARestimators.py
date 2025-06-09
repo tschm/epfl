@@ -4,11 +4,11 @@ __generated_with = "0.13.15"
 app = marimo.App()
 
 with app.setup:
+    import cvxpy as cvx
     import marimo as mo
     import numpy as np
     import pandas as pd
     import plotly.graph_objects as go
-    import cvxpy as cvx
     import statsmodels.tsa.stattools as sts
     from numpy.linalg import lstsq
 
@@ -109,9 +109,7 @@ def _():
     # Create a bar chart with plotly
     _fig = go.Figure()
     _fig.add_trace(go.Bar(x=list(range(1, len(weights))), y=weights[1:]))
-    _fig.update_layout(
-        title="Partial Autocorrelation", xaxis_title="Lag", yaxis_title="PACF"
-    )
+    _fig.update_layout(title="Partial Autocorrelation", xaxis_title="Lag", yaxis_title="PACF")
     _fig
     return r, weights
 
@@ -126,9 +124,7 @@ def _(r, weights):
     # Create a line chart with plotly
     _fig = go.Figure()
     _fig.add_trace(go.Scatter(x=r.index, y=(r * pos.shift(1)).cumsum(), mode="lines"))
-    _fig.update_layout(
-        title="Cumulative Profit", xaxis_title="Time", yaxis_title="Profit"
-    )
+    _fig.update_layout(title="Cumulative Profit", xaxis_title="Time", yaxis_title="Profit")
     _fig
 
     return pos
@@ -203,9 +199,7 @@ def _():
 @app.cell
 def _(r, periods, W):
     # each column of A is a convoluted return time series
-    A = pd.DataFrame(
-        {_period: convolution(r, W[_period]).shift(1) for _period in periods}
-    )
+    A = pd.DataFrame({_period: convolution(r, W[_period]).shift(1) for _period in periods})
 
     A = A.dropna(axis=0)
     r_filtered = r[A.index].dropna()
@@ -213,12 +207,8 @@ def _(r, periods, W):
     # Create a line chart with plotly
     _fig = go.Figure()
     for _period in [2, 16, 64]:
-        _fig.add_trace(
-            go.Scatter(x=A.index, y=A[_period], mode="lines", name=f"Period {_period}")
-        )
-    _fig.update_layout(
-        title="Convoluted Return Time Series", xaxis_title="Date", yaxis_title="Value"
-    )
+        _fig.add_trace(go.Scatter(x=A.index, y=A[_period], mode="lines", name=f"Period {_period}"))
+    _fig.update_layout(title="Convoluted Return Time Series", xaxis_title="Date", yaxis_title="Value")
     _fig
 
     return A, r_filtered
@@ -347,23 +337,15 @@ def _(W, A, r_filtered):
 def _(r, t_weight):
     # for lamb in sorted(_t_weight.keys()):
 
-    _pos = pd.DataFrame(
-        {_lamb: convolution(r, t_weight[_lamb]) for _lamb in t_weight.keys()}
-    )
+    _pos = pd.DataFrame({_lamb: convolution(r, t_weight[_lamb]) for _lamb in t_weight})
     _pos = 1e6 * (_pos / _pos.std())
 
-    _profit = pd.DataFrame(
-        {lamb: (r * _pos[lamb].shift(1)).cumsum() for lamb in _pos.keys()}
-    )
+    _profit = pd.DataFrame({lamb: (r * _pos[lamb].shift(1)).cumsum() for lamb in _pos})
 
     # Create a line chart with plotly
     _fig = go.Figure()
     for _lamb in [0.0, 5.0, 15.0]:
-        _fig.add_trace(
-            go.Scatter(
-                x=_profit.index, y=_profit[_lamb], mode="lines", name=f"Lambda {_lamb}"
-            )
-        )
+        _fig.add_trace(go.Scatter(x=_profit.index, y=_profit[_lamb], mode="lines", name=f"Lambda {_lamb}"))
     _fig.update_layout(
         title="Cumulative Profit for Different Lambda Values",
         xaxis_title="Date",

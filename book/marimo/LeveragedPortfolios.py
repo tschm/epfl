@@ -5,8 +5,8 @@ app = marimo.App()
 
 
 with app.setup:
-    import marimo as mo
     import cvxpy as cvx
+    import marimo as mo
     import numpy as np
 
 
@@ -76,9 +76,9 @@ def _():
     maximize(objective=_x.T @ _mu, constraints=_constraints)
     _f = _x.value
 
-    print("Sum of positive weights: {}".format(np.sum(_f[_f > 0])))
-    print("Sum of negative weights: {}".format(np.sum(_f[_f < 0])))
-    print("Sum of all weights:      {}".format(np.sum(_f)))
+    print(f"Sum of positive weights: {np.sum(_f[_f > 0])}")
+    print(f"Sum of negative weights: {np.sum(_f[_f < 0])}")
+    print(f"Sum of all weights:      {np.sum(_f)}")
     return
 
 

@@ -8,7 +8,28 @@ with app.setup:
     import numpy as np
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
+
+
+@app.cell
+async def _():
+    try:
+        import sys
+
+        if "pyodide" in sys.modules:
+            import micropip
+
+            await micropip.install("cvxpy-base")
+
+    except ImportError:
+        pass
+    return
+
+
+@app.cell
+def _cvx():
     import cvxpy as cvx
+
+    return (cvx,)
 
 
 @app.cell
@@ -203,20 +224,21 @@ def _():
 
 
 @app.function
-def minimize(objective, constraints=None):
+def minimize(cvx, objective, constraints=None):
+    print(cvx)
     return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
 
 @app.function
-def min_var(matrix, lamb=0.0):
-    """
-    min 2-norm (matrix*w) + lamb*2-norm(w)
-    s.t. e'w = 1, w >= 0
+def min_var(cvx, matrix, lamb=0.0):
+    """Min 2-norm (matrix*w) + lamb*2-norm(w)
+    s.t. e'w = 1, w >= 0.
     """
     w = cvx.Variable(matrix.shape[1])
     minimize(
+        cvx=cvx,
         objective=cvx.norm(matrix @ w, 2) + lamb * cvx.norm(w, 2),
-        constraints=[0 <= w, cvx.sum(w) == 1],
+        constraints=[w >= 0, cvx.sum(w) == 1],
     )
     return w.value
 
@@ -225,20 +247,18 @@ def min_var(matrix, lamb=0.0):
 def plot_bar(data, width=0.35, title=""):
     _fig = go.Figure()
     _fig.add_trace(go.Bar(x=np.arange(5) + 1, y=data, width=2 * width))
-    _fig.update_layout(
-        title=title, xaxis_title="index", yaxis_title="Weight", yaxis_range=[0, 1]
-    )
+    _fig.update_layout(title=title, xaxis_title="index", yaxis_title="Weight", yaxis_range=[0, 1])
     return _fig
 
 
 @app.cell
-def _():
+def _(cvx):
     random_data = np.dot(np.random.randn(250, 5), np.diag([1, 2, 3, 4, 5]))
-    _data = min_var(random_data)
+    _data = min_var(cvx, random_data)
 
     _fig = plot_bar(_data)
     _fig
-    return random_data
+    return (random_data,)
 
 
 @app.cell
@@ -263,18 +283,16 @@ def _():
 
 
 @app.cell
-def _(random_data):
+def _(cvx, random_data):
     # Create subplot layout with specified width/height via `update_layout` later
-    _fig = make_subplots(
-        rows=1, cols=2, subplot_titles=["0", "10"], horizontal_spacing=0.05
-    )
+    _fig = make_subplots(rows=1, cols=2, subplot_titles=["0", "10"], horizontal_spacing=0.05)
 
     # Add first subplot
-    _fig1 = plot_bar(min_var(random_data, lamb=0))
+    _fig1 = plot_bar(min_var(cvx, random_data, lamb=0))
     _fig.add_trace(_fig1.data[0], row=1, col=1)
 
     # Add second subplot
-    _fig2 = plot_bar(min_var(random_data, lamb=10))
+    _fig2 = plot_bar(min_var(cvx, random_data, lamb=10))
     _fig.add_trace(_fig2.data[0], row=1, col=2)
 
     # Update layout (width/height here)
@@ -287,40 +305,38 @@ def _(random_data):
     )
 
     _fig
+    return
 
 
 @app.cell
-def _(random_data):
-    _fig = make_subplots(
-        rows=1, cols=2, subplot_titles=["20", "50"], horizontal_spacing=0.05
-    )
+def _(cvx, random_data):
+    _fig = make_subplots(rows=1, cols=2, subplot_titles=["20", "50"], horizontal_spacing=0.05)
 
     # Add the first subplot
-    _fig1 = plot_bar(min_var(random_data, lamb=20))
+    _fig1 = plot_bar(min_var(cvx, random_data, lamb=20))
     _fig.add_trace(_fig1.data[0], row=1, col=1)
 
     # Add the second subplot
-    _fig2 = plot_bar(min_var(random_data, lamb=50))
+    _fig2 = plot_bar(min_var(cvx, random_data, lamb=50))
     _fig.add_trace(_fig2.data[0], row=1, col=2)
 
     # Update layout
     _fig.update_layout(showlegend=False, yaxis_range=[0, 1], yaxis2_range=[0, 1])
 
     _fig
+    return
 
 
 @app.cell
-def _(random_data):
-    fig = make_subplots(
-        rows=1, cols=2, subplot_titles=["100", "200"], horizontal_spacing=0.05
-    )
+def _(cvx, random_data):
+    fig = make_subplots(rows=1, cols=2, subplot_titles=["100", "200"], horizontal_spacing=0.05)
 
     # Add the first subplot
-    fig1 = plot_bar(min_var(random_data, lamb=100))
+    fig1 = plot_bar(min_var(cvx, random_data, lamb=100))
     fig.add_trace(fig1.data[0], row=1, col=1)
 
     # Add the second subplot
-    fig2 = plot_bar(min_var(random_data, lamb=200))
+    fig2 = plot_bar(min_var(cvx, random_data, lamb=200))
     fig.add_trace(fig2.data[0], row=1, col=2)
 
     # Update layout

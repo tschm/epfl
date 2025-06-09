@@ -4,9 +4,9 @@ __generated_with = "0.13.15"
 app = marimo.App()
 
 with app.setup:
+    import cvxpy as cvx
     import marimo as mo
     import numpy as np
-    import cvxpy as cvx
 
 
 @app.cell
@@ -145,9 +145,7 @@ def _():
 
     # introduce the variable for the var
     _gamma = cvx.Variable(1)
-    _cvar = minimize(
-        objective=_gamma + 1.0 / int(_n * (1 - _alpha)) * cvx.sum(cvx.pos(_R - _gamma))
-    )
+    _cvar = minimize(objective=_gamma + 1.0 / int(_n * (1 - _alpha)) * cvx.sum(cvx.pos(_R - _gamma)))
 
     print(1.0 / (_n * (1 - _alpha)))
     print(f"A minimizer of f (<= VaR):  {_gamma.value}")
@@ -169,7 +167,7 @@ def _():
     _k = int(_n * (1 - _alpha))
 
     _gamma, _w = (cvx.Variable(1), cvx.Variable(_m))
-    _constraints = [0 <= _w, cvx.sum(_w) == 1]
+    _constraints = [_w >= 0, cvx.sum(_w) == 1]
 
     _obj = cvx.Minimize(_gamma + cvx.sum(cvx.pos(_R @ _w - _gamma)) / _k)
     _cvar = cvx.Problem(objective=_obj, constraints=_constraints).solve()
