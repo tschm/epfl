@@ -19,4 +19,5 @@ scipy==1.15.3
 # Statistical models, hypothesis tests, and data exploration
 statsmodels==0.14.4
 
+cvxsimulator==1.4.3
 marimo==0.13.15
