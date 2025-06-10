@@ -13,9 +13,15 @@ with app.setup:
     import numpy as np
     import plotly.graph_objects as go
 
+    # pick a bunch of random points
+    pos = np.random.randn(1000, 2)
+
+    print(f"cvxpy-base version: {cvx.__version__}")
+    print(f"numpy version: {np.__version__}")
+
 
 @app.cell
-def _(mo):
+def _():
     mo.md(
         r"""
     ### Location problem
@@ -28,12 +34,10 @@ def _(mo):
 
 @app.cell
 def _():
-    # pick a bunch of random points
-    pos = np.random.randn(1000, 2)
-
     # Create a scatter plot with plotly
     _fig = go.Figure()
     _fig.add_trace(go.Scatter(x=pos[:, 0], y=pos[:, 1], mode="markers", marker={"symbol": "x", "size": 10}))
+
     _fig.update_layout(
         title="Random Points",
         xaxis_title="x",
@@ -43,7 +47,7 @@ def _():
 
     _fig
 
-    return (pos,)
+    return
 
 
 @app.function
@@ -87,13 +91,13 @@ def location(pos):
 
 
 @app.cell
-def _(pos):
+def _():
     print(location(pos))
     return
 
 
 @app.cell
-def _(pos):
+def _():
     # Create a scatter plot with a circle overlay using plotly
     _radius, _midpoint = location(pos)
 

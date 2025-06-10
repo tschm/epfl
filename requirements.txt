@@ -18,3 +18,5 @@ scipy==1.15.3
 
 # Statistical models, hypothesis tests, and data exploration
 statsmodels==0.14.4
+
+marimo==0.13.15
