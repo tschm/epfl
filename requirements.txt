@@ -10,7 +10,7 @@ pandas==2.3.0
 numpy==2.3.0
 
 # Modeling and solving convex optimization problems
-cvxpy-base==1.6.5
+cvxpy-base==1.6.6
 clarabel==0.11.0
 
 # Scientific computing library for mathematics, science, and engineering
