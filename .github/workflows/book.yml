@@ -28,8 +28,8 @@ jobs:
     steps:
         # Set up the Python virtual environment with all required dependencies
         # This uses a reusable action from the cradle repository
-        - name: "Build the virtual environment for ${{ github.repository }}"
-          uses: tschm/cradle/actions/environment@v0.1.72
+        - name: Checkout [${{ github.repository }}]
+          uses: actions/checkout@v4
 
         # Build the Jupyter Book using a reusable action
         # This action handles the book building process including configuration
@@ -41,18 +41,22 @@ jobs:
   marimo:
     runs-on: ubuntu-latest
     steps:
-      # Set up the Python virtual environment with all required dependencies
-      # This uses a reusable action from the cradle repository
-      - name: "Build the virtual environment for ${{ github.repository }}"
-        uses: tschm/cradle/actions/environment@v0.1.72
+
+      # Check out the repository code
+      - name: Checkout [${{ github.repository }}]
+        uses: actions/checkout@v4
+
+      - name: Install the latest version of uv and set the python version
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: 3.13
+
 
       # Convert all Marimo notebooks to HTML-WASM format
       # The WASM format allows for interactive elements to work in the browser
       - name: Convert notebooks to HTML-WASM
         run: |
-          uv run pip install --no-cache-dir marimo
           mkdir -p artifacts/marimo
-          mkdir -p artifacts/marimo_run
 
           # Find all Python files in the notebooks directory and export them to HTML-WASM
           for notebook in book/marimo/*.py; do
@@ -64,19 +68,7 @@ jobs:
             mkdir -p artifacts/marimo/$filename
 
             # Export in edit mode to allow users to modify the notebook
-            uv run marimo export html-wasm $notebook -o artifacts/marimo/$filename/index.html --mode edit
-
-            # test the notebook
-            #uv run marimo export html-wasm $notebook -o artifacts/marimo_run/$filename --mode run
-
-            # 2. Serve the output directory (not the file!)
-            # uv run python -m http.server 8000 --directory artifacts/marimo_run/$filename
-
-            # 3. (Optional) Open in browser from CLI
-            # uv run python -m webbrowser http://localhost:8000/index.html
-
-            # uv run python -m http.server --directory artifacts/marimo_run/$filename
-            # pushd artifacts/marimo_run/$filename/index.html;  python3 -m http.server 9999; popd;
+            uvx marimo export html-wasm --sandbox $notebook -o artifacts/marimo/$filename/index.html --mode edit
           done
 
           # List all exported notebooks
