@@ -20,3 +20,6 @@ chapters:
 
     - url: https://tschm.github.io/epfl/marimo/ConstructingARestimators/index.html
       title: Constructing AR estimators
+
+    - url: https://tschm.github.io/epfl/marimo/MonteCarloPi/index.html
+      title: Estimating pi
