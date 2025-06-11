@@ -64,13 +64,13 @@ jobs:
             mkdir -p artifacts/marimo/$filename
 
             # Export in edit mode to allow users to modify the notebook
-            uv run marimo export html-wasm $notebook -o artifacts/marimo/$filename --mode edit
+            uv run marimo export html-wasm $notebook -o artifacts/marimo/$filename/index.html --mode edit
 
             # test the notebook
-            uv run marimo export html-wasm $notebook -o artifacts/marimo_run/$filename --mode run
+            #uv run marimo export html-wasm $notebook -o artifacts/marimo_run/$filename --mode run
 
             # 2. Serve the output directory (not the file!)
-            uv run python -m http.server 8000 --directory artifacts/marimo_run/$filename
+            # uv run python -m http.server 8000 --directory artifacts/marimo_run/$filename
 
             # 3. (Optional) Open in browser from CLI
             # uv run python -m webbrowser http://localhost:8000/index.html
