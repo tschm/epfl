@@ -1,3 +1,9 @@
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "marimo==0.13.15"
+# ]
+# ///
 """Intro."""
 
 import marimo

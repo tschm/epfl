@@ -10,13 +10,6 @@ venv:
 	@uv venv --python='3.12'
 
 
-# Mark install target as phony (not producing a file named 'install')
-.PHONY: install
-install: venv ## Install a virtual environment
-	@uv pip install --upgrade pip
-	@uv pip install -r requirements.txt
-
-
 # Format and lint the code using pre-commit
 .PHONY: fmt
 fmt: venv ## Run autoformatting and linting
@@ -40,11 +33,5 @@ help:  ## Display this help screen
 
 # Install and run Marimo for interactive notebooks
 .PHONY: marimo
-marimo: install ## Run Marimo notebooks
-	@uv run pip install marimo
-	@uv run marimo edit book/marimo
-
-.PHONY: test
-test: install
-	@uv run pip install pytest requests marimo
-	@uv run pytest tests
+marimo: venv ## Run Marimo notebooks
+	@uvx marimo edit --sandbox book/marimo/$(NOTEBOOK)
