@@ -5,14 +5,13 @@
 .DEFAULT_GOAL := help
 
 # Create a virtual environment using uv with Python 3.12
-venv:
+uv:
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
-	@uv venv --python='3.12'
 
 
 # Format and lint the code using pre-commit
 .PHONY: fmt
-fmt: venv ## Run autoformatting and linting
+fmt: uv ## Run autoformatting and linting
 	@uvx pre-commit install
 	@uvx pre-commit run --all-files
 
@@ -33,5 +32,5 @@ help:  ## Display this help screen
 
 # Install and run Marimo for interactive notebooks
 .PHONY: marimo
-marimo: venv ## Run Marimo notebooks
+marimo: uv ## Run Marimo notebooks
 	@uvx marimo edit --sandbox book/marimo/$(NOTEBOOK)
