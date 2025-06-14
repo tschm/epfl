@@ -54,4 +54,4 @@ jobs:
           pid=$!
           sleep 1
           kill $pid
-        working-directory: book/marimo
+        working-directory: notebooks
