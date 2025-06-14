@@ -21,82 +21,30 @@ permissions:
 
 # This workflow contains multiple jobs that run in parallel and sequentially
 jobs:
-  # Job to build the Jupyter Book documentation
-  # This converts Jupyter notebooks to a static website with navigation and search
-  jupyter:
-    runs-on: ubuntu-latest
-    steps:
-        # Set up the Python virtual environment with all required dependencies
-        # This uses a reusable action from the cradle repository
-        - name: Checkout [${{ github.repository }}]
-          uses: actions/checkout@v4
-
-        # Build the Jupyter Book using a reusable action
-        # This action handles the book building process including configuration
-        - uses: tschm/cradle/actions/jupyter@v0.1.72
-
-
   # Job to build Marimo interactive notebooks and export them to HTML-WASM
   # This creates interactive web applications from Python notebook files
   marimo:
     runs-on: ubuntu-latest
     steps:
+      - uses: tschm/marimushka/actions/export@main
 
-      # Check out the repository code
-      - name: Checkout [${{ github.repository }}]
-        uses: actions/checkout@v4
+  # The deploy job publishes the built site to GitHub Pages
+  deploy:
+    needs: marimo  # This job depends on the build job completing successfully
 
-      - name: Install the latest version of uv and set the python version
-        uses: astral-sh/setup-uv@v6
-        with:
-          python-version: 3.13
-
-
-      # Convert all Marimo notebooks to HTML-WASM format
-      # The WASM format allows for interactive elements to work in the browser
-      - name: Convert notebooks to HTML-WASM
-        run: |
-          mkdir -p artifacts/marimo
-
-          # Find all Python files in the notebooks directory and export them to HTML-WASM
-          for notebook in book/marimo/*.py; do
-            # Extract the filename without extension
-            filename=$(basename "$notebook" .py)
-            echo "Exporting $notebook to HTML-WASM..."
-
-            # Create output directory for this notebook
-            mkdir -p artifacts/marimo/$filename
-
-            # Export in edit mode to allow users to modify the notebook
-            uvx marimo export html-wasm --sandbox $notebook -o artifacts/marimo/$filename/index.html --mode edit
-          done
-
-          # List all exported notebooks
-          echo "Exported notebooks:"
-          ls -la artifacts/marimo/
-
-      # Upload the generated HTML-WASM files as a GitHub Actions artifact
-      # This makes the files available for the deployment job
-      - name: Upload HTML artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: marimo
-          path: artifacts/marimo
-          retention-days: 1  # Keep artifacts for 1 day to save storage
-
-
-  # Job to combine all artifacts and prepare them for deployment
-  # This job runs after both jupyter and marimo jobs have completed
-  build:
+    # Required permissions for the GitHub Pages deployment
     permissions:
-      pages: write            # Permission to deploy to Pages
-      id-token: write         # Permission to verify deployment origin
-    runs-on: ubuntu-latest
-    needs: [jupyter, marimo]  # This job depends on both jupyter and marimo jobs
+      pages: write      # Permission to deploy to Pages
+      id-token: write   # Permission to verify the deployment
+
+    # Configure the deployment environment
     environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      name: github-pages                             # Deploy to the github-pages environment
+      url: ${{ steps.deployment.outputs.page_url }}  # Use the URL from the deployment step
+
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
     steps:
-      - name: Publish book
-        id: deployment
-        uses: tschm/cradle/actions/book@v0.1.72
+      # Deploy the site to GitHub Pages using the official action
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment                 # ID used to reference this step's outputs
+        uses: actions/deploy-pages@v4  # GitHub's official Pages deployment action
