@@ -28,7 +28,7 @@ jobs:
           NOTEBOOKS=$(ls -p | grep -v / | grep '\.py$' | jq -R -s -c 'split("\n") | map(select(length > 0))')
           echo "notebooks=$NOTEBOOKS" >> $GITHUB_OUTPUT
           echo "Found notebooks: $NOTEBOOKS"
-        working-directory: book/marimo
+        working-directory: notebooks
 
   run-notebook:
     name: Run ${{ matrix.notebook }}
