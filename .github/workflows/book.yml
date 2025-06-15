@@ -24,9 +24,9 @@ jobs:
   # Job to build Marimo interactive notebooks and export them to HTML-WASM
   # This creates interactive web applications from Python notebook files
   marimo:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu runner
     steps:
-      - uses: tschm/marimushka/actions/export@main
+      - uses: tschm/marimushka/actions/export@v0.0.8
         with:
           notebooks: 'notebooks'
 
