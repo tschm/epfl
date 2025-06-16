@@ -3,10 +3,10 @@
 format: jb-book
 root: docs/index
 chapters:
-    - url: https://tschm.github.io/epfl/marimo/intro/index.html
+    - url: https://tschm.github.io/epfl/marimo/notebooks/intro.html
       title: Introduction
 
-    - url: https://tschm.github.io/epfl/marimo/LeveragedPortfolios/index.html
+    - url: https://tschm.github.io/epfl/marimo/notebooks/LeveragedPortfolios.html
       title: Leveraged Portfolios
 
     - url: https://tschm.github.io/epfl/marimo/Quant/index.html
