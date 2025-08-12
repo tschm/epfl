@@ -4,7 +4,12 @@
 #     "marimo==0.13.15"
 # ]
 # ///
-"""Intro."""
+"""Introduction to portfolio optimization, regression, and conic programming.
+
+This module provides an overview of quantitative finance concepts, focusing on
+portfolio optimization techniques, challenges in the field, and practical applications.
+It includes background information, literature references, and key concepts in the domain.
+"""
 
 import marimo
 

@@ -9,6 +9,14 @@
 # ]
 # ///
 
+"""Module for demonstrating regression techniques in quantitative finance.
+
+This module covers linear regression methods for portfolio optimization, including
+unconstrained and constrained least squares problems. It demonstrates how regression
+can be applied to financial problems like tracking indices, factor analysis, and
+portfolio construction with various constraints.
+"""
+
 import marimo
 
 __generated_with = "0.13.15"
@@ -215,13 +223,34 @@ def _():
 
 @app.function
 def minimize(objective, constraints=None):
+    """Minimizes a given objective function subject to optional constraints.
+
+    This function creates and solves a convex optimization problem to find the
+    minimum value of the provided objective function, subject to any specified
+    constraints.
+
+    Args:
+        objective: The objective function to minimize.
+        constraints: Optional list of constraints for the optimization problem.
+
+    Returns:
+        The optimal value of the objective function.
+    """
     return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
 
 @app.function
 def min_var(matrix, lamb=0.0):
-    """Min 2-norm (matrix*w) + lamb*2-norm(w)
+    """Min 2-norm (matrix*w) + lamb*2-norm(w) subject to constraints.
+
     s.t. e'w = 1, w >= 0.
+
+    Args:
+        matrix: Matrix of asset returns.
+        lamb: Regularization parameter. Defaults to 0.0.
+
+    Returns:
+        Optimal portfolio weights.
     """
     w = cvx.Variable(matrix.shape[1])
     minimize(
@@ -233,6 +262,19 @@ def min_var(matrix, lamb=0.0):
 
 @app.function
 def plot_bar(data, width=0.35, title=""):
+    """Create a bar chart visualization of portfolio weights.
+
+    This function creates a plotly bar chart to visualize portfolio weights
+    or similar data.
+
+    Args:
+        data: The data to plot (typically portfolio weights).
+        width: Width of the bars. Defaults to 0.35.
+        title: Title for the plot. Defaults to empty string.
+
+    Returns:
+        A plotly Figure object containing the bar chart.
+    """
     _fig = go.Figure()
     _fig.add_trace(go.Bar(x=np.arange(5) + 1, y=data, width=2 * width))
     _fig.update_layout(title=title, xaxis_title="index", yaxis_title="Weight", yaxis_range=[0, 1])

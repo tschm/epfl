@@ -7,6 +7,13 @@
 #     "clarabel==0.11.0",
 # ]
 # ///
+"""Module for calculating and demonstrating Conditional Value at Risk (CVaR).
+
+This module provides functions and visualizations for understanding and computing
+Conditional Value at Risk, a risk measure that quantifies the expected loss in the
+worst-case scenarios of a distribution.
+"""
+
 import marimo
 
 __generated_with = "0.13.15"
@@ -146,21 +153,21 @@ def _():
 
 @app.cell
 def _():
-    _R = [-1.0, 2.0, 3.0, 2.0, 4.0, 2.0, 0.0, 1.0, -2.0, -2.0]
+    _r = [-1.0, 2.0, 3.0, 2.0, 4.0, 2.0, 0.0, 1.0, -2.0, -2.0]
 
-    _n = len(_R)
+    _n = len(_r)
     # We are interested in CVaR for alpha=0.80, e.g. what's the mean of the 20% of the biggest losses
     _alpha = 0.80
 
     # introduce the variable for the var
     _gamma = cvx.Variable(1)
-    _cvar = minimize(objective=_gamma + 1.0 / int(_n * (1 - _alpha)) * cvx.sum(cvx.pos(_R - _gamma)))
+    _cvar = minimize(objective=_gamma + 1.0 / int(_n * (1 - _alpha)) * cvx.sum(cvx.pos(_r - _gamma)))
 
     print(1.0 / (_n * (1 - _alpha)))
     print(f"A minimizer of f (<= VaR):  {_gamma.value}")
     print(f"Minimum of f (== CVaR):     {_cvar}")
 
-    _x = cvx.sum_largest(_R, k=int(_n * (1 - _alpha)))
+    _x = cvx.sum_largest(_r, k=int(_n * (1 - _alpha)))
     print(_x.value)
     return
 
@@ -168,8 +175,8 @@ def _():
 @app.cell
 def _():
     # take some random return data
-    _R = np.random.randn(2500, 100)
-    _n, _m = _R.shape
+    _r = np.random.randn(2500, 100)
+    _n, _m = _r.shape
 
     # We are interested in CVaR for alpha=0.95, e.g. what's the mean of the 5% of the biggest losses
     _alpha = 0.95
@@ -178,11 +185,11 @@ def _():
     _gamma, _w = (cvx.Variable(1), cvx.Variable(_m))
     _constraints = [_w >= 0, cvx.sum(_w) == 1]
 
-    _obj = cvx.Minimize(_gamma + cvx.sum(cvx.pos(_R @ _w - _gamma)) / _k)
+    _obj = cvx.Minimize(_gamma + cvx.sum(cvx.pos(_r @ _w - _gamma)) / _k)
     _cvar = cvx.Problem(objective=_obj, constraints=_constraints).solve()
     print(f"CVaR: {_cvar}")
 
-    _obj2 = cvx.Minimize(cvx.sum_largest(_R @ _w, k=_k) / _k)
+    _obj2 = cvx.Minimize(cvx.sum_largest(_r @ _w, k=_k) / _k)
     _cvar2 = cvx.Problem(objective=_obj2, constraints=_constraints).solve()
     print(f"CVaR 2: {_cvar2}")
 
@@ -208,6 +215,19 @@ def _():
 
 @app.function
 def minimize(objective, constraints=None):
+    """Minimizes a given objective function subject to optional constraints.
+
+    This function creates and solves a convex optimization problem to find the
+    minimum value of the provided objective function, subject to any specified
+    constraints.
+
+    Args:
+        objective: The objective function to minimize.
+        constraints: Optional list of constraints for the optimization problem.
+
+    Returns:
+        The optimal value of the objective function.
+    """
     return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
 

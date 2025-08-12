@@ -7,6 +7,13 @@
 # ]
 # ///
 
+"""Module for estimating the value of π using Monte Carlo simulation.
+
+This module demonstrates a probabilistic approach to approximating π by generating
+random points in a square and determining the ratio of points that fall within a
+circle. The interactive visualization shows how the accuracy improves with more points.
+"""
+
 import marimo
 
 __generated_with = "0.13.15"

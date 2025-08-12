@@ -11,6 +11,13 @@
 # ]
 # ///
 
+"""Module for constructing and analyzing autoregressive (AR) estimators.
+
+This module demonstrates how to build autoregressive models for financial time series,
+including techniques for parameter selection, convolution operations, and optimization
+approaches for constructing robust estimators with regularization.
+"""
+
 import marimo
 
 __generated_with = "0.13.15"
@@ -58,6 +65,18 @@ def _():
 
 @app.function
 def convolution(ts, weights):
+    """Apply a convolution filter to a time series using specified weights.
+
+    This function performs a one-sided convolution operation on a time series,
+    which is useful for creating autoregressive models and moving averages.
+
+    Args:
+        ts: The time series data to filter (pandas Series or array-like).
+        weights: The weights to use in the convolution filter.
+
+    Returns:
+        A filtered time series resulting from the convolution operation.
+    """
     from statsmodels.tsa.filters.filtertools import convolution_filter
 
     return convolution_filter(ts, weights, nsides=1)
@@ -163,9 +182,22 @@ def _():
 
 @app.function
 def exp_weights(m, n=100):
+    """Generate normalized exponentially decaying weights.
+
+    This function creates a vector of exponentially decaying weights with decay rate
+    determined by parameter m. The weights are normalized to have unit norm.
+
+    Args:
+        m: The decay parameter controlling the rate of exponential decay.
+           Larger values of m result in slower decay.
+        n: The number of weights to generate. Defaults to 100.
+
+    Returns:
+        A numpy array of normalized exponentially decaying weights.
+    """
     x = np.power(1.0 - 1.0 / m, range(1, n + 1))
-    S = np.linalg.norm(x)
-    return x / S
+    s = np.linalg.norm(x)
+    return x / s
 
 
 @app.cell
@@ -297,20 +329,59 @@ def _():
 
 @app.function
 def minimize(objective, constraints=None):
+    """Minimizes a given objective function subject to optional constraints.
+
+    This function creates and solves a convex optimization problem to find the
+    minimum value of the provided objective function, subject to any specified
+    constraints.
+
+    Args:
+        objective: The objective function to minimize.
+        constraints: Optional list of constraints for the optimization problem.
+
+    Returns:
+        The optimal value of the objective function.
+    """
     return cvx.Problem(cvx.Minimize(objective), constraints).solve()
 
 
 @app.function
 def mean_variation(ts):
+    """Calculate the mean absolute difference between consecutive values in a time series.
+
+    This function computes the average of absolute differences between adjacent
+    elements in a time series, which is a measure of the series' variability.
+
+    Args:
+        ts: A time series (pandas Series or array-like).
+
+    Returns:
+        The mean variation (average absolute difference) of the time series.
+    """
     return ts.diff().abs().mean()
 
 
 @app.function
 def ar(A, r, lamb=0.0):
+    """Fit an autoregressive model with regularization based on signal variation.
+
+    This function solves a regularized regression problem to find optimal weights
+    for an autoregressive model. The regularization penalizes weights for signals
+    with high mean variation, favoring smoother signals.
+
+    Args:
+        A: Matrix of predictor signals, where each column is a different signal.
+        r: Target return series to predict.
+        lamb: Regularization parameter controlling the penalty on signal variation.
+            Higher values result in smoother weights. Defaults to 0.0.
+
+    Returns:
+        A pandas Series containing the optimal weights for each predictor signal.
+    """
     # introduce the variable for the var
     x = cvx.Variable(A.shape[1])
-    D = np.diag(A.apply(mean_variation))
-    minimize(objective=cvx.norm(A.values @ x - r, 2) + lamb * cvx.norm(D @ x, 1))
+    d = np.diag(A.apply(mean_variation))
+    minimize(objective=cvx.norm(A.values @ x - r, 2) + lamb * cvx.norm(d @ x, 1))
     return pd.Series(index=A.keys(), data=x.value)
 
 
