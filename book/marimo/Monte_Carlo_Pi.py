@@ -7,6 +7,13 @@
 # ]
 # ///
 
+"""Module for estimating the value of π using Monte Carlo simulation.
+
+This module demonstrates a probabilistic approach to approximating π by generating
+random points in a square and determining the ratio of points that fall within a
+circle. The interactive visualization shows how the accuracy improves with more points.
+"""
+
 import marimo
 
 __generated_with = "0.13.15"
@@ -146,9 +153,11 @@ def _(pi_estimate):
 
     ### How to improve the estimate?
 
-    The accuracy of the Monte Carlo method improves as the number of points increases. Try adjusting the slider to see how the estimate changes with more points.
+    The accuracy of the Monte Carlo method improves as the number of points increases.
+    Try adjusting the slider to see how the estimate changes with more points.
 
-    The error in this method decreases proportionally to 1/√n, where n is the number of points. This means you need to quadruple the number of points to halve the error.
+    The error in this method decreases proportionally to 1/√n, where n is the number of points.
+    This means you need to quadruple the number of points to halve the error.
     """
     )
     return

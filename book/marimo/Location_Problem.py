@@ -9,6 +9,13 @@
 # ]
 # ///
 
+"""Module for solving and visualizing the minimum enclosing circle problem.
+
+This module demonstrates how to find the smallest circle that contains a set of points
+in a plane, using convex optimization techniques. It includes visualization of the
+points and the resulting minimum enclosing circle.
+"""
+
 import marimo
 
 __generated_with = "0.13.15"
@@ -80,9 +87,10 @@ def minimize(objective, constraints=None):
 
 @app.function
 def location(pos):
-    """Computes the minimum enclosing circle (or sphere in higher dimensions) for
-    a given set of points. The function minimizes the radius while ensuring
-    that all points lie within or on the boundary of the circle.
+    """Computes the minimum enclosing circle (or sphere in higher dimensions) for a given set of points.
+
+    The function minimizes the radius while ensuring that all points lie within
+    or on the boundary of the circle.
 
     :param pos: A 2D array-like structure containing coordinates of points
         (e.g., list of tuples or numpy array). Each row represents a point
@@ -94,9 +102,9 @@ def location(pos):
         (as a 1D array of floats).
     :rtype: tuple[float, numpy.ndarray]
     """
-    R, x = cvx.Variable(1), cvx.Variable(2)
-    minimize(objective=R, constraints=[cvx.norm(row - x, 2) <= R for row in pos])
-    return R.value, x.value
+    r, x = cvx.Variable(1), cvx.Variable(2)
+    minimize(objective=r, constraints=[cvx.norm(row - x, 2) <= r for row in pos])
+    return r.value, x.value
 
 
 @app.cell
@@ -159,7 +167,8 @@ def _():
         r"""
     # Summary
 
-    - Each constraint $\rVert{\mathbf{x}-\mathbf{c}}\lVert_2 < R$ represents a cone. Feasible domain is the intersection of all cones.
+    - Each constraint $\rVert{\mathbf{x}-\mathbf{c}}\lVert_2 < R$ represents a cone.
+      Feasible domain is the intersection of all cones.
 
     - It is trivial to generalize (but not to plot) for points in higher dimensional spaces.
 

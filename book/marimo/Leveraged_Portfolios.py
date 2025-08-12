@@ -8,6 +8,13 @@
 # ]
 # ///
 
+"""Module for demonstrating leveraged portfolio optimization.
+
+This module explores the concept of leveraged portfolios, particularly the 130/30 equity
+portfolio strategy, where 30% of the capital is used for short positions to finance
+additional 30% in long positions, resulting in 130% long exposure.
+"""
+
 import marimo
 
 __generated_with = "0.13.15"
@@ -63,6 +70,19 @@ def _():
 
 @app.function
 def maximize(objective, constraints=None):
+    """Maximizes a given objective function subject to optional constraints.
+
+    This function creates and solves a convex optimization problem to find the
+    maximum value of the provided objective function, subject to any specified
+    constraints.
+
+    Args:
+        objective: The objective function to maximize.
+        constraints: Optional list of constraints for the optimization problem.
+
+    Returns:
+        The optimal value of the objective function.
+    """
     return cvx.Problem(cvx.Maximize(objective), constraints).solve()
 
 
@@ -71,7 +91,7 @@ def _():
     # make some random data, e.g. cov-matrix and expected returns
     _n = 100
     _c = 0.9
-    _C = _c * np.ones((_n, _n)) + (1 - _c) * np.eye(_n)
+    _c_matrix = _c * np.ones((_n, _n)) + (1 - _c) * np.eye(_n)
     _mu = 0.05 * np.sin(range(0, _n))
     # maximal volatility and leverage...
     _sigma_max = 1.0
@@ -81,7 +101,7 @@ def _():
     _constraints = [
         cvx.sum(_x) == 1,
         cvx.norm(_x, 1) <= 1 + 2 * _excess,
-        cvx.quad_form(_x, _C) <= _sigma_max * _sigma_max,
+        cvx.quad_form(_x, _c_matrix) <= _sigma_max * _sigma_max,
     ]
     maximize(objective=_x.T @ _mu, constraints=_constraints)
     _f = _x.value

@@ -4,7 +4,12 @@
 #     "marimo==0.13.15"
 # ]
 # ///
-"""Intro."""
+"""Introduction to portfolio optimization, regression, and conic programming.
+
+This module provides an overview of quantitative finance concepts, focusing on
+portfolio optimization techniques, challenges in the field, and practical applications.
+It includes background information, literature references, and key concepts in the domain.
+"""
 
 import marimo
 
@@ -57,7 +62,8 @@ def _(mo):
         r"""
     ## Most utterly humble brief personal history within portfolio optimization
 
-    - 2007: Joined **Winton Capital**. Risk measurement (covariance matrices, volatilities, etc.) and portfolio optimization. Projects with **Raphael Hauser**.
+    - 2007: Joined **Winton Capital**. Risk measurement (covariance matrices, volatilities, etc.)
+      and portfolio optimization. Projects with **Raphael Hauser**.
 
     - 2008: Started to cooperate with **Mosek** (Danish company providing mathematical software).
 
@@ -127,7 +133,9 @@ def _(mo):
     - It's **broken**.
     - It's **not relevant**. It's all about getting the estimators correct.
     - Our problems are far too complicated for this. We have developed a **proprietary** method far superior.
-    - Some are rediscovering **familiar concepts**: *(The solvers) overuse statistically estimated information and magnify the impact of estimation errors. It is not simply a matter of garbage in, garbage out, but, rather, a molehill of garbage in, a mountain of garbage out* (Michaud 1998)
+    - Some are rediscovering **familiar concepts**: *(The solvers) overuse statistically estimated information and
+      magnify the impact of estimation errors. It is not simply a matter of garbage in, garbage out, but, rather,
+      a molehill of garbage in, a mountain of garbage out* (Michaud 1998)
     """
     )
     return
