@@ -57,11 +57,14 @@ def _():
         r"""
     * In this talk we assume losses are positive. Larger losses, more pain... We want negative losses!
 
-    * The value at risk $\mathtt{VaR}_{\alpha}$ at level $\alpha$ is (the smallest) loss such that $\alpha \%$ of losses are smaller than $\mathtt{VaR}_{\alpha}$.
+    * The value at risk $\mathtt{VaR}_{\alpha}$ at level $\alpha$ is (the smallest) loss such that
+    $\alpha \%$ of losses are smaller than $\mathtt{VaR}_{\alpha}$.
 
-    * This does not say anything about the magnitude of the losses larger than the $\mathtt{VaR}_{\alpha}$. We can only make statements about their number: $n(1 - \alpha)$
+    * This does not say anything about the magnitude of the losses larger than the $\mathtt{VaR}_{\alpha}$.
+    We can only make statements about their number: $n(1 - \alpha)$
 
-    * The $\mathtt{VaR}_{\alpha}$ has some sever mathematical flaws. It's not sub-additive, it's not convex. It's broken! However, the regulator embraced it.
+    * The $\mathtt{VaR}_{\alpha}$ has some sever mathematical flaws. It's not sub-additive, it's not convex.
+    It's broken! However, the regulator embraced it.
     """
     )
     return
@@ -71,11 +74,13 @@ def _():
 def _():
     mo.md(
         r"""
-    * We compute the mean of the largest $n(1-\alpha)$ entries of a vector (or a optimal linear combination of vectors) without ever sorting the entries of any vector.
+    * We compute the mean of the largest $n(1-\alpha)$ entries of a vector (or a optimal linear combination of vectors)
+    without ever sorting the entries of any vector.
 
     * The resulting convex program is linear.
 
-    * This mean is called Conditional Value at Risk $\mathtt{CVaR}_{\alpha}$ and is an upper bound for the Value at Risk $\mathtt{VaR}_{\alpha}$.
+    * This mean is called Conditional Value at Risk $\mathtt{CVaR}_{\alpha}$ and is an upper bound
+    for the Value at Risk $\mathtt{VaR}_{\alpha}$.
     """
     )
     return
@@ -138,7 +143,8 @@ def _():
         r"""
     Before (using conic reformulation of the $x^+$ function):
 
-    * \begin{align}\mathtt{CVaR}(\mathbf{r})=\min_{\gamma \in \mathbb{R}, \mathbf{t} \in \mathbb{R}^n} \,&\, \gamma + \frac{1}{n\,(1-\alpha)}\sum t_i\\
+    * \begin{align}\mathtt{CVaR}(\mathbf{r})=\min_{\gamma \in \mathbb{R}, \mathbf{t} \in \mathbb{R}^n} \,&\, \gamma +
+    \frac{1}{n\,(1-\alpha)}\sum t_i\\
     \text{s.t. }&t_i \geq r_i - \gamma \\
                 &\mathbf{t}\geq 0
     \end{align}
@@ -207,7 +213,8 @@ def _():
 
     * We do not need to sort the elements nor do we need to know the Value at Risk $\mathtt{VaR}$.
 
-    In practice the vector $\mathbf{r}$ is not given. Rather we have $m$ assets and try to find a linear combination of their corresponding return vectors such that the resulting portfolio has minimal Conditional Value at Risk.
+    In practice the vector $\mathbf{r}$ is not given. Rather we have $m$ assets and try to find a linear combination
+    of their corresponding return vectors such that the resulting portfolio has minimal Conditional Value at Risk.
     """
     )
     return

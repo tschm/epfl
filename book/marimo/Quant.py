@@ -47,7 +47,8 @@ def _():
         r"""
     # Linear Regression
 
-    Let $\mathbf{A} \in \mathbb{R}^{n \times m}$ and $\mathbf{b} \in \mathbb{R}^n$. Solve the unconstrained least squares problem:
+    Let $\mathbf{A} \in \mathbb{R}^{n \times m}$ and $\mathbf{b} \in \mathbb{R}^n$.
+    Solve the unconstrained least squares problem:
 
     \begin{align}
     \mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{x}-\mathbf{b}}\lVert_2
@@ -96,9 +97,11 @@ def _():
 
     You may see here already
 
-     + The matrix $\mathbf{A}^T \mathbf{A}$ is a scaled covariance matrix (if the columns of $\mathbf{A}$ are centered). Run into problems with small eigenvalues here...
+     + The matrix $\mathbf{A}^T \mathbf{A}$ is a scaled covariance matrix (if the columns of $\mathbf{A}$ are centered).
+       Run into problems with small eigenvalues here...
 
-    **Nerd alarm**: Being a numerical analyst I recommend to use the SVD or QR-decomposition to solve the unconstrained least squares problem.
+    **Nerd alarm**: Being a numerical analyst I recommend to use the SVD or QR-decomposition
+    to solve the unconstrained least squares problem.
     """
     )
     return
@@ -110,9 +113,11 @@ def _():
         r"""
     # Constrained regression
 
-    Let $\mathbf{A} \in \mathbb{R}^{n \times m}$ and $\mathbf{b} \in \mathbb{R}^n$. We solve the constrained least squares problem:
+    Let $\mathbf{A} \in \mathbb{R}^{n \times m}$ and $\mathbf{b} \in \mathbb{R}^n$.
+    We solve the constrained least squares problem:
 
-    \begin{align}\mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{x}-\mathbf{b}}\lVert_2\\
+    \begin{align}\mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{x}-\mathbf{b}}\lVert_2
+    \\
     \text{s.t. } &\Sigma\,x_i=1\\
                 &\mathbf{x}\geq 0
     \end{align}
@@ -210,12 +215,14 @@ def _():
     The $i$th column of $\mathbf{A}$ is the time series of returns for the $i$th asset.
     Hence to minimize the variance of a portfolio (a linear combination of assets) we solve:
 
-    \begin{align}\mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{w}-\mathbf{0}}\lVert_2\\
+    \begin{align}\mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{w}-\mathbf{0}}\lVert_2
+    \\
     \text{s.t. } &\Sigma\,w_i=1\\
                 &\mathbf{w}\geq 0
     \end{align}
 
-    **Nerd alarm**: This is strictly speaking not a Minimum Variance portfolio as we use squared deviations from $0$ rather than from the mean.
+    **Nerd alarm**: This is strictly speaking not a Minimum Variance portfolio as we use squared deviations
+    from $0$ rather than from the mean.
     """
     )
     return
@@ -298,10 +305,12 @@ def _():
     # Balance?
 
     - Bounds
-    - **Tikhonov regularization** (penalty by the $2$-norm of the weights in the objective), also known as **Ridge Regression** or **Shrinkage to the mean**
+    - **Tikhonov regularization** (penalty by the $2$-norm of the weights in the objective),
+      also known as **Ridge Regression** or **Shrinkage to the mean**
 
 
-    \begin{align}\mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{w}}\lVert_2 + \lambda \rVert{\mathbf{w}}\lVert_2\\
+    \begin{align}\mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{w}}\lVert_2 +
+    \lambda \rVert{\mathbf{w}}\lVert_2\\
     \text{s.t. } &\Sigma\,w_i=1\\
                 &\mathbf{w}\geq 0
     \end{align}
@@ -382,13 +391,16 @@ def _():
         r"""
     # Summary
 
-    - Although the Sculptor method (or variants thereof) are heavily used in practice such approaches are usually inefficient ways to construct feasible but not optimal solutions.
+    - Although the Sculptor method (or variants thereof) are heavily used in practice such approaches are usually
+      inefficient ways to construct feasible but not optimal solutions.
 
     - It's usually more effective to combine all constraints into one (conic) program.
 
-    - Modern regularization techniques offer extreme flexibility (linear constraints on weights, level of trading activity, bounds on leverage, trading costs, ...)
+    - Modern regularization techniques offer extreme flexibility (linear constraints on weights,
+      level of trading activity, bounds on leverage, trading costs, ...)
 
-    - Example given: Using Tikhonov regularization we can interpolate between the Minimum Variance portfolio and the $1/N$ portfolio.
+    - Example given: Using Tikhonov regularization we can interpolate between the Minimum Variance portfolio
+      and the $1/N$ portfolio.
 
     **Recommended read**: Regression techniques for Portfolio Optimisation using MOSEK, Schmelzer et al., see https://arxiv.org/abs/1310.3397
     """

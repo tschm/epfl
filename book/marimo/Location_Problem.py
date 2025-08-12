@@ -167,7 +167,8 @@ def _():
         r"""
     # Summary
 
-    - Each constraint $\rVert{\mathbf{x}-\mathbf{c}}\lVert_2 < R$ represents a cone. Feasible domain is the intersection of all cones.
+    - Each constraint $\rVert{\mathbf{x}-\mathbf{c}}\lVert_2 < R$ represents a cone.
+      Feasible domain is the intersection of all cones.
 
     - It is trivial to generalize (but not to plot) for points in higher dimensional spaces.
 

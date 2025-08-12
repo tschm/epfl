@@ -153,9 +153,11 @@ def _(pi_estimate):
 
     ### How to improve the estimate?
 
-    The accuracy of the Monte Carlo method improves as the number of points increases. Try adjusting the slider to see how the estimate changes with more points.
+    The accuracy of the Monte Carlo method improves as the number of points increases.
+    Try adjusting the slider to see how the estimate changes with more points.
 
-    The error in this method decreases proportionally to 1/√n, where n is the number of points. This means you need to quadruple the number of points to halve the error.
+    The error in this method decreases proportionally to 1/√n, where n is the number of points.
+    This means you need to quadruple the number of points to halve the error.
     """
     )
     return
