@@ -16,12 +16,12 @@ tasks:
           if [ "$ARCH" = "arm64" ]; then
             # macOS ARM64 (Apple Silicon)
             UV_INSTALLER_URL="https://github.com/astral-sh/uv/releases/download/${UV_VERSION}/uv-aarch64-apple-darwin.tar.gz"
-            UV_INSTALLER_SHA256="c2e5d2e7c3a9d1d8a4a9b2d2a9c8c9d2a9c8c9d2a9c8c9d2a9c8c9d2a9c8c9d2" # Replace with actual checksum
+            UV_INSTALLER_SHA256="e4d4859d7726298daa4c12e114f269ff282b2cfc2b415dc0b2ca44ae2dbd358e"
             EXTRACT_DIR="uv-aarch64-apple-darwin"
           else
             # macOS x86_64 (Intel)
             UV_INSTALLER_URL="https://github.com/astral-sh/uv/releases/download/${UV_VERSION}/uv-x86_64-apple-darwin.tar.gz"
-            UV_INSTALLER_SHA256="c2e5d2e7c3a9d1d8a4a9b2d2a9c8c9d2a9c8c9d2a9c8c9d2a9c8c9d2a9c8c9d2" # Replace with actual checksum
+            UV_INSTALLER_SHA256="31ed353cfd8e6c962e7c60617bd8a9d6b97b704c1ecb5b5eceaff8c6121b54ac"
             EXTRACT_DIR="uv-x86_64-apple-darwin"
           fi
         else
