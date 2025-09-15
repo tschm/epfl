@@ -1,0 +1,99 @@
+version: '3'
+
+tasks:
+  uv:
+    desc: Install uv and uvx
+    cmds:
+      - |
+        # install uv and uvx
+        UV_VERSION="0.8.17"
+
+        # Detect OS and architecture
+        OS=$(uname -s)
+        ARCH=$(uname -m)
+
+        if [ "$OS" = "Darwin" ]; then
+          if [ "$ARCH" = "arm64" ]; then
+            # macOS ARM64 (Apple Silicon)
+            UV_INSTALLER_URL="https://github.com/astral-sh/uv/releases/download/${UV_VERSION}/uv-aarch64-apple-darwin.tar.gz"
+            UV_INSTALLER_SHA256="e4d4859d7726298daa4c12e114f269ff282b2cfc2b415dc0b2ca44ae2dbd358e"
+            EXTRACT_DIR="uv-aarch64-apple-darwin"
+          else
+            # macOS x86_64 (Intel)
+            UV_INSTALLER_URL="https://github.com/astral-sh/uv/releases/download/${UV_VERSION}/uv-x86_64-apple-darwin.tar.gz"
+            UV_INSTALLER_SHA256="31ed353cfd8e6c962e7c60617bd8a9d6b97b704c1ecb5b5eceaff8c6121b54ac"
+            EXTRACT_DIR="uv-x86_64-apple-darwin"
+          fi
+        else
+          # Linux
+          UV_INSTALLER_URL="https://github.com/astral-sh/uv/releases/download/${UV_VERSION}/uv-x86_64-unknown-linux-gnu.tar.gz"
+          UV_INSTALLER_SHA256="920cbcaad514cc185634f6f0dcd71df5e8f4ee4456d440a22e0f8c0f142a8203"
+          EXTRACT_DIR="uv-x86_64-unknown-linux-gnu"
+        fi
+
+        # Create temporary directory
+        TMP_DIR=$(mktemp -d)
+        INSTALLER_PATH="${TMP_DIR}/uv-installer.tar.gz"
+
+        # Download installer
+        printf "${BLUE}[INFO] Downloading uv installer v${UV_VERSION} for ${OS} ${ARCH}...${RESET}\n"
+        curl -sSfL "${UV_INSTALLER_URL}" -o "${INSTALLER_PATH}" || { printf "${RED}[ERROR] Failed to download uv installer${RESET}\n"; exit 1; }
+
+        # Verify checksum
+        printf "${BLUE}[INFO] Verifying installer checksum...${RESET}\n"
+        ACTUAL_SHA256=$(shasum -a 256 "${INSTALLER_PATH}" | cut -d ' ' -f 1)
+        if [ "${ACTUAL_SHA256}" != "${UV_INSTALLER_SHA256}" ]; then
+          printf "${RED}[ERROR] Checksum verification failed! Expected: ${UV_INSTALLER_SHA256}, Got: ${ACTUAL_SHA256}${RESET}\n"
+          rm -rf "${TMP_DIR}"
+          exit 1
+        fi
+
+        # Extract and install
+        printf "${BLUE}[INFO] Installing uv...${RESET}\n"
+        mkdir -p "$HOME/.local/bin"
+        tar -xzf "${INSTALLER_PATH}" -C "${TMP_DIR}"
+        cp "${TMP_DIR}/${EXTRACT_DIR}/uv" "$HOME/.local/bin/"
+        cp "${TMP_DIR}/${EXTRACT_DIR}/uvx" "$HOME/.local/bin/"
+        chmod +x "$HOME/.local/bin/uv" "$HOME/.local/bin/uvx"
+
+        # Clean up
+        rm -rf "${TMP_DIR}"
+        printf "${GREEN}[SUCCESS] uv v${UV_VERSION} installed successfully${RESET}\n"
+
+  install:
+    desc: Install all dependencies using uv
+    deps: [uv]
+    cmds:
+      - |
+        # Check if .venv folder already exists
+        if [ -d ".venv" ]; then
+          printf "${BLUE}[INFO] Virtual environment already exists, skipping installation${RESET}\n"
+        else
+          # we need the virtual environment at least for the tests to work
+          # even if we don't install anything
+
+          # Create the virtual environment
+          printf "${BLUE}[INFO] Creating virtual environment...${RESET}\n"
+
+          # Create the virtual environment
+          uv venv --python 3.12 || { printf "${RED}[ERROR] Failed to create virtual environment${RESET}\n"; exit 1; }
+
+          if [ -f "pyproject.toml" ]; then
+            printf "${BLUE}[INFO] Installing dependencies${RESET}\n"
+            uv sync --all-extras --frozen || { printf "${RED}[ERROR] Failed to install dependencies${RESET}\n"; exit 1; }
+          else
+            printf "${YELLOW}[WARN] No pyproject.toml found, skipping install${RESET}\n"
+          fi
+        fi
+
+  build:
+    desc: Build the package using hatch
+    deps: [install]
+    cmds:
+      - |
+        if [ -f "pyproject.toml" ]; then
+          printf "${BLUE}[INFO] Building package...${RESET}\n"
+          uvx hatch build
+        else
+          printf "${YELLOW}[WARN] No pyproject.toml found, skipping build${RESET}\n"
+        fi
