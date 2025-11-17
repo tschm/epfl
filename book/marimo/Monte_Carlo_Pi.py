@@ -1,12 +1,3 @@
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#     "marimo==0.13.15",
-#     "numpy==2.3.0",
-#     "plotly==6.1.2",
-# ]
-# ///
-
 """Module for estimating the value of π using Monte Carlo simulation.
 
 This module demonstrates a probabilistic approach to approximating π by generating
@@ -16,7 +7,7 @@ circle. The interactive visualization shows how the accuracy improves with more 
 
 import marimo
 
-__generated_with = "0.13.15"
+__generated_with = "0.17.8"
 app = marimo.App()
 
 with app.setup:
@@ -27,8 +18,7 @@ with app.setup:
 
 @app.cell
 def _():
-    mo.md(
-        r"""
+    mo.md(r"""
     # Estimating π using Monte Carlo
 
     This notebook demonstrates how to estimate the value of π (pi) using a Monte Carlo method.
@@ -39,8 +29,7 @@ def _():
     3. The ratio of points inside the circle to the total number of points, multiplied by 4, approximates π.
 
     This works because the ratio of the area of the circle (πr²) to the area of the square (4r²) is π/4.
-    """
-    )
+    """)
     return
 
 
@@ -50,7 +39,6 @@ def _():
     num_points = mo.ui.slider(3, 7, step=1, value=3, label="Number of points 10^{n}")
 
     num_points
-
     return (num_points,)
 
 
@@ -77,7 +65,6 @@ def _(num_points):
     # Create points dataframe for plotting
     points_inside = points[inside_circle]
     points_outside = points[~inside_circle]
-
     return pi_estimate, points_inside, points_outside
 
 
@@ -136,14 +123,12 @@ def _(pi_estimate, points_inside, points_outside):
         line={"color": "black", "width": 2},
         fillcolor="rgba(0,0,0,0)",
     )
-
     return
 
 
 @app.cell
 def _(pi_estimate):
-    mo.md(
-        f"""
+    mo.md(f"""
     ## Results
 
     - Estimated value of π: **{pi_estimate:.6f}**
@@ -158,8 +143,7 @@ def _(pi_estimate):
 
     The error in this method decreases proportionally to 1/√n, where n is the number of points.
     This means you need to quadruple the number of points to halve the error.
-    """
-    )
+    """)
     return
 
 

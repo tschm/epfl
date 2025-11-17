@@ -1,0 +1,17 @@
+[project]
+name = "epfl"
+version = "0.1.0"
+description = "Companion materials for an EPFL talk."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Thomas Schmelzer" }]
+license = { file = "LICENSE" }
+dependencies = [
+    "numpy==2.3.0",
+    "plotly==6.4.0",
+]
+
+[project.urls]
+Homepage = "https://tschm.github.io/epfl/book"
+Repository = "https://github.com/tschm/epfl"
+

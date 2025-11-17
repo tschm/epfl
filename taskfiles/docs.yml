@@ -168,6 +168,7 @@ tasks:
         if [ ! -d "{{.MARIMO_FOLDER}}" ]; then
           printf " ${YELLOW}[WARN] Marimo folder '{{.MARIMO_FOLDER}}' not found, skipping start${RESET}\n"
         else
-          ./bin/uv sync --all-extras
+          #./bin/uv sync --all-extras
+          ./bin/uv pip install marimo
           ./bin/uv run marimo edit "{{.MARIMO_FOLDER}}"
         fi
