@@ -14,6 +14,7 @@ dependencies = [
     "marimo==0.17.8",
     "statsmodels==0.14.5",
     "pandas==2.3.3",
+    "polars==1.33.0",
 ]
 
 [project.urls]
@@ -21,7 +22,7 @@ Homepage = "https://tschm.github.io/epfl/book"
 Repository = "https://github.com/tschm/epfl"
 
 [tool.deptry.per_rule_ignores]
-DEP002 = ["clarabel"]
+DEP002 = ["clarabel", "polars"]
 
 [tool.deptry.package_module_name_map]
 "cvxpy-base" = "cvxpy"
