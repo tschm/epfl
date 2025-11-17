@@ -1,12 +1,3 @@
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#     "cvxpy-base==1.6.6",
-#     "marimo==0.13.15",
-#     "numpy==2.3.0",
-#     "clarabel==0.11.0",
-# ]
-# ///
 """Module for calculating and demonstrating Conditional Value at Risk (CVaR).
 
 This module provides functions and visualizations for understanding and computing
@@ -16,7 +7,7 @@ worst-case scenarios of a distribution.
 
 import marimo
 
-__generated_with = "0.13.15"
+__generated_with = "0.17.8"
 app = marimo.App()
 
 with app.setup:
@@ -27,34 +18,29 @@ with app.setup:
 
 @app.cell
 def _():
-    mo.md(
-        r"""
+    mo.md(r"""
     # The Conditional Value at Risk
 
     https://en.wikipedia.org/wiki/Expected_shortfall
 
     **Thomas Schmelzer**
-    """
-    )
+    """)
     return
 
 
 @app.cell
 def _():
-    mo.md(
-        r"""
+    mo.md(r"""
     The $\alpha=0.99$ tail of a loss distribution
     -----------------------------------------------
     <img src="talk/tail.jpg" style="margin-left:auto; margin-right:auto; display:block">
-    """
-    )
+    """)
     return
 
 
 @app.cell
 def _():
-    mo.md(
-        r"""
+    mo.md(r"""
     * In this talk we assume losses are positive. Larger losses, more pain... We want negative losses!
 
     * The value at risk $\mathtt{VaR}_{\alpha}$ at level $\alpha$ is (the smallest) loss such that
@@ -65,15 +51,13 @@ def _():
 
     * The $\mathtt{VaR}_{\alpha}$ has some sever mathematical flaws. It's not sub-additive, it's not convex.
     It's broken! However, the regulator embraced it.
-    """
-    )
+    """)
     return
 
 
 @app.cell
 def _():
-    mo.md(
-        r"""
+    mo.md(r"""
     * We compute the mean of the largest $n(1-\alpha)$ entries of a vector (or a optimal linear combination of vectors)
     without ever sorting the entries of any vector.
 
@@ -81,15 +65,13 @@ def _():
 
     * This mean is called Conditional Value at Risk $\mathtt{CVaR}_{\alpha}$ and is an upper bound
     for the Value at Risk $\mathtt{VaR}_{\alpha}$.
-    """
-    )
+    """)
     return
 
 
 @app.cell
 def _():
-    mo.md(
-        r"""
+    mo.md(r"""
     Given a vector $\mathbf{r}$ we introduce a free variable $\gamma$ and define the function $f$ as:
 
     $$
@@ -101,15 +83,13 @@ def _():
     $$
     f^{'}(\gamma) = 1 - \frac{\#\left\{r_i \geq \gamma\right\}}{n\,(1-\alpha)}
     $$
-    """
-    )
+    """)
     return
 
 
 @app.cell
 def _():
-    mo.md(
-        r"""
+    mo.md(r"""
     If $\gamma$ such that $\#\{r_i \geq \gamma\}=n\,(1-\alpha)$:
 
     - $\gamma$ is a minimizer of $f$.
@@ -118,8 +98,7 @@ def _():
     In particular:
 
     * $f(\mathtt{VaR}_\alpha(\mathbf{r})) = \mathtt{CVaR}_\alpha(\mathbf{r})$.
-    """
-    )
+    """)
     return
 
 
@@ -133,14 +112,12 @@ def _():
     _r = np.array([-1.0, 2.0, 3.0, 2.0, 4.0, 2.0, 0.0, 1.0, -2.0, -2.0])
     _x = np.linspace(start=-1.0, stop=5.0, num=1000)
     _v = np.array([f(gamma=g, returns=_r, alpha=0.80) for g in _x])
-
     return
 
 
 @app.cell
 def _():
-    mo.md(
-        r"""
+    mo.md(r"""
     Before (using conic reformulation of the $x^+$ function):
 
     * \begin{align}\mathtt{CVaR}(\mathbf{r})=\min_{\gamma \in \mathbb{R}, \mathbf{t} \in \mathbb{R}^n} \,&\, \gamma +
@@ -152,8 +129,7 @@ def _():
     Now
 
     * http://www.cvxpy.org/en/latest/tutorial/functions/, in particular the $x^{+} = \max\{0,x\}$
-    """
-    )
+    """)
     return
 
 
@@ -198,14 +174,12 @@ def _():
     _obj2 = cvx.Minimize(cvx.sum_largest(_r @ _w, k=_k) / _k)
     _cvar2 = cvx.Problem(objective=_obj2, constraints=_constraints).solve()
     print(f"CVaR 2: {_cvar2}")
-
     return
 
 
 @app.cell
 def _():
-    mo.md(
-        r"""
+    mo.md(r"""
     Summary
     -------
 
@@ -215,8 +189,7 @@ def _():
 
     In practice the vector $\mathbf{r}$ is not given. Rather we have $m$ assets and try to find a linear combination
     of their corresponding return vectors such that the resulting portfolio has minimal Conditional Value at Risk.
-    """
-    )
+    """)
     return
 
 
