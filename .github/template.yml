@@ -12,3 +12,4 @@ include: |
     Makefile
     ruff.toml
     Taskfile.yml
+    .devcontainer
