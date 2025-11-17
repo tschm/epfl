@@ -20,4 +20,7 @@ dependencies = [
 Homepage = "https://tschm.github.io/epfl/book"
 Repository = "https://github.com/tschm/epfl"
 
+[tool.deptry.per_rule_ignores]
+DEP001 = ["cvxpy"]
+DEP002 = ["clarabel", "cvxpy-base"]  # DEP002: Unused direct dependencies
 
