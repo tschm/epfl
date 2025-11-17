@@ -1,13 +1,3 @@
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#     "cvxpy-base==1.6.6",
-#     "marimo==0.13.15",
-#     "numpy==2.3.0",
-#     "clarabel==0.11.0",
-# ]
-# ///
-
 """Module for demonstrating leveraged portfolio optimization.
 
 This module explores the concept of leveraged portfolios, particularly the 130/30 equity

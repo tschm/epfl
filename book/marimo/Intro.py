@@ -1,9 +1,3 @@
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#     "marimo==0.13.15"
-# ]
-# ///
 """Introduction to portfolio optimization, regression, and conic programming.
 
 This module provides an overview of quantitative finance concepts, focusing on
