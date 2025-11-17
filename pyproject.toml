@@ -1,6 +1,6 @@
 [project]
 name = "epfl"
-version = "0.1.0"
+version = "0.0.0"
 description = "Companion materials for an EPFL talk."
 readme = "README.md"
 requires-python = ">=3.12"
@@ -21,10 +21,7 @@ Homepage = "https://tschm.github.io/epfl/book"
 Repository = "https://github.com/tschm/epfl"
 
 [tool.deptry.per_rule_ignores]
-#DEP001 = ["cvxpy"]
-DEP002 = ["clarabel"] #, "cvxpy-base"]  # DEP002: Unused direct dependencies
-
-
+DEP002 = ["clarabel"]
 
 [tool.deptry.package_module_name_map]
 "cvxpy-base" = "cvxpy"
