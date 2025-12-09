@@ -12,7 +12,7 @@ dependencies = [
     "clarabel==0.11.1",
     "cvxpy-base==1.7.5",
     "marimo==0.18.3",
-    "statsmodels==0.14.5",
+    "statsmodels==0.14.6",
     "pandas==2.3.3",
 ]
 
