@@ -11,6 +11,7 @@ worst-case scenarios of a distribution.
 #     "cvxpy-base==1.7.5",
 #     "marimo==0.18.4",
 #     "numpy==2.3.5",
+#     "clarabel==0.11.1",
 # ]
 # ///
 
