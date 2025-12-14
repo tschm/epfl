@@ -5,6 +5,16 @@ in a plane, using convex optimization techniques. It includes visualization of t
 points and the resulting minimum enclosing circle.
 """
 
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "cvxpy-base==1.7.5",
+#     "marimo==0.18.4",
+#     "numpy==2.3.5",
+#     "plotly==6.5.0",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.13.15"

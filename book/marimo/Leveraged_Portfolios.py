@@ -5,6 +5,15 @@ portfolio strategy, where 30% of the capital is used for short positions to fina
 additional 30% in long positions, resulting in 130% long exposure.
 """
 
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "cvxpy-base==1.7.5",
+#     "marimo==0.18.4",
+#     "numpy==2.3.5",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.13.15"

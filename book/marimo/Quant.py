@@ -6,6 +6,16 @@ can be applied to financial problems like tracking indices, factor analysis, and
 portfolio construction with various constraints.
 """
 
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "cvxpy-base==1.7.5",
+#     "marimo==0.18.4",
+#     "numpy==2.3.5",
+#     "plotly==6.5.0",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.13.15"
