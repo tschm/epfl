@@ -36,14 +36,14 @@ def _():
         r"""
     # Linear Regression
 
-    Let $\mathbf{A} \in \mathbb{R}^{n \times m}$ and $\mathbf{b} \in \mathbb{R}^n$.
+    Let $\mathbf{a} \in \mathbb{R}^{n \times m}$ and $\mathbf{b} \in \mathbb{R}^n$.
     Solve the unconstrained least squares problem:
 
     \begin{align}
-    \mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{x}-\mathbf{b}}\lVert_2
+    \mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{a}\mathbf{x}-\mathbf{b}}\lVert_2
     \end{align}
 
-    The $i$th column of $\mathbf{A}$ may represent the time series of returns for asset $i$.
+    The $i$th column of $\mathbf{a}$ may represent the time series of returns for asset $i$.
 
     Portfolio Optimisation is about all about clever (linear) combinations of assets.
     """
@@ -56,7 +56,7 @@ def _():
     mo.md(
         r"""
     # Examples:
-    - Tracking an index (index in $\mathbf{b}$, assets in $\mathbf{A}$)
+    - Tracking an index (index in $\mathbf{b}$, assets in $\mathbf{a}$)
     - Constructing an indicator, factor analysis, ...
     - Approximation...
     - ...
@@ -76,17 +76,17 @@ def _():
     As we (probably) all know
 
     $$
-    \mathbf{x}^{*}=\left(\mathbf{A}^T \mathbf{A}\right)^{-1}\mathbf{A}^{T}\mathbf{x}
+    \mathbf{x}^{*}=\left(\mathbf{a}^T \mathbf{a}\right)^{-1}\mathbf{a}^{T}\mathbf{x}
     $$
 
     solves
 
-    \begin{align}\mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{x}-\mathbf{b}}\lVert_2
+    \begin{align}\mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{a}\mathbf{x}-\mathbf{b}}\lVert_2
     \end{align}
 
     You may see here already
 
-     + The matrix $\mathbf{A}^T \mathbf{A}$ is a scaled covariance matrix (if the columns of $\mathbf{A}$ are centered).
+     + The matrix $\mathbf{a}^T \mathbf{a}$ is a scaled covariance matrix (if the columns of $\mathbf{a}$ are centered).
        Run into problems with small eigenvalues here...
 
     **Nerd alarm**: Being a numerical analyst I recommend to use the SVD or QR-decomposition
@@ -102,10 +102,10 @@ def _():
         r"""
     # Constrained regression
 
-    Let $\mathbf{A} \in \mathbb{R}^{n \times m}$ and $\mathbf{b} \in \mathbb{R}^n$.
+    Let $\mathbf{a} \in \mathbb{R}^{n \times m}$ and $\mathbf{b} \in \mathbb{R}^n$.
     We solve the constrained least squares problem:
 
-    \begin{align}\mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{x}-\mathbf{b}}\lVert_2
+    \begin{align}\mathbf{x}^{*}=\arg\min_{\mathbf{x} \in \mathbb{R}^m}& \rVert{\mathbf{a}\mathbf{x}-\mathbf{b}}\lVert_2
     \\
     \text{s.t. } &\Sigma\,x_i=1\\
                 &\mathbf{x}\geq 0
@@ -166,7 +166,7 @@ def _():
     We introduce an auxiliary scalar $z$:
 
     \begin{align}\min_{z \in \mathbb{R}, \mathbf{x} \in \mathbb{R}^m} & z\\
-    \text{s.t. }&z \geq \rVert{\mathbf{A}\mathbf{x}-\mathbf{b}}\lVert_2\\
+    \text{s.t. }&z \geq \rVert{\mathbf{a}\mathbf{x}-\mathbf{b}}\lVert_2\\
                 &\Sigma\,x_i=1\\
                 &\mathbf{x}\geq 0
     \end{align}
@@ -183,7 +183,7 @@ def _():
 
     \begin{align}\min_{z \in \mathbb{R}, \mathbf{x} \in \mathbb{R}^m, \mathbf{y} \in \mathbb{R}^n} & z\\
     \text{s.t. }&z \geq \rVert{y}\lVert_2\\
-                &\mathbf{y} = \mathbf{A}\mathbf{x}-\mathbf{b}\\
+                &\mathbf{y} = \mathbf{a}\mathbf{x}-\mathbf{b}\\
                 &\Sigma\,x_i=1\\
                 &\mathbf{x}\geq 0
     \end{align}
@@ -201,10 +201,10 @@ def _():
     mo.md(
         r"""
     # Application: Implementing a minimum variance portfolio
-    The $i$th column of $\mathbf{A}$ is the time series of returns for the $i$th asset.
+    The $i$th column of $\mathbf{a}$ is the time series of returns for the $i$th asset.
     Hence to minimize the variance of a portfolio (a linear combination of assets) we solve:
 
-    \begin{align}\mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{w}-\mathbf{0}}\lVert_2
+    \begin{align}\mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}& \rVert{\mathbf{a}\mathbf{w}-\mathbf{0}}\lVert_2
     \\
     \text{s.t. } &\Sigma\,w_i=1\\
                 &\mathbf{w}\geq 0
@@ -269,7 +269,7 @@ def plot_bar(data, width=0.35, title=""):
         title: Title for the plot. Defaults to empty string.
 
     Returns:
-        A plotly Figure object containing the bar chart.
+        a plotly Figure object containing the bar chart.
     """
     _fig = go.Figure()
     _fig.add_trace(go.Bar(x=np.arange(5) + 1, y=data, width=2 * width))
@@ -298,7 +298,7 @@ def _():
       also known as **Ridge Regression** or **Shrinkage to the mean**
 
 
-    \begin{align}\mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{w}}\lVert_2 +
+    \begin{align}\mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}& \rVert{\mathbf{a}\mathbf{w}}\lVert_2 +
     \lambda \rVert{\mathbf{w}}\lVert_2\\
     \text{s.t. } &\Sigma\,w_i=1\\
                 &\mathbf{w}\geq 0

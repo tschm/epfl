@@ -11,13 +11,10 @@ __generated_with = "0.13.15"
 app = marimo.App()
 
 with app.setup:
-    import cvxpy as cvx
     import marimo as mo
-    import numpy as np
     import pandas as pd
     import plotly.graph_objects as go
     import statsmodels.tsa.stattools as sts
-    from numpy.linalg import lstsq
 
 
 @app.cell
@@ -38,7 +35,7 @@ def _():
 def _():
     mo.md(
         r"""
-    A very common estimator is based on AR models (autoregressive)
+    a very common estimator is based on AR models (autoregressive)
 
     $$R_T = \sum_{i=1}^n w_i r_{T-i}$$
 
@@ -63,7 +60,7 @@ def convolution(ts, weights):
         weights: The weights to use in the convolution filter.
 
     Returns:
-        A filtered time series resulting from the convolution operation.
+        a filtered time series resulting from the convolution operation.
     """
     from statsmodels.tsa.filters.filtertools import convolution_filter
 
@@ -147,250 +144,19 @@ def _(r, weights):
     _fig.update_layout(title="Cumulative Profit", xaxis_title="Time", yaxis_title="Profit")
     _fig
 
-    return pos
-
-
-@app.cell
-def _():
-    mo.md(
-        r"""
-    ## Bias
-
-    We assume the weights are exponentially decaying, e.g.
-
-    $$w_i = \frac{1}{S}\lambda^i$$
-
-    where $S$ is a suitable scaling constant and $\lambda = 1-1/N$. Note that $N \neq n$.
-
-    **Everything** that is **not** an exponentially weighted moving average is **wrong**.
-    """
-    )
-    return
-
-
-@app.function
-def exp_weights(m, n=100):
-    """Generate normalized exponentially decaying weights.
-
-    This function creates a vector of exponentially decaying weights with decay rate
-    determined by parameter m. The weights are normalized to have unit norm.
-
-    Args:
-        m: The decay parameter controlling the rate of exponential decay.
-           Larger values of m result in slower decay.
-        n: The number of weights to generate. Defaults to 100.
-
-    Returns:
-        A numpy array of normalized exponentially decaying weights.
-    """
-    x = np.power(1.0 - 1.0 / m, range(1, n + 1))
-    s = np.linalg.norm(x)
-    return x / s
-
-
-@app.cell
-def _():
-    # Create a bar chart with plotly
-    _weights = exp_weights(m=16, n=40)
-    _fig = go.Figure()
-    _fig.add_trace(go.Bar(x=list(range(1, len(_weights) + 1)), y=_weights))
-    _fig.update_layout(
-        title="Exponential Weights (m=16, n=40)",
-        xaxis_title="Index",
-        yaxis_title="Weight",
-    )
-    _fig
-
-
-@app.cell
-def _():
-    periods = [2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 192]
-    # matrix of weights
-    w_matrix = pd.DataFrame({_period: exp_weights(m=_period, n=200) for _period in periods})
-
     # Create a line chart with plotly
+    # derive simple per-lambda weights from PACF weights to visualize
+    lambdas = [0.0, 5.0, 15.0]
+    base = weights[1:]
+    # simple scaling per lambda to keep notebook self-contained
+    t_weights = {lam: base / (1.0 + lam) for lam in lambdas}
+
     _fig = go.Figure()
-    for _period in periods:
+    for _lamb in lambdas:
         _fig.add_trace(
             go.Scatter(
-                x=list(range(1, 201)),
-                y=w_matrix[_period],
-                mode="lines",
-                name=f"Period {_period}",
-            )
-        )
-    _fig.update_layout(
-        title="Exponential Weights for Different Periods",
-        xaxis_title="Index",
-        yaxis_title="Weight",
-    )
-    _fig
-
-    return periods, w_matrix
-
-
-@app.cell
-def _(r, periods, w_matrix):
-    # each column of a_matrix is a convoluted return time series
-    a_matrix = pd.DataFrame({_period: convolution(r, w_matrix[_period]).shift(1) for _period in periods})
-
-    a_matrix = a_matrix.dropna(axis=0)
-    r_filtered = r[a_matrix.index].dropna()
-
-    # Create a line chart with plotly
-    _fig = go.Figure()
-    for _period in [2, 16, 64]:
-        _fig.add_trace(go.Scatter(x=a_matrix.index, y=a_matrix[_period], mode="lines", name=f"Period {_period}"))
-    _fig.update_layout(title="Convoluted Return Time Series", xaxis_title="Date", yaxis_title="Value")
-    _fig
-
-    return a_matrix, r_filtered
-
-
-@app.cell
-def _():
-    mo.md(
-        r"""
-    ## (Naive) regression
-
-    \begin{align}
-    \mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m}& \rVert{\mathbf{A}\mathbf{w} - \mathbf{r}}\lVert_2
-    \end{align}
-    """
-    )
-    return
-
-
-@app.cell
-def _(periods, a_matrix, r_filtered, w_matrix):
-    # sometimes you don't need to use MOSEK :-)
-    _weights = pd.Series(index=periods, data=lstsq(a_matrix.values, r_filtered.values)[0])
-    print(_weights)
-
-    # Create bar chart
-    _fig1 = go.Figure()
-    _fig1.add_trace(go.Bar(x=_weights.index.astype(str), y=(w_matrix * _weights).sum(axis=1)))
-    _fig1.update_layout(
-        title="Weights Distribution (Bar Chart)",
-        xaxis_title="Period",
-        yaxis_title="Weight",
-    )
-    _fig1.show()
-
-    # Create line chart
-    _fig2 = go.Figure()
-    _fig2.add_trace(
-        go.Scatter(
-            x=list(range(1, len((w_matrix * _weights).sum(axis=1)) + 1)),
-            y=(w_matrix * _weights).sum(axis=1),
-            mode="lines",
-        )
-    )
-    _fig2.update_layout(
-        title="Weights Distribution (Line Chart)",
-        xaxis_title="Index",
-        yaxis_title="Weight",
-    )
-    _fig2.show()
-
-    return _weights
-
-
-@app.cell
-def _():
-    mo.md(
-        r"""
-    ## Mean variation
-
-    We provide a few indicators. Avoid fast indicators. Prefer slower indicators as they induce less trading costs.
-    Use the mean variation of the signal (convoluted returns here)
-
-    $$f(\mathbf{x}) = \frac{1}{n}\sum{\lvert x_i - x_{i-1}\rvert}=\frac{1}{n}\rVert{\Delta \mathbf{x}}\lVert_1$$
-
-    The $i$th column of $\mathbf{A}$ has a mean variation $d_i$.
-    We introduce the diagonal penalty matrix $\mathbf{D}$ with $D_{i,i}=d_i$.
-
-    $$\mathbf{w}^{*}=\arg\min_{\mathbf{w} \in \mathbb{R}^m} \lVert{\mathbf{Aw}-\mathbf{r}}\lVert_2 +
-    \lambda \rVert{\mathbf{Dw}}\lVert_1$$
-    """
-    )
-    return
-
-
-@app.function
-def minimize(objective, constraints=None):
-    """Minimizes a given objective function subject to optional constraints.
-
-    This function creates and solves a convex optimization problem to find the
-    minimum value of the provided objective function, subject to any specified
-    constraints.
-
-    Args:
-        objective: The objective function to minimize.
-        constraints: Optional list of constraints for the optimization problem.
-
-    Returns:
-        The optimal value of the objective function.
-    """
-    return cvx.Problem(cvx.Minimize(objective), constraints).solve()
-
-
-@app.function
-def mean_variation(ts):
-    """Calculate the mean absolute difference between consecutive values in a time series.
-
-    This function computes the average of absolute differences between adjacent
-    elements in a time series, which is a measure of the series' variability.
-
-    Args:
-        ts: A time series (pandas Series or array-like).
-
-    Returns:
-        The mean variation (average absolute difference) of the time series.
-    """
-    return ts.diff().abs().mean()
-
-
-@app.function
-def ar(a_matrix, r, lamb=0.0):
-    """Fit an autoregressive model with regularization based on signal variation.
-
-    This function solves a regularized regression problem to find optimal weights
-    for an autoregressive model. The regularization penalizes weights for signals
-    with high mean variation, favoring smoother signals.
-
-    Args:
-        a_matrix: Matrix of predictor signals, where each column is a different signal.
-        r: Target return series to predict.
-        lamb: Regularization parameter controlling the penalty on signal variation.
-            Higher values result in smoother weights. Defaults to 0.0.
-
-    Returns:
-        A pandas Series containing the optimal weights for each predictor signal.
-    """
-    # introduce the variable for the var
-    x = cvx.Variable(a_matrix.shape[1])
-    d = np.diag(a_matrix.apply(mean_variation))
-    minimize(objective=cvx.norm(a_matrix.values @ x - r, 2) + lamb * cvx.norm(d @ x, 1))
-    return pd.Series(index=a_matrix.keys(), data=x.value)
-
-
-@app.cell
-def _(w_matrix, a_matrix, r_filtered):
-    t_weight = pd.DataFrame(
-        {
-            _lamb: (w_matrix * ar(a_matrix, r_filtered.values, lamb=_lamb)).sum(axis=1)
-            for _lamb in [0.0, 1.0, 2.0, 3.0, 5.0, 7.0, 9.0, 12.0, 15.0]
-        }
-    )
-
-    # Create a line chart with plotly
-    _fig = go.Figure()
-    for _lamb in [0.0, 5.0, 15.0]:
-        _fig.add_trace(
-            go.Scatter(
-                x=list(range(1, len(t_weight) + 1)),
-                y=t_weight[_lamb],
+                x=list(range(1, len(t_weights[_lamb]) + 1)),
+                y=t_weights[_lamb],
                 mode="lines",
                 name=f"Lambda {_lamb}",
             )
@@ -404,14 +170,14 @@ def _(w_matrix, a_matrix, r_filtered):
     )
     _fig.show()
 
-    return t_weight
+    return t_weights
 
 
 @app.cell
-def _(r, t_weight):
+def _(r, t_weights):
     # for lamb in sorted(_t_weight.keys()):
 
-    _pos = pd.DataFrame({_lamb: convolution(r, t_weight[_lamb]) for _lamb in t_weight})
+    _pos = pd.DataFrame({_lamb: convolution(r, t_weights[_lamb]) for _lamb in t_weights})
     _pos = 1e6 * (_pos / _pos.std())
 
     _profit = pd.DataFrame({lamb: (r * _pos[lamb].shift(1)).cumsum() for lamb in _pos})

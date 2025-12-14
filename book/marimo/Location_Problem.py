@@ -65,7 +65,7 @@ def minimize(objective, constraints=None):
 
     :param objective: The objective function to be minimized.
     :type objective: cvx.Expression
-    :param constraints: A list of constraints applied to the optimization problem,
+    :param constraints: a list of constraints applied to the optimization problem,
                         or None if there are no constraints.
     :type constraints: Optional[List[cvx.Constraint]]
     :return: The minimum value of the objective function achieved under the given constraints.
@@ -81,12 +81,12 @@ def location(pos):
     The function minimizes the radius while ensuring that all points lie within
     or on the boundary of the circle.
 
-    :param pos: A 2D array-like structure containing coordinates of points
+    :param pos: a 2D array-like structure containing coordinates of points
         (e.g., list of tuples or numpy array). Each row represents a point
         in an n-dimensional Euclidean space, and the number of columns must
         be consistent across all rows.
     :type pos: array-like
-    :return: A tuple containing two elements: the radius of the minimum
+    :return: a tuple containing two elements: the radius of the minimum
         enclosing circle (as a float) and the center coordinates of the circle
         (as a 1D array of floats).
     :rtype: tuple[float, numpy.ndarray]

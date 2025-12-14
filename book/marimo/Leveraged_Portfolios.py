@@ -35,7 +35,7 @@ def _():
 def _():
     mo.md(
         r"""
-    ## A 130/30 Equity Portfolio
+    ## a 130/30 Equity Portfolio
 
     - Allocate capital $C=1$. Sell short at most $c = 0.3$ to finance a long position of $1 + c$.
     - Universe of $n$ assets.
