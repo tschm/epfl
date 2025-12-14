@@ -5,6 +5,13 @@ portfolio optimization techniques, challenges in the field, and practical applic
 It includes background information, literature references, and key concepts in the domain.
 """
 
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "marimo==0.18.4",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.13.15"

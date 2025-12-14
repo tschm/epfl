@@ -5,6 +5,19 @@ including techniques for parameter selection, convolution operations, and optimi
 approaches for constructing robust estimators with regularization.
 """
 
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "cvxpy-base==1.7.5",
+#     "marimo==0.18.4",
+#     "numpy==2.3.5",
+#     "pandas==2.3.3",
+#     "plotly==6.5.0",
+#     "statsmodels==0.14.6",
+#     "clarabel==0.11.1",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.13.15"

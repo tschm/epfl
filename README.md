@@ -3,7 +3,7 @@
 [![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://github.com/renovatebot/renovate)
 [![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Container&message=Open%20in%20VS%20Code&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/tschm/epfl)
 
-- Live site: https://tschm.github.io/epfl/book
+- Live site: https://tschm.github.io/epfl
 
 ## 📝 About
 
