@@ -14,6 +14,7 @@ approaches for constructing robust estimators with regularization.
 #     "pandas==2.3.3",
 #     "plotly==6.5.0",
 #     "statsmodels==0.14.6",
+#     "clarabel==0.11.1",
 # ]
 # ///
 
