@@ -5,6 +5,16 @@ Conditional Value at Risk, a risk measure that quantifies the expected loss in t
 worst-case scenarios of a distribution.
 """
 
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "cvxpy-base==1.7.5",
+#     "marimo==0.18.4",
+#     "numpy==2.3.5",
+#     "clarabel==0.11.1",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.17.8"

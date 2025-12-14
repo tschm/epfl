@@ -5,6 +5,15 @@ random points in a square and determining the ratio of points that fall within a
 circle. The interactive visualization shows how the accuracy improves with more points.
 """
 
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "marimo==0.18.4",
+#     "numpy==2.3.5",
+#     "plotly==6.5.0",
+# ]
+# ///
+
 import marimo
 
 __generated_with = "0.17.8"
