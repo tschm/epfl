@@ -13,6 +13,7 @@ portfolio construction with various constraints.
 #     "marimo==0.18.4",
 #     "numpy==2.3.5",
 #     "plotly==6.5.0",
+#     "clarabel==0.11.1",
 # ]
 # ///
 
