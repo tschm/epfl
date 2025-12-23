@@ -12,5 +12,6 @@ include:
     - ruff.toml
     - .devcontainer
     - pytest.ini
+    - book
 exclude:
     - .github/workflows/docker.yml
