@@ -1,6 +1,6 @@
 [project]
 name = "epfl"
-version = "0.0.0"
+version = "0.1.0"
 description = "Companion materials for an EPFL talk."
 readme = "README.md"
 requires-python = ">=3.12"
