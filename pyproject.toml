@@ -21,7 +21,7 @@ Homepage = "https://tschm.github.io/epfl/book"
 Repository = "https://github.com/tschm/epfl"
 
 [tool.deptry.per_rule_ignores]
-DEP002 = ["clarabel"]
+DEP002 = ["clarabel", "statsmodels", "cvxpy-base"]
 
 [tool.deptry.package_module_name_map]
 "cvxpy-base" = "cvxpy"
