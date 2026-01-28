@@ -25,3 +25,9 @@ DEP002 = ["clarabel", "statsmodels", "cvxpy-base"]
 
 [tool.deptry.package_module_name_map]
 "cvxpy-base" = "cvxpy"
+numpy = "numpy"
+plotly = "plotly"
+clarabel = "clarabel"
+marimo = "marimo"
+statsmodels = "statsmodels"
+pandas = "pandas"
